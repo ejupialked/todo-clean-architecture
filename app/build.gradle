@@ -23,9 +23,9 @@ dependencies {
 
 
 
-    // ButterKnife
+   /* // ButterKnife
     implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'*/
 
     //Dagger dependencies
     def dagger_version  = "2.23.1"

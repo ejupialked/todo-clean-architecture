@@ -1,8 +1,10 @@
-package com.ejupialked.todoapp;
+package com.ejupialked.todoapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.ejupialked.todoapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
