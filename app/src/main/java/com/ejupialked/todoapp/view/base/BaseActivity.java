@@ -6,8 +6,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.jhordan.euro_cleanarchitecture.R;
-
 import butterknife.ButterKnife;
 
 /**
@@ -21,7 +19,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         setupToolbar();
@@ -63,3 +62,4 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @return The layout id that's gonna be the activity view.
      */
     protected abstract int getLayoutId();
+}
