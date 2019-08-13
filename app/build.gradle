@@ -23,9 +23,9 @@ dependencies {
 
 
 
-   /* // ButterKnife
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'*/
+
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+
 
     //Dagger dependencies
     def dagger_version  = "2.23.1"

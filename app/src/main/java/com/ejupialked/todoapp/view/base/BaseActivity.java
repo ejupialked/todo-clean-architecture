@@ -6,6 +6,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.ejupialked.todoapp.R;
+
 import butterknife.ButterKnife;
 
 /**
@@ -23,7 +25,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        setupToolbar();
         bindViews();
         initView();
     }
@@ -35,19 +36,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void initView() {
     }
 
-    /**
-     * Its common use a toolbar within activity, if it exists in the
-     * layout this will be configured
-     */
-    public void setupToolbar() {
-        mToolbar = findViewById(R.id.toolbar);
-        if (mToolbar != null) {
-            setSupportActionBar(mToolbar);
-        }
-    }
+
 
     /**
-     * Every object annotated with {@link butterknife.Bind} its gonna injected trough butterknife
+     * Every object annotated with {@link butterknife} its gonna injected trough butterknife
      */
     private void bindViews() {
         ButterKnife.bind(this);
