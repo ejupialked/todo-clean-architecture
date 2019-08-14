@@ -14,26 +14,23 @@ import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MViewHolder extends RecyclerView.ViewHolder{
 
     private final TaskTypesPresenter presenter;
 
-    /*@BindView(R.id.imageTaskType) */ImageView imageView;
-   /* @BindView(R.id.taskType)*/ TextView taskTypeName;
-    /*@BindView(R.id.numberTasks)*/ TextView numberOfTasks;
-    /*@BindView(R.id.parent_layout) */RelativeLayout parentLayout;
+    @BindView(R.id.imageTaskType)  ImageView imageView;
+    @BindView(R.id.taskType)       TextView taskTypeName;
+    @BindView(R.id.numberTasks)    TextView numberOfTasks;
+    @BindView(R.id.parent_layout)  RelativeLayout parentLayout;
 
 
 
     public MViewHolder(@NonNull View itemView, @NonNull TaskTypesPresenter presenter) {
-
         super(itemView);
-        imageView = itemView.findViewById(R.id.imageTaskType);
-        taskTypeName = itemView.findViewById(R.id.taskType);
-        numberOfTasks = itemView.findViewById(R.id.numberTasks);
-        parentLayout =itemView.findViewById(R.id.parent_layout);
+
         this.presenter = presenter;
         ButterKnife.bind(this, itemView);
     }

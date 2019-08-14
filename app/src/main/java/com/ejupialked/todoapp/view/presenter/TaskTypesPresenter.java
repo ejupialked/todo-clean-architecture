@@ -32,7 +32,6 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
         getView().showLoading();
 
-
         getTaskTypes.execute(new DisposableObserver<List<TypeTask>>() {
             @Override
             public void onNext(List<TypeTask> typeTasks) {
@@ -48,7 +47,6 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
             @Override
             public void onComplete() {
                 getView().hideLoading();
-
             }
         });
     }
