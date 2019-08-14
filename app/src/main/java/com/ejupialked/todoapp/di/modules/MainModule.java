@@ -3,6 +3,10 @@ package com.ejupialked.todoapp.di.modules;
 import android.content.Context;
 
 import com.ejupialked.todoapp.TODOApplication;
+import com.ejupialked.todoapp.data.repository.Repository;
+import com.ejupialked.todoapp.data.repository.TasksRepository;
+import com.ejupialked.todoapp.data.repository.datasource.DataSource;
+import com.ejupialked.todoapp.data.repository.datasource.DataSourceTasks;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -28,11 +32,17 @@ public class MainModule {
         return todoApplication;
     }
 
-    /*@Provides
+    @Provides
     @Singleton
-    Repository provideRepository(TeamsRepository teamsRepository) {
-        return teamsRepository;
-    }*/
+    Repository provideRepository(TasksRepository tasksRepository) {
+        return tasksRepository;
+    }
+
+    @Provides
+    @Singleton
+    DataSource provideDataSource(DataSourceTasks dataSourceTasks) {
+        return dataSourceTasks;
+    }
 
     @Provides
     @Named("executor_thread")
