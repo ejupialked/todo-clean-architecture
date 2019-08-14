@@ -3,7 +3,7 @@ package com.ejupialked.todoapp.di.components;
 import android.content.Context;
 
 import com.ejupialked.todoapp.di.modules.MainModule;
-import com.ejupialked.todoapp.view.activity.MainActivity;
+import com.ejupialked.todoapp.view.activity.TaskTypeActivity;
 
 import javax.inject.Singleton;
 
@@ -13,7 +13,7 @@ import dagger.Component;
 @Component(modules = MainModule.class)
 public interface MainComponent {
 
-    void inject(MainActivity activity);
+    void inject(TaskTypeActivity activity);
 
     Context context();
 }

@@ -5,62 +5,61 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ejupialked.todoapp.R;
+import com.ejupialked.todoapp.domain.model.TypeTask;
+import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
+
+public class RecycleViewAdapter extends RecyclerView.Adapter<MViewHolder> {
 
     private static final String TAG = "RecycleViewAdapter";
 
-    private ArrayList<String> taskTypes = new ArrayList<>();
-    private Context context;
+    private List<TypeTask> taskTypes;
+
+    private final TaskTypesPresenter presenter;
+
+    public RecycleViewAdapter(@NonNull TaskTypesPresenter presenter){
+        this.presenter = presenter;
+        taskTypes = new ArrayList<>();
+    }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.layout_tasktypeitem, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+
+        return new MViewHolder(view, presenter);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called." + position);
+        TypeTask t = taskTypes.get(position);
+        holder.render(t);
 
     }
+
+
 
     @Override
     public int getItemCount() {
-        return 0;
+        return taskTypes.size();
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        ImageView imageView;
-        TextView taskTypeName;
-        TextView numberOfTasks;
-        RelativeLayout parentLayout;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.imageTaskType);
-            taskTypeName = itemView.findViewById(R.id.taskType);
-            numberOfTasks = itemView.findViewById(R.id.numberTasks);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
-
-        }
+    public void addAll(Collection<TypeTask> collection) {
+        taskTypes.addAll(collection);
     }
+
 
 
 

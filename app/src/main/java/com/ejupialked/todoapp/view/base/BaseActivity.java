@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +42,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private void bindViews() {
         ButterKnife.bind(this);
-    }
-
-    @Nullable
-    public Toolbar getToolbar() {
-        return mToolbar;
     }
 
     /**
