@@ -36,6 +36,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         initializeDagger();
         initializePresenter();
         initRecycleView();
+
         presenter.initialize();
 
     }

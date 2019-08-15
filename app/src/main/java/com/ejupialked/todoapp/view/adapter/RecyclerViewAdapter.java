@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
@@ -64,19 +66,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         private final TaskTypesPresenter presenter;
 
-        @BindView(R.id.nameTaskType)
-        TextView imageName;
-        RelativeLayout parentLayout;
+        @BindView(R.id.nameTaskType) TextView typeTask;
+        @BindView(R.id.numberOfTasks) TextView numberOfTasks;
+        @BindView(R.id.imageTaskType) ImageView image;
+        @BindView(R.id.parent_layout) RelativeLayout parentLayout;
 
         public ViewHolder(View itemView, TaskTypesPresenter presenter) {
             super(itemView);
             this.presenter = presenter;
-            parentLayout = itemView.findViewById(R.id.parent_layout);
+            ButterKnife.bind(this, itemView);
         }
 
         public void render(TypeTask t) {
             onItemClick(t);
             renderName(t.getName());
+            renderNumber(t.getTasks());
+
+            renderImage();
+        }
+
+        private void renderImage() {
+            image.setImageResource(R.mipmap.ic_launcher);
+        }
+
+        private void renderNumber(int tasks) {
+            numberOfTasks.setText(String.valueOf(tasks));
         }
 
         private void onItemClick(final TypeTask typeTask) {
@@ -85,7 +99,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
         private void renderName(String name) {
-            imageName.setText(name);
+            typeTask.setText(name);
         }
     }
 }

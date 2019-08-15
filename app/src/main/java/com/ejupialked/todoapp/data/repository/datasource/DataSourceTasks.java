@@ -27,12 +27,12 @@ public class DataSourceTasks implements DataSource{
         taskTypes = new ArrayList<>();
         tasks = new HashMap<>();
 
-        taskTypes.add(new TypeTask("Health", 0));
-        taskTypes.add(new TypeTask("Education", 0));
-        taskTypes.add(new TypeTask("Diet", 0));
+        taskTypes.add(new TypeTask("Health", 4));
+        taskTypes.add(new TypeTask("Education", 243));
+        taskTypes.add(new TypeTask("Diet", 3));
         taskTypes.add(new TypeTask("Family", 0));
-        taskTypes.add(new TypeTask("Shopping", 0));
-        taskTypes.add(new TypeTask("Work", 0));
+        taskTypes.add(new TypeTask("Shopping", 2));
+        taskTypes.add(new TypeTask("Work", 1));
 
 
         for (TypeTask t: taskTypes) {
