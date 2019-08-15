@@ -14,15 +14,11 @@ import io.reactivex.observers.DisposableObserver;
 
 public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
-
     private GetTaskTypes getTaskTypes;
-    private TasksRepository repository;
-
 
     @Inject
-    public TaskTypesPresenter(@NonNull GetTaskTypes getTaskTypes, @NonNull TasksRepository repository ) {
+    public TaskTypesPresenter(@NonNull GetTaskTypes getTaskTypes) {
         this.getTaskTypes = getTaskTypes;
-        this.repository = repository;
     }
 
 
@@ -51,9 +47,20 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         });
     }
 
+    public void onTaskTypeClicked(String name){
+        getView().showNameTaskType(name);
+
+
+    }
+
+    public void destroy(){
+        this.getTaskTypes.dispose();
+        setView(null);
+    }
+
+
     public interface View extends Presenter.View {
         void showTaskTypes(List<TypeTask> typeTaskList);
-
-        void showTasks(TypeTask typeTask);
+        void showNameTaskType(String name);
     }
 }

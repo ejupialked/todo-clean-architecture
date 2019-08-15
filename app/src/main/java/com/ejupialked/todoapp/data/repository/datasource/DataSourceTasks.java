@@ -15,7 +15,7 @@ import javax.inject.Singleton;
 import io.reactivex.Observable;
 
 @Singleton
-public class DataSourceTasks implements  DataSource{
+public class DataSourceTasks implements DataSource{
 
     List<TypeTask> taskTypes;
     Map<TypeTask, List<Task>> tasks;
@@ -26,7 +26,6 @@ public class DataSourceTasks implements  DataSource{
 
         taskTypes = new ArrayList<>();
         tasks = new HashMap<>();
-
 
         taskTypes.add(new TypeTask("Health", 0));
         taskTypes.add(new TypeTask("Education", 0));
