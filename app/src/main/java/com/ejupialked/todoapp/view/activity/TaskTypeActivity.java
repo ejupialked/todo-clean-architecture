@@ -5,8 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
+
 import android.widget.Toast;
 
 import com.ejupialked.todoapp.R;
@@ -20,11 +19,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+
 
 public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter.View {
 
     @Inject TaskTypesPresenter presenter;
     RecyclerViewAdapter recyclerViewAdapter;
+
+    @BindView(R.id.recycle)
+    RecyclerView recyclerView;
 
     @Override
     public void initView() {
@@ -34,13 +38,10 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         initRecycleView();
         presenter.initialize();
 
-
-
     }
 
     private void initRecycleView(){
-        RecyclerView recyclerView = findViewById(R.id.recycle);
-        recyclerViewAdapter = new RecyclerViewAdapter(presenter,this);
+        recyclerViewAdapter = new RecyclerViewAdapter(presenter);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -71,7 +72,6 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     @Override
     public void showNameTaskType(String name) {
         Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
@@ -80,6 +80,5 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
     @Override
     public void hideLoading() {
-
     }
 }

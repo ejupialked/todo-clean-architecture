@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textColor="#000"
         android:layout_marginStart="40dp"
-        android:id="@+id/image_name"
+        android:id="@+id/nameTaskType"
         android:layout_centerVertical="true"
         android:textSize="20sp"
         android:text="Alked"/>

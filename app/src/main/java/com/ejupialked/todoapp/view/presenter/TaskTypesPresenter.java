@@ -2,7 +2,6 @@ package com.ejupialked.todoapp.view.presenter;
 
 import androidx.annotation.NonNull;
 
-import com.ejupialked.todoapp.data.repository.TasksRepository;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.GetTaskTypes;
 
@@ -49,8 +48,6 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
     public void onTaskTypeClicked(String name){
         getView().showNameTaskType(name);
-
-
     }
 
     public void destroy(){

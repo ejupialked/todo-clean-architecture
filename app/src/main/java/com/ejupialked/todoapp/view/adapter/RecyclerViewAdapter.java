@@ -1,7 +1,6 @@
 package com.ejupialked.todoapp.view.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,20 +18,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import butterknife.BindView;
+
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
-    private static final String TAG = "RecyclerViewAdapter";
 
     private final TaskTypesPresenter presenter;
     private final List<TypeTask> taskList;
 
-    private Context mContext;
-
-    public RecyclerViewAdapter(TaskTypesPresenter presenter, Context context) {
+    public RecyclerViewAdapter(TaskTypesPresenter presenter) {
         this.presenter = presenter;
         this.taskList = new ArrayList<>();
-        mContext = context;
     }
 
     @NonNull
@@ -67,13 +64,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         private final TaskTypesPresenter presenter;
 
+        @BindView(R.id.nameTaskType)
         TextView imageName;
         RelativeLayout parentLayout;
 
         public ViewHolder(View itemView, TaskTypesPresenter presenter) {
             super(itemView);
             this.presenter = presenter;
-            imageName = itemView.findViewById(R.id.image_name);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
 
