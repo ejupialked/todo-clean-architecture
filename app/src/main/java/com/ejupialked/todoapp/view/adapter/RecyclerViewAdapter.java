@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Optional;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
@@ -70,6 +72,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @BindView(R.id.numberOfTasks) TextView numberOfTasks;
         @BindView(R.id.imageTaskType) ImageView image;
         @BindView(R.id.parent_layout) RelativeLayout parentLayout;
+         @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
 
         public ViewHolder(View itemView, TaskTypesPresenter presenter) {
             super(itemView);
@@ -79,6 +82,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public void render(TypeTask t) {
             onItemClick(t);
+            onCreateTask();
             renderName(t.getName());
             renderNumber(t.getTasks());
 
@@ -97,6 +101,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnClickListener(v -> presenter.onTaskTypeClicked(typeTask.getName()));
         }
 
+        private void onCreateTask() {
+            floatingActionButton.setOnClickListener(v -> presenter.onTaskTypeCreated());
+        }
 
         private void renderName(String name) {
             typeTask.setText(name);

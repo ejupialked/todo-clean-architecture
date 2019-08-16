@@ -35,43 +35,7 @@ public class DataSourceTasks implements DataSource{
         taskTypes.add(new TypeTask("Shopping", 2));
         taskTypes.add(new TypeTask("Work", 1));
 
-        taskTypes.add(new TypeTask("Health", 4));
-        taskTypes.add(new TypeTask("Education", 243));
-        taskTypes.add(new TypeTask("Diet", 3));
-        taskTypes.add(new TypeTask("Family", 0));
-        taskTypes.add(new TypeTask("Shopping", 2));
-        taskTypes.add(new TypeTask("Work", 1));
-        taskTypes.add(new TypeTask("Health", 4));
-        taskTypes.add(new TypeTask("Education", 243));
-        taskTypes.add(new TypeTask("Diet", 3));
-        taskTypes.add(new TypeTask("Family", 0));
-        taskTypes.add(new TypeTask("Shopping", 2));
-        taskTypes.add(new TypeTask("Work", 1));
-        taskTypes.add(new TypeTask("Health", 4));
-        taskTypes.add(new TypeTask("Education", 243));
-        taskTypes.add(new TypeTask("Diet", 3));
-        taskTypes.add(new TypeTask("Family", 0));
-        taskTypes.add(new TypeTask("Shopping", 2));
-        taskTypes.add(new TypeTask("Work", 1));
 
-        taskTypes.add(new TypeTask("Health", 4));
-        taskTypes.add(new TypeTask("Education", 243));
-        taskTypes.add(new TypeTask("Diet", 3));
-        taskTypes.add(new TypeTask("Family", 0));
-        taskTypes.add(new TypeTask("Shopping", 2));
-        taskTypes.add(new TypeTask("Work", 1));
-        taskTypes.add(new TypeTask("Health", 4));
-        taskTypes.add(new TypeTask("Education", 243));
-        taskTypes.add(new TypeTask("Diet", 3));
-        taskTypes.add(new TypeTask("Family", 0));
-        taskTypes.add(new TypeTask("Shopping", 2));
-        taskTypes.add(new TypeTask("Work", 1));
-        taskTypes.add(new TypeTask("Health", 4));
-        taskTypes.add(new TypeTask("Education", 243));
-        taskTypes.add(new TypeTask("Diet", 3));
-        taskTypes.add(new TypeTask("Family", 0));
-        taskTypes.add(new TypeTask("Shopping", 2));
-        taskTypes.add(new TypeTask("Work", 1));
 
         int i = 0;
         for (TypeTask t: taskTypes) {

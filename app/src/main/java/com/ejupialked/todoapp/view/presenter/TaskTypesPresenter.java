@@ -50,6 +50,11 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         getView().showNameTaskType(name);
     }
 
+    public void onTaskTypeCreated(){
+        getView().createTaskType();
+    }
+
+
     public void destroy(){
         this.getTaskTypes.dispose();
         setView(null);
@@ -58,6 +63,7 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
     public interface View extends Presenter.View {
         void showTaskTypes(List<TypeTask> typeTaskList);
+        void createTaskType();
         void showNameTaskType(String name);
     }
 }

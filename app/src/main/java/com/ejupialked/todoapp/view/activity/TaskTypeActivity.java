@@ -15,6 +15,9 @@ import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
 import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -70,10 +73,17 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
+
+    @Override
+    public void createTaskType() {
+        recyclerViewAdapter.addAll(Arrays.asList(new TypeTask("Test create", 3)));
+    }
+
     @Override
     public void showNameTaskType(String name) {
         Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
+
 
     @Override
     public void showLoading() {
