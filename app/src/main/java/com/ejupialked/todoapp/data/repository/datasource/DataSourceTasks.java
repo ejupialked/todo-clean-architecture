@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 import javax.inject.Inject;
@@ -34,10 +35,48 @@ public class DataSourceTasks implements DataSource{
         taskTypes.add(new TypeTask("Shopping", 2));
         taskTypes.add(new TypeTask("Work", 1));
 
+        taskTypes.add(new TypeTask("Health", 4));
+        taskTypes.add(new TypeTask("Education", 243));
+        taskTypes.add(new TypeTask("Diet", 3));
+        taskTypes.add(new TypeTask("Family", 0));
+        taskTypes.add(new TypeTask("Shopping", 2));
+        taskTypes.add(new TypeTask("Work", 1));
+        taskTypes.add(new TypeTask("Health", 4));
+        taskTypes.add(new TypeTask("Education", 243));
+        taskTypes.add(new TypeTask("Diet", 3));
+        taskTypes.add(new TypeTask("Family", 0));
+        taskTypes.add(new TypeTask("Shopping", 2));
+        taskTypes.add(new TypeTask("Work", 1));
+        taskTypes.add(new TypeTask("Health", 4));
+        taskTypes.add(new TypeTask("Education", 243));
+        taskTypes.add(new TypeTask("Diet", 3));
+        taskTypes.add(new TypeTask("Family", 0));
+        taskTypes.add(new TypeTask("Shopping", 2));
+        taskTypes.add(new TypeTask("Work", 1));
 
+        taskTypes.add(new TypeTask("Health", 4));
+        taskTypes.add(new TypeTask("Education", 243));
+        taskTypes.add(new TypeTask("Diet", 3));
+        taskTypes.add(new TypeTask("Family", 0));
+        taskTypes.add(new TypeTask("Shopping", 2));
+        taskTypes.add(new TypeTask("Work", 1));
+        taskTypes.add(new TypeTask("Health", 4));
+        taskTypes.add(new TypeTask("Education", 243));
+        taskTypes.add(new TypeTask("Diet", 3));
+        taskTypes.add(new TypeTask("Family", 0));
+        taskTypes.add(new TypeTask("Shopping", 2));
+        taskTypes.add(new TypeTask("Work", 1));
+        taskTypes.add(new TypeTask("Health", 4));
+        taskTypes.add(new TypeTask("Education", 243));
+        taskTypes.add(new TypeTask("Diet", 3));
+        taskTypes.add(new TypeTask("Family", 0));
+        taskTypes.add(new TypeTask("Shopping", 2));
+        taskTypes.add(new TypeTask("Work", 1));
+
+        int i = 0;
         for (TypeTask t: taskTypes) {
-            tasks.put(t, new ArrayList<Task>());
-            t.setTasks(tasks.get(t).size());
+            tasks.put(t, new ArrayList<>());
+           t.setTasks(i++);
         }
 
     }

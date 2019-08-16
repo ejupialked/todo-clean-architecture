@@ -1,4 +1,10 @@
 package com.ejupialked.todoapp.view.activity;
 
-public class TasksActivity {
+import com.ejupialked.todoapp.view.base.BaseActivity;
+
+public class TasksActivity extends BaseActivity {
+    @Override
+    protected int getLayoutId() {
+        return 0;
+    }
 }
