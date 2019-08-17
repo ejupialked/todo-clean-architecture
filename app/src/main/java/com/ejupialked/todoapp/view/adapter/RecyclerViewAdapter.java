@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
-import com.github.clans.fab.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -72,11 +72,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @BindView(R.id.numberOfTasks) TextView numberOfTasks;
         @BindView(R.id.imageTaskType) ImageView image;
         @BindView(R.id.parent_layout) RelativeLayout parentLayout;
-         @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
+        @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
 
         public ViewHolder(View itemView, TaskTypesPresenter presenter) {
             super(itemView);
             this.presenter = presenter;
+
             ButterKnife.bind(this, itemView);
         }
 
