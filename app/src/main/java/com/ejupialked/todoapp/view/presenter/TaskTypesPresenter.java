@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.AddTaskType;
 import com.ejupialked.todoapp.domain.usecase.GetTaskTypes;
+import com.ejupialked.todoapp.view.activity.CustomDialog;
 
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
     }
 
 
-    public interface View extends Presenter.View {
+    public interface View extends Presenter.View, CustomDialog.CustomDialogListener {
         void showTaskTypes(List<TypeTask> typeTaskList);
         void updateTypeTasks(TypeTask t);
         void showNameTaskType(String name);

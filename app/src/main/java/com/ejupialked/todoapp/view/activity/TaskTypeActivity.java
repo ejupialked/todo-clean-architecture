@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ejupialked.todoapp.R;
@@ -16,9 +17,7 @@ import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -49,9 +48,12 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     private void initFAB() {
-        floatingActionButton.setOnClickListener(v -> {
-            presenter.onTaskTypeCreated(new TypeTask("test1", 4));
-        });
+        floatingActionButton.setOnClickListener(v -> openDialog());
+    }
+
+    private void openDialog() {
+        CustomDialog customDialog = new CustomDialog();
+        customDialog.show(getSupportFragmentManager(), "example");
     }
 
     private void initRecycleView(){
@@ -104,5 +106,10 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
     @Override
     public void hideLoading() {
+    }
+
+    @Override
+    public void applyTask(String taskName) {
+        presenter.onTaskTypeCreated(new TypeTask(taskName, 0));
     }
 }
