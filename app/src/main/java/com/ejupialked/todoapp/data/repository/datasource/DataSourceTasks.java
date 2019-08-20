@@ -34,8 +34,7 @@ public class DataSourceTasks implements DataSource{
         taskTypes.add(new TypeTask("Work", 1));
 
 
-
-        int i = 0;
+       int i = 0;
         for (TypeTask t: taskTypes) {
             tasks.put(t, new ArrayList<>());
            t.setTasks(i++);
@@ -48,7 +47,23 @@ public class DataSourceTasks implements DataSource{
         return Observable.fromArray(tasks.get(typeTask));
     }
 
-    public Observable<List<TypeTask>>  typeTaskList() {
+    public Observable<List<TypeTask>> typeTaskList() {
         return Observable.fromArray(taskTypes);
+    }
+
+    @Override
+    public Observable<TypeTask> createType(TypeTask t) {
+        taskTypes.add(t);
+        tasks.put(t, new ArrayList<>());
+        return Observable.create(emitter -> {
+
+            if (t != null) {
+                emitter.onNext(t);
+                emitter.onComplete();
+            } else {
+                emitter.onError(
+                        new Throwable("Error task type"));
+            }
+        });
     }
 }

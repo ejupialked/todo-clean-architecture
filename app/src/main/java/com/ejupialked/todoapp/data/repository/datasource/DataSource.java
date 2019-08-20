@@ -11,6 +11,8 @@ public interface DataSource {
 
     Observable<List<TypeTask>> typeTaskList();
 
+    Observable<TypeTask> createType(TypeTask t);
+
     Observable<List<Task>> tasks(TypeTask typeTask);
 
 }

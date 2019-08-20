@@ -14,10 +14,12 @@ import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
 import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,8 +32,9 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     @Inject TaskTypesPresenter presenter;
     RecyclerViewAdapter recyclerViewAdapter;
 
-    @BindView(R.id.recycle)
-    RecyclerView recyclerView;
+    @BindView(R.id.recycle) RecyclerView recyclerView;
+    @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
+
 
     @Override
     public void initView() {
@@ -39,9 +42,16 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         initializeDagger();
         initializePresenter();
         initRecycleView();
+        initFAB();
 
         presenter.initialize();
 
+    }
+
+    private void initFAB() {
+        floatingActionButton.setOnClickListener(v -> {
+            presenter.onTaskTypeCreated(new TypeTask("test1", 4));
+        });
     }
 
     private void initRecycleView(){
@@ -74,9 +84,12 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
 
+
     @Override
-    public void createTaskType() {
-        recyclerViewAdapter.addAll(Arrays.asList(new TypeTask("Test create", 3)));
+    public void updateTypeTasks(TypeTask typeTask) {
+        recyclerViewAdapter.addAll(Collections.singleton(typeTask));
+        recyclerViewAdapter.notifyDataSetChanged();
+
     }
 
     @Override

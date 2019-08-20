@@ -29,6 +29,11 @@ public class TasksRepository implements Repository {
     }
 
     @Override
+    public Observable<TypeTask> createTypeTask(TypeTask typeTask) {
+        return dataSource.createType(typeTask);
+    }
+
+    @Override
     public Observable<List<Task>> tasks(TypeTask typeTask) {
         return dataSource.tasks(typeTask);
     }
