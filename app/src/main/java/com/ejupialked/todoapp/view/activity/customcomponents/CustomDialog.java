@@ -1,5 +1,6 @@
-package com.ejupialked.todoapp.view.activity;
+package com.ejupialked.todoapp.view.activity.customcomponents;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -7,13 +8,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.ejupialked.todoapp.R;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,25 +33,19 @@ public class CustomDialog extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.layout_dialogtypetask, null);
+        LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
+        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.layout_dialogtypetask, null);
 
         ButterKnife.bind(this, view);
 
         builder.setView(view)
                 .setTitle("Create new task type")
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                .setNegativeButton("Cancel", (dialogInterface, i) -> {
 
-                    }
                 })
-                .setPositiveButton("Create", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String taskName = editText.getText().toString();
-                        listener.applyTask(taskName);
-                    }
+                .setPositiveButton("Create", (dialogInterface, i) -> {
+                    String taskName = editText.getText().toString();
+                    listener.applyTask(taskName);
                 });
 
 

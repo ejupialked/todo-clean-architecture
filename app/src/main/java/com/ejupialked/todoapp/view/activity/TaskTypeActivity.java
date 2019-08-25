@@ -1,21 +1,26 @@
 package com.ejupialked.todoapp.view.activity;
 
 
-import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import android.widget.EditText;
+import android.graphics.Canvas;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.TODOApplication;
 import com.ejupialked.todoapp.domain.model.TypeTask;
+import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialog;
+import com.ejupialked.todoapp.view.activity.customcomponents.SwipeToDeleteCallback;
 import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
 import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 
 import java.util.Collections;
@@ -32,7 +37,8 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     RecyclerViewAdapter recyclerViewAdapter;
 
     @BindView(R.id.recycle) RecyclerView recyclerView;
-    @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
+    @BindView(R.id.floatingActionButtonCreate)
+    FloatingActionButton floatingActionButton;
 
 
     @Override
@@ -59,6 +65,10 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     private void initRecycleView(){
         recyclerViewAdapter = new RecyclerViewAdapter(presenter);
         recyclerView.setAdapter(recyclerViewAdapter);
+
+        ItemTouchHelper itemTouchHelper = new
+                ItemTouchHelper(new SwipeToDeleteCallback(recyclerViewAdapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -86,11 +96,17 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
 
-
     @Override
     public void updateTypeTasks(TypeTask typeTask) {
         recyclerViewAdapter.addAll(Collections.singleton(typeTask));
         recyclerViewAdapter.notifyDataSetChanged();
+
+    }
+
+
+
+    @Override
+    public void removeTypeTask(TypeTask t) {
 
     }
 
@@ -112,4 +128,5 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     public void applyTask(String taskName) {
         presenter.onTaskTypeCreated(new TypeTask(taskName, 0));
     }
+
 }

@@ -30,16 +30,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private final TaskTypesPresenter presenter;
     private final List<TypeTask> taskList;
+    private Context context;
 
     public RecyclerViewAdapter(TaskTypesPresenter presenter) {
         this.presenter = presenter;
         this.taskList = new ArrayList<>();
+        this.context = getContext();
+
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tasktype, parent, false);
+
+
         return new ViewHolder(view, presenter);
 
     }
@@ -51,11 +56,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     }
 
+    public Context getContext() {
+        return context;
+    }
 
     public void addAll(Collection<TypeTask> collection) {
         taskList.addAll(collection);
     }
-
 
 
     @Override
