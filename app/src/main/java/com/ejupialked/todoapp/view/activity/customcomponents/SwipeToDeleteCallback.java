@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
+import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
@@ -17,11 +18,13 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
 
     private RecyclerViewAdapter mAdapter;
+    private final TaskTypesPresenter presenter;
 
 
-    public SwipeToDeleteCallback(RecyclerViewAdapter adapter) {
+    public SwipeToDeleteCallback(RecyclerViewAdapter adapter, TaskTypesPresenter taskTypesPresenter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         mAdapter = adapter;
+        presenter = taskTypesPresenter;
     }
 
 
@@ -51,6 +54,6 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
-        mAdapter.notifyItemRemoved(position);
+        presenter.onTaskTypeRemoved(position);
     }
 }

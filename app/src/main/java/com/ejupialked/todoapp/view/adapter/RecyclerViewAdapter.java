@@ -43,10 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tasktype, parent, false);
-
-
         return new ViewHolder(view, presenter);
-
     }
 
     @Override
@@ -54,6 +51,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TypeTask t = taskList.get(position);
         holder.render(t);
 
+    }
+
+
+    public void removeTaskTypeAtPosition(int p){
+        taskList.remove(p);
+    }
+
+    public TaskTypesPresenter getPresenter() {
+        return presenter;
     }
 
     public Context getContext() {

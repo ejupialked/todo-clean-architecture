@@ -34,11 +34,11 @@ import butterknife.BindView;
 public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter.View {
 
     @Inject TaskTypesPresenter presenter;
+
     RecyclerViewAdapter recyclerViewAdapter;
 
     @BindView(R.id.recycle) RecyclerView recyclerView;
-    @BindView(R.id.floatingActionButtonCreate)
-    FloatingActionButton floatingActionButton;
+    @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
 
 
     @Override
@@ -47,10 +47,17 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         initializeDagger();
         initializePresenter();
         initRecycleView();
+        initSwipeToDelete();
         initFAB();
 
         presenter.initialize();
 
+    }
+
+    private void initSwipeToDelete() {
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(
+                new SwipeToDeleteCallback(recyclerViewAdapter, presenter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     private void initFAB() {
@@ -65,10 +72,6 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     private void initRecycleView(){
         recyclerViewAdapter = new RecyclerViewAdapter(presenter);
         recyclerView.setAdapter(recyclerViewAdapter);
-
-        ItemTouchHelper itemTouchHelper = new
-                ItemTouchHelper(new SwipeToDeleteCallback(recyclerViewAdapter));
-        itemTouchHelper.attachToRecyclerView(recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -87,8 +90,6 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
 
-
-
     @Override
     public void showTaskTypes(List<TypeTask> typeTaskList) {
         recyclerViewAdapter.addAll(typeTaskList);
@@ -100,14 +101,14 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     public void updateTypeTasks(TypeTask typeTask) {
         recyclerViewAdapter.addAll(Collections.singleton(typeTask));
         recyclerViewAdapter.notifyDataSetChanged();
-
     }
 
 
-
     @Override
-    public void removeTypeTask(TypeTask t) {
-
+    public void removeTypeTask(Integer p) {
+        recyclerViewAdapter.notifyItemRemoved(p);
+        recyclerViewAdapter.removeTaskTypeAtPosition(p);
+        recyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -117,12 +118,10 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
 
     @Override
-    public void showLoading() {
-    }
+    public void showLoading() {}
 
     @Override
-    public void hideLoading() {
-    }
+    public void hideLoading() {}
 
     @Override
     public void applyTask(String taskName) {

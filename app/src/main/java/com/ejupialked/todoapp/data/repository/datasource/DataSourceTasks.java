@@ -16,8 +16,8 @@ import io.reactivex.Observable;
 @Singleton
 public class DataSourceTasks implements DataSource{
 
-    List<TypeTask> taskTypes;
-    Map<TypeTask, List<Task>> tasks;
+    private List<TypeTask> taskTypes;
+    private Map<TypeTask, List<Task>> tasks;
 
 
     @Inject
@@ -45,6 +45,23 @@ public class DataSourceTasks implements DataSource{
 
     public Observable<List<Task>> tasks(TypeTask typeTask){
         return Observable.fromArray(tasks.get(typeTask));
+    }
+
+    @Override
+    public Observable<Integer> removeTaskType(Integer position) {
+
+        taskTypes.remove(position);
+
+         return Observable.create(emitter -> {
+
+            if (position != null) {
+                emitter.onNext(position);
+                emitter.onComplete();
+            } else {
+                emitter.onError(
+                        new Throwable("Error task type"));
+            }
+        });
     }
 
     public Observable<List<TypeTask>> typeTaskList() {

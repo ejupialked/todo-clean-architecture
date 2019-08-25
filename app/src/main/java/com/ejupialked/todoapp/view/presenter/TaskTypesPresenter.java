@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.AddTaskType;
 import com.ejupialked.todoapp.domain.usecase.GetTaskTypes;
+import com.ejupialked.todoapp.domain.usecase.RemoveTaskType;
 import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialog;
 
 import java.util.List;
@@ -17,10 +18,12 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
     private GetTaskTypes getTaskTypes;
     private AddTaskType addTaskType;
+    private RemoveTaskType removeTaskType;
 
     @Inject
-    public TaskTypesPresenter(@NonNull GetTaskTypes getTaskTypes, @NonNull AddTaskType addTaskType) {
+    public TaskTypesPresenter(@NonNull GetTaskTypes getTaskTypes, @NonNull AddTaskType addTaskType, @NonNull RemoveTaskType removeTaskType) {
         this.getTaskTypes = getTaskTypes;
+        this.removeTaskType = removeTaskType;
         this.addTaskType = addTaskType;
     }
 
@@ -54,6 +57,30 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         getView().showNameTaskType(name);
     }
 
+
+    public void onTaskTypeRemoved(Integer p){
+
+        removeTaskType.removeTaskTypeAtPosition(p);
+
+        removeTaskType.execute(new DisposableObserver<Integer>() {
+            @Override
+            public void onNext(Integer integer) {
+                getView().removeTypeTask(integer);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+    }
+
     public void onTaskTypeCreated(TypeTask t){
 
         addTaskType.createTaskType(t);
@@ -85,9 +112,10 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
 
     public interface View extends Presenter.View, CustomDialog.CustomDialogListener {
+
         void showTaskTypes(List<TypeTask> typeTaskList);
         void updateTypeTasks(TypeTask t);
-        void removeTypeTask(TypeTask t);
+        void removeTypeTask(Integer p);
         void showNameTaskType(String name);
     }
 }

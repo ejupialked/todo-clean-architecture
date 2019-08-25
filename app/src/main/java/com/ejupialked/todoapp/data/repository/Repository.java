@@ -14,4 +14,5 @@ public interface Repository {
 
     Observable<List<Task>> tasks(TypeTask typeTask);
 
+    Observable<Integer> removeTaskType(Integer position);
 }

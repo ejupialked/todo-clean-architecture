@@ -13,7 +13,6 @@ import io.reactivex.Scheduler;
 
 public class GetTaskTypes extends UseCase<List<TypeTask>> {
 
-
     private final Repository repository;
 
     @Inject
