@@ -1,6 +1,8 @@
 package com.ejupialked.todoapp.domain.model;
 
-public class TypeTask {
+import java.io.Serializable;
+
+public class TypeTask implements Serializable {
 
     String name;
     int tasks;

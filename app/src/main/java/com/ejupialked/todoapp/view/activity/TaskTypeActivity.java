@@ -26,6 +26,8 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
     RecyclerViewAdapter recyclerViewAdapter;
 
+
+
     @Override
     public void initView() {
         super.initView();
@@ -96,6 +98,11 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     @Override
     public void showNameTaskType(String name) {
         Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void openTasksScreen(TypeTask typeTask) {
+        TasksActivity.open(TaskTypeActivity.this, typeTask);
     }
 
 

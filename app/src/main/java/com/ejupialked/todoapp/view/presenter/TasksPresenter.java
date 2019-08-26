@@ -49,6 +49,16 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
     }
 
+    public void destroy() {
+        this.getTasks.dispose();
+        setView(null);
+    }
+
+
+    public void setTypeTask(TypeTask typeTask) {
+        this.typeTask = typeTask;
+    }
+
     public interface View extends Presenter.View {
         void showTasks(List<Task> tasks);
     }

@@ -17,7 +17,7 @@ import io.reactivex.Observable;
 public class DataSourceTasks implements DataSource{
 
     private List<TypeTask> taskTypes;
-    private Map<TypeTask, List<Task>> tasks;
+    private Map<TypeTask, ArrayList<Task>> tasks;
 
 
     @Inject
@@ -46,13 +46,31 @@ public class DataSourceTasks implements DataSource{
         tasks.get(taskTypes.get(0)).add(new Task("Drink 2l", "high", "false"));
         tasks.get(taskTypes.get(0)).add(new Task("Eat 4 peanuts ", "medium", "true"));
         tasks.get(taskTypes.get(0)).add(new Task("Do not eat sugar", "high", "false"));
-
+        tasks.get(taskTypes.get(0)).add(new Task("Drink 2l", "high", "false"));
+        tasks.get(taskTypes.get(0)).add(new Task("Eat 4 peanuts ", "medium", "true"));
+        tasks.get(taskTypes.get(0)).add(new Task("Do not eat sugar", "high", "false"));tasks.get(taskTypes.get(0)).add(new Task("Drink 2l", "high", "false"));
+        tasks.get(taskTypes.get(0)).add(new Task("Eat 4 peanuts ", "medium", "true"));
+        tasks.get(taskTypes.get(0)).add(new Task("Do not eat sugar", "high", "false"));tasks.get(taskTypes.get(0)).add(new Task("Drink 2l", "high", "false"));
+        tasks.get(taskTypes.get(0)).add(new Task("Eat 4 peanuts ", "medium", "true"));
+        tasks.get(taskTypes.get(0)).add(new Task("Do not eat sugar", "high", "false"));
 
     }
 
 
     public Observable<List<Task>> tasks(TypeTask typeTask){
-        return Observable.fromArray(tasks.get(typeTask));
+
+        ArrayList<Task> tasksL = new ArrayList<>();
+
+        for (Map.Entry<TypeTask, ArrayList<Task>>  entry: tasks.entrySet()) {
+
+            if(entry.getValue().size() != 0){
+                tasksL = entry.getValue();
+            }
+
+        }
+
+
+        return Observable.fromArray(tasksL);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.ejupialked.todoapp.di.modules.MainModule;
 import com.ejupialked.todoapp.view.activity.TaskTypeActivity;
+import com.ejupialked.todoapp.view.activity.TasksActivity;
 
 import javax.inject.Singleton;
 
@@ -14,6 +15,8 @@ import dagger.Component;
 public interface MainComponent {
 
     void inject(TaskTypeActivity activity);
+    void inject(TasksActivity activity);
+
 
     Context context();
 }

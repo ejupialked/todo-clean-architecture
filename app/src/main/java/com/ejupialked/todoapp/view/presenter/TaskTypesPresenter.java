@@ -99,8 +99,8 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         setView(null);
     }
 
-    public void onTaskTypeClicked(String name){
-        getView().showNameTaskType(name);
+    public void onTaskTypeClicked(TypeTask typeTask){
+        getView().openTasksScreen(typeTask);
     }
 
 

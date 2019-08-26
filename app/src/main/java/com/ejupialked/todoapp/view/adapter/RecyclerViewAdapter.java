@@ -50,7 +50,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TypeTask t = taskList.get(position);
         holder.render(t);
-
     }
 
 
@@ -109,7 +108,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
         private void onItemClick(final TypeTask typeTask) {
-            itemView.setOnClickListener(v -> presenter.onTaskTypeClicked(typeTask.getName()));
+            itemView.setOnClickListener(v -> presenter.onTaskTypeClicked(typeTask));
         }
 
         private void renderName(String name) {
