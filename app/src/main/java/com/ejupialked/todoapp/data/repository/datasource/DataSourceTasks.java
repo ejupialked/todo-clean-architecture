@@ -34,11 +34,19 @@ public class DataSourceTasks implements DataSource{
         taskTypes.add(new TypeTask("Work", 1));
 
 
+
+
        int i = 0;
         for (TypeTask t: taskTypes) {
             tasks.put(t, new ArrayList<>());
            t.setTasks(i++);
         }
+
+
+        tasks.get(taskTypes.get(0)).add(new Task("Drink 2l", "high", "false"));
+        tasks.get(taskTypes.get(0)).add(new Task("Eat 4 peanuts ", "medium", "true"));
+        tasks.get(taskTypes.get(0)).add(new Task("Do not eat sugar", "high", "false"));
+
 
     }
 

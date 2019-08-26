@@ -1,5 +1,7 @@
 package com.ejupialked.todoapp.domain.usecase;
 
+import com.ejupialked.todoapp.domain.model.TypeTask;
+
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
@@ -35,4 +37,5 @@ abstract class UseCase<T> {
     }
 
     protected abstract Observable<T> createObservableUseCase();
+
 }

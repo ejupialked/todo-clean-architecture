@@ -10,6 +10,7 @@ import io.reactivex.Observable;
 public interface Repository {
 
     Observable<List<TypeTask>> typeTaskList();
+
     Observable<TypeTask> createTypeTask(TypeTask typeTask);
 
     Observable<List<Task>> tasks(TypeTask typeTask);
