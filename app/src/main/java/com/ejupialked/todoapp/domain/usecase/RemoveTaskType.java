@@ -1,7 +1,6 @@
 package com.ejupialked.todoapp.domain.usecase;
 
 import com.ejupialked.todoapp.data.repository.Repository;
-import com.ejupialked.todoapp.domain.model.TypeTask;
 
 import javax.inject.Inject;
 import javax.inject.Named;

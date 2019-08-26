@@ -2,14 +2,10 @@ package com.ejupialked.todoapp.view.activity.customcomponents;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.ejupialked.todoapp.R;
-import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
@@ -17,13 +13,11 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
 
-    private RecyclerViewAdapter mAdapter;
     private final TaskTypesPresenter presenter;
 
 
-    public SwipeToDeleteCallback(RecyclerViewAdapter adapter, TaskTypesPresenter taskTypesPresenter) {
+    public SwipeToDeleteCallback(TaskTypesPresenter taskTypesPresenter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
-        mAdapter = adapter;
         presenter = taskTypesPresenter;
     }
 

@@ -1,17 +1,13 @@
 package com.ejupialked.todoapp.view.presenter;
 
 import androidx.annotation.NonNull;
-
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.AddTaskType;
 import com.ejupialked.todoapp.domain.usecase.GetTaskTypes;
 import com.ejupialked.todoapp.domain.usecase.RemoveTaskType;
 import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialog;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.reactivex.observers.DisposableObserver;
 
 public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
@@ -21,7 +17,9 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
     private RemoveTaskType removeTaskType;
 
     @Inject
-    public TaskTypesPresenter(@NonNull GetTaskTypes getTaskTypes, @NonNull AddTaskType addTaskType, @NonNull RemoveTaskType removeTaskType) {
+    public TaskTypesPresenter(@NonNull GetTaskTypes getTaskTypes,
+                              @NonNull AddTaskType addTaskType,
+                              @NonNull RemoveTaskType removeTaskType) {
         this.getTaskTypes = getTaskTypes;
         this.removeTaskType = removeTaskType;
         this.addTaskType = addTaskType;
@@ -31,8 +29,6 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
     @Override
     public void initialize() {
         super.initialize();
-
-        getView().showLoading();
 
         getTaskTypes.execute(new DisposableObserver<List<TypeTask>>() {
             @Override
@@ -53,11 +49,6 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         });
     }
 
-    public void onTaskTypeClicked(String name){
-        getView().showNameTaskType(name);
-    }
-
-
     public void onTaskTypeRemoved(Integer p){
 
         removeTaskType.removeTaskTypeAtPosition(p);
@@ -70,12 +61,10 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
             @Override
             public void onError(Throwable e) {
-
             }
 
             @Override
             public void onComplete() {
-
             }
         });
 
@@ -110,12 +99,19 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         setView(null);
     }
 
+    public void onTaskTypeClicked(String name){
+        getView().showNameTaskType(name);
+    }
+
+
 
     public interface View extends Presenter.View, CustomDialog.CustomDialogListener {
-
         void showTaskTypes(List<TypeTask> typeTaskList);
         void updateTypeTasks(TypeTask t);
         void removeTypeTask(Integer p);
         void showNameTaskType(String name);
+
+        void openTasksScreen(TypeTask typeTask);
+
     }
 }

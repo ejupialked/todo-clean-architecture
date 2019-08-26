@@ -1,16 +1,9 @@
 package com.ejupialked.todoapp.view.activity;
 
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-
-import android.graphics.Canvas;
-import android.view.View;
 import android.widget.Toast;
-
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.TODOApplication;
 import com.ejupialked.todoapp.domain.model.TypeTask;
@@ -20,26 +13,18 @@ import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
 import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-
 import java.util.Collections;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 
 
 public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter.View {
 
     @Inject TaskTypesPresenter presenter;
-
-    RecyclerViewAdapter recyclerViewAdapter;
-
     @BindView(R.id.recycle) RecyclerView recyclerView;
     @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
-
+    RecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     public void initView() {
@@ -49,14 +34,11 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         initRecycleView();
         initSwipeToDelete();
         initFAB();
-
         presenter.initialize();
-
     }
 
     private void initSwipeToDelete() {
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(
-                new SwipeToDeleteCallback(recyclerViewAdapter, presenter));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(presenter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
