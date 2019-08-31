@@ -114,7 +114,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
     @Override
     public void applyTask(String taskName) {
-        presenter.onTaskTypeCreated(new TypeTask(taskName, 0));
+        presenter.onTaskTypeCreated(new TypeTask(taskName));
     }
 
 }

@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.GetTasks;
+import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialog;
+
 import java.util.List;
 import javax.inject.Inject;
 import io.reactivex.observers.DisposableObserver;
@@ -59,7 +61,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
         this.typeTask = typeTask;
     }
 
-    public interface View extends Presenter.View {
+    public interface View extends Presenter.View, CustomDialog.CustomDialogListener  {
         void showTasks(List<Task> tasks);
     }
 }

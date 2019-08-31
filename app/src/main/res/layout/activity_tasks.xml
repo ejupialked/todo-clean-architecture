@@ -19,4 +19,15 @@
     </androidx.recyclerview.widget.RecyclerView>
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonCreateTask"
+        android:layout_width="wrap_content"
+        android:layout_margin="17dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/create"
+        />
+
+
 </RelativeLayout>

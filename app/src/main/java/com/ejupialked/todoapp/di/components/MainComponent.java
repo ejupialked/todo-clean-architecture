@@ -15,8 +15,8 @@ import dagger.Component;
 public interface MainComponent {
 
     void inject(TaskTypeActivity activity);
-    void inject(TasksActivity activity);
 
+    void inject(TasksActivity activity);
 
     Context context();
 }

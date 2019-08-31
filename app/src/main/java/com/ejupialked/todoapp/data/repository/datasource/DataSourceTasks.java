@@ -4,9 +4,7 @@ import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,70 +14,71 @@ import io.reactivex.Observable;
 @Singleton
 public class DataSourceTasks implements DataSource{
 
-    private List<TypeTask> taskTypes;
-    private Map<TypeTask, ArrayList<Task>> tasks;
+
+    private ArrayList<TypeTask> typeTasks;
 
 
     @Inject
-    public DataSourceTasks(){
+    DataSourceTasks(){
 
-        taskTypes = new ArrayList<>();
-        tasks = new HashMap<>();
+        initDataset();
+    }
 
-        taskTypes.add(new TypeTask("Health", 4));
-        taskTypes.add(new TypeTask("Education", 243));
-        taskTypes.add(new TypeTask("Diet", 3));
-        taskTypes.add(new TypeTask("Family", 0));
-        taskTypes.add(new TypeTask("Shopping", 2));
-        taskTypes.add(new TypeTask("Work", 1));
+    private void initDataset() {
+
+        typeTasks = new ArrayList<>();
 
 
 
+        typeTasks.add(new TypeTask("Health"));
+        typeTasks.add(new TypeTask("Education"));
+        typeTasks.add(new TypeTask("Diet"));
+        typeTasks.add(new TypeTask("Family"));
+        typeTasks.add(new TypeTask("Shopping"));
+        typeTasks.add(new TypeTask("Work"));
 
-       int i = 0;
-        for (TypeTask t: taskTypes) {
-            tasks.put(t, new ArrayList<>());
-           t.setTasks(i++);
-        }
+
+        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
+        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
+        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
+        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
+        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
+        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
+        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
+        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
+        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
+        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
+        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
+        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
+        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
+        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
 
 
-        tasks.get(taskTypes.get(0)).add(new Task("Drink 2l", "high", "false"));
-        tasks.get(taskTypes.get(0)).add(new Task("Eat 4 peanuts ", "medium", "true"));
-        tasks.get(taskTypes.get(0)).add(new Task("Do not eat sugar", "high", "false"));
-        tasks.get(taskTypes.get(0)).add(new Task("Drink 2l", "high", "false"));
-        tasks.get(taskTypes.get(0)).add(new Task("Eat 4 peanuts ", "medium", "true"));
-        tasks.get(taskTypes.get(0)).add(new Task("Do not eat sugar", "high", "false"));tasks.get(taskTypes.get(0)).add(new Task("Drink 2l", "high", "false"));
-        tasks.get(taskTypes.get(0)).add(new Task("Eat 4 peanuts ", "medium", "true"));
-        tasks.get(taskTypes.get(0)).add(new Task("Do not eat sugar", "high", "false"));tasks.get(taskTypes.get(0)).add(new Task("Drink 2l", "high", "false"));
-        tasks.get(taskTypes.get(0)).add(new Task("Eat 4 peanuts ", "medium", "true"));
-        tasks.get(taskTypes.get(0)).add(new Task("Do not eat sugar", "high", "false"));
+
+        typeTasks.get(3).addNewTask(new Task("Call father", "high", "no"));
+        typeTasks.get(3).addNewTask(new Task("birthday sister", "high", "no"));
 
     }
 
 
     public Observable<List<Task>> tasks(TypeTask typeTask){
 
-        ArrayList<Task> tasksL = new ArrayList<>();
-
-        for (Map.Entry<TypeTask, ArrayList<Task>>  entry: tasks.entrySet()) {
-
-            if(entry.getValue().size() != 0){
-                tasksL = entry.getValue();
-            }
-
+        ArrayList<Task> found = null;
+        try {
+           found = searchTasks(typeTask, typeTasks);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-
-        return Observable.fromArray(tasksL);
+        return Observable.fromArray(found);
     }
 
     @Override
     public Observable<Integer> removeTaskType(Integer position) {
 
-        taskTypes.remove(position);
+         typeTasks.remove(position);
 
          return Observable.create(emitter -> {
-
             if (position != null) {
                 emitter.onNext(position);
                 emitter.onComplete();
@@ -91,13 +90,12 @@ public class DataSourceTasks implements DataSource{
     }
 
     public Observable<List<TypeTask>> typeTaskList() {
-        return Observable.fromArray(taskTypes);
+        return Observable.fromArray(new ArrayList<>(typeTasks));
     }
 
     @Override
     public Observable<TypeTask> createType(TypeTask t) {
-        taskTypes.add(t);
-        tasks.put(t, new ArrayList<>());
+        typeTasks.add(t);
         return Observable.create(emitter -> {
 
             if (t != null) {
@@ -109,4 +107,19 @@ public class DataSourceTasks implements DataSource{
             }
         });
     }
+
+
+
+    public ArrayList<Task> searchTasks(TypeTask t, ArrayList<TypeTask> taskTypes) throws Exception {
+
+        for(TypeTask x: taskTypes){
+            if(x.equals(t)){
+                return t.getTasks();
+            }
+        }
+
+        throw new Exception("Tasks not found");
+    }
+
+
 }

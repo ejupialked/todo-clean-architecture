@@ -1,30 +1,60 @@
 package com.ejupialked.todoapp.domain.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class TypeTask implements Serializable {
 
-    String name;
-    int tasks;
+    private String name;
+    private int numberOfTasks;
+    private ArrayList<Task> tasks;
+    String uniqueID;
 
-    public TypeTask(String name, int tasks) {
+
+    public TypeTask(String name) {
         this.name = name;
-        this.tasks = tasks;
+        this.tasks = new ArrayList<>();
+        uniqueID = UUID.randomUUID().toString();
+
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setTasks(int tasks) {
-        this.tasks = tasks;
-    }
 
     public String getName() {
         return name;
     }
 
-    public int getTasks() {
+    public void addNewTask(Task task){
+        tasks.add(task);
+    }
+
+    public ArrayList<Task> getTasks() {
         return tasks;
     }
+
+    public int getNumberOfTasks() {
+        return tasks.size();
+    }
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof TypeTask)){
+            return false;
+        }
+
+        TypeTask model = ((TypeTask) obj);
+
+        return this.getUniqueID().equals(model.getUniqueID());
+    }
 }
+

@@ -1,6 +1,8 @@
 package com.ejupialked.todoapp.domain.model;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
 
   private String descrption;
   private String priority;

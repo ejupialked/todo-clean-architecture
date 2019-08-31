@@ -9,13 +9,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -95,7 +93,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void render(TypeTask t) {
             onItemClick(t);
             renderName(t.getName());
-            renderNumber(t.getTasks());
+            renderNumber(t.getNumberOfTasks());
             renderImage();
         }
 

@@ -107,4 +107,9 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     public void hideLoading() {
 
     }
+
+    @Override
+    public void applyTask(String taskName) {
+
+    }
 }
