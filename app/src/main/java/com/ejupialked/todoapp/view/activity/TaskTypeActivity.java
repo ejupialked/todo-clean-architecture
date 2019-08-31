@@ -8,7 +8,7 @@ import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.TODOApplication;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTaskType;
-import com.ejupialked.todoapp.view.activity.customcomponents.SwipeToDeleteCallback;
+import com.ejupialked.todoapp.view.activity.customcomponents.SwipeToDeleteCallbackTypeTasks;
 import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
 import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
@@ -40,7 +40,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     private void initSwipeToDelete() {
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(presenter));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallbackTypeTasks(presenter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 

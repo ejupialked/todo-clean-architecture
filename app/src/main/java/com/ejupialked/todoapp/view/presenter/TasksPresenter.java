@@ -5,6 +5,7 @@ import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.AddTask;
 import com.ejupialked.todoapp.domain.usecase.GetTasks;
+import com.ejupialked.todoapp.domain.usecase.RemoveTask;
 import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTask;
 
 import java.util.List;
@@ -15,12 +16,15 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
     private GetTasks getTasks;
     private AddTask addTask;
+    private RemoveTask removeTask;
     private TypeTask typeTask;
 
+
     @Inject
-    public TasksPresenter(@NonNull GetTasks getTasks, @NonNull AddTask addTask) {
+    public TasksPresenter(@NonNull GetTasks getTasks, @NonNull AddTask addTask, @NonNull RemoveTask removeTask) {
         this.getTasks = getTasks;
         this.addTask = addTask;
+        this.removeTask = removeTask;
     }
 
 
@@ -86,6 +90,28 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
             public void onComplete() {
             }
         });
+    }
+
+    public void onTaskRemoved(int position) {
+
+        removeTask.removeTaskAtPostion(typeTask, position);
+
+        removeTask.execute(new DisposableObserver<TypeTask>() {
+            @Override
+            public void onNext(TypeTask typeTask) {
+                getView().showTasks(typeTask.getTasks());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
     }
 
     public interface View extends Presenter.View, CustomDialogTask.CustomDialogListener  {

@@ -147,6 +147,34 @@ public class DataSourceTasks implements DataSource{
     }
 
 
+    @Override
+    public Observable<TypeTask> removeTask(TypeTask typeTask) {
+
+
+        TypeTask found = null;
+
+        try {
+            found = searchTaskType(typeTask, typeTasks);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        typeTasks.remove(found);
+        typeTasks.add(typeTask);
+
+
+        return Observable.create(emitter -> {
+            if (typeTask != null) {
+                emitter.onNext(typeTask);
+                emitter.onComplete();
+            } else {
+                emitter.onError(
+                        new Throwable("Error task type"));
+            }
+        });
+
+
+    }
 
     public TypeTask searchTaskType(TypeTask t, ArrayList<TypeTask> taskTypes) throws Exception {
 

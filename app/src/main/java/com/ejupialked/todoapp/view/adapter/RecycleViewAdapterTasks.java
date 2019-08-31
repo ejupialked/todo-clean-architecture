@@ -55,6 +55,12 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         return tasks.size();
     }
 
+
+    public void clear() {
+        int size = tasks.size();
+        tasks.clear();
+        notifyItemRangeRemoved(0, size);
+    }
     public void addAll(Collection<Task> collection) {
         tasks.addAll(collection);
     }

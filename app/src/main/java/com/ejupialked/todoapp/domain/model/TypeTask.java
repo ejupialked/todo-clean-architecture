@@ -25,6 +25,10 @@ public class TypeTask implements Serializable {
     }
 
 
+    public void removeTask(int index){
+        this.tasks.remove(index);
+    }
+
     public String getName() {
         return name;
     }

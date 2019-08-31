@@ -18,4 +18,6 @@ public interface Repository {
     Observable<Integer> removeTaskType(Integer position);
 
     Observable<TypeTask> createTask(TypeTask typeTask);
+
+    Observable<TypeTask> removeTask(TypeTask typeTask);
 }

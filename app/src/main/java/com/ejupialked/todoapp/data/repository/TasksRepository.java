@@ -48,4 +48,9 @@ public class TasksRepository implements Repository {
     public Observable<TypeTask> createTask(TypeTask typeTask) {
         return dataSource.createTask(typeTask);
     }
+
+    @Override
+    public Observable<TypeTask> removeTask(TypeTask typeTask) {
+        return dataSource.removeTask(typeTask);
+    }
 }

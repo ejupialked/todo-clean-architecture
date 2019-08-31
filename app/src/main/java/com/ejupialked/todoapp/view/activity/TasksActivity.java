@@ -3,6 +3,7 @@ package com.ejupialked.todoapp.view.activity;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,13 +12,15 @@ import com.ejupialked.todoapp.TODOApplication;
 import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTask;
-import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTaskType;
+import com.ejupialked.todoapp.view.activity.customcomponents.SwipeToDeleteCallBackTasks;
+import com.ejupialked.todoapp.view.activity.customcomponents.SwipeToDeleteCallbackTypeTasks;
 import com.ejupialked.todoapp.view.adapter.RecycleViewAdapterTasks;
 import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TasksPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -37,7 +40,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     private RecycleViewAdapterTasks recyclerViewAdapter;
 
 
-    private final static String TYPE_TASK_KEY = "type_task_key";
+    private final static String TYPE_TASK_KEY = "type_task_key"; //intent
 
 
     public static void open(Context context, TypeTask typeTask) {
@@ -54,6 +57,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         initAdapter();
         initFAB();
         initRecycleViewer();
+        initSwipeToDelete();
 
     }
 
@@ -91,7 +95,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
 
     public TypeTask getTypeTaskExtra() {
-        return (TypeTask) getIntent().getExtras().get(TYPE_TASK_KEY);
+        return (TypeTask) Objects.requireNonNull(getIntent().getExtras()).get(TYPE_TASK_KEY);
     }
 
     @Override protected void onDestroy() {
@@ -108,10 +112,16 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
     @Override
     public void showTasks(List<Task> tasks) {
+        recyclerViewAdapter.clear();
         recyclerViewAdapter.addAll(tasks);
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
+
+    private void initSwipeToDelete() {
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallBackTasks(presenter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
 
     @Override
     public void updateTasks(List<Task> tasks) {
