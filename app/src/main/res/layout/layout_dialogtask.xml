@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/edit_taskdescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="40"
+        android:hint="insert a short description (max 50 char)" />
+
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radiogroup_task"
+        android:layout_below="@id/edit_taskdescription"
+        android:layout_alignParentLeft="true"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:text="Choose priority:"/>
+
+        <RadioButton
+            android:id="@+id/radio_high"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High"/>
+        <RadioButton
+            android:id="@+id/radio_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium"/>
+        <RadioButton
+            android:id="@+id/radio_low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Low"/>
+
+
+
+    </RadioGroup>
+
+
+
+</RelativeLayout>

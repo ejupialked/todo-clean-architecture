@@ -3,8 +3,6 @@ package com.ejupialked.todoapp.view.activity;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,10 +10,12 @@ import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.TODOApplication;
 import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
+import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTask;
+import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTaskType;
 import com.ejupialked.todoapp.view.adapter.RecycleViewAdapterTasks;
-import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
 import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TasksPresenter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -30,6 +30,9 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
     @BindView(R.id.recycle_view_tasks)
      RecyclerView recyclerView;
+
+    @BindView(R.id.floatingActionButtonCreateTask)
+    FloatingActionButton floatingActionButtonCreateTask;
 
     private RecycleViewAdapterTasks recyclerViewAdapter;
 
@@ -49,9 +52,20 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         initializeDagger();
         initializePresenter();
         initAdapter();
+        initFAB();
         initRecycleViewer();
+
     }
 
+    private void initFAB() {
+        floatingActionButtonCreateTask.setOnClickListener(v -> openDialog());
+
+    }
+
+    private void openDialog() {
+        CustomDialogTask customDialogTask = new CustomDialogTask();
+        customDialogTask.show(getSupportFragmentManager(), "example");
+    }
     private void initAdapter() {
         recyclerViewAdapter = new RecycleViewAdapterTasks(presenter);
 
@@ -98,6 +112,13 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
+
+    @Override
+    public void updateTasks(List<Task> tasks) {
+        recyclerViewAdapter.addAll(tasks);
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public void showLoading() {
 
@@ -108,8 +129,9 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
     }
 
-    @Override
-    public void applyTask(String taskName) {
 
+    @Override
+    public void applyTask(String description, String priority) {
+        presenter.onTaskCreated(new Task(description, priority, "no"));
     }
 }

@@ -51,10 +51,13 @@ public class TypeTask implements Serializable {
         if(!(obj instanceof TypeTask)){
             return false;
         }
-
         TypeTask model = ((TypeTask) obj);
-
         return this.getUniqueID().equals(model.getUniqueID());
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks.clear();
+        this.tasks.addAll(tasks);
     }
 }
 

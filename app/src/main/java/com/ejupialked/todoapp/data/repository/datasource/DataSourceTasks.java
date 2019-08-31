@@ -61,6 +61,31 @@ public class DataSourceTasks implements DataSource{
     }
 
 
+    @Override
+    public Observable<TypeTask> createTask(TypeTask typeTask)  {
+        TypeTask found = null;
+
+        try {
+            found = searchTaskType(typeTask, typeTasks);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        typeTasks.remove(found);
+        typeTasks.add(typeTask);
+
+        return Observable.create(emitter -> {
+
+            if (typeTask != null) {
+                emitter.onNext(typeTask);
+                emitter.onComplete();
+            } else {
+                emitter.onError(
+                        new Throwable("Error task type"));
+            }
+        });
+    }
+
     public Observable<List<Task>> tasks(TypeTask typeTask){
 
         ArrayList<Task> found = null;
@@ -121,5 +146,17 @@ public class DataSourceTasks implements DataSource{
         throw new Exception("Tasks not found");
     }
 
+
+
+    public TypeTask searchTaskType(TypeTask t, ArrayList<TypeTask> taskTypes) throws Exception {
+
+        for(TypeTask x: taskTypes){
+            if(x.equals(t)){
+                return t;
+            }
+        }
+
+        throw new Exception("TaskType not found");
+    }
 
 }

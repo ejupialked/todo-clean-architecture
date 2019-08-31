@@ -3,11 +3,11 @@ package com.ejupialked.todoapp.view.activity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.widget.Toast;
+
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.TODOApplication;
 import com.ejupialked.todoapp.domain.model.TypeTask;
-import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialog;
+import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTaskType;
 import com.ejupialked.todoapp.view.activity.customcomponents.SwipeToDeleteCallback;
 import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
 import com.ejupialked.todoapp.view.base.BaseActivity;
@@ -49,8 +49,8 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     private void openDialog() {
-        CustomDialog customDialog = new CustomDialog();
-        customDialog.show(getSupportFragmentManager(), "example");
+        CustomDialogTaskType customDialogTaskType = new CustomDialogTaskType();
+        customDialogTaskType.show(getSupportFragmentManager(), "example");
     }
 
     private void initRecycleView(){
@@ -76,6 +76,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
     @Override
     public void showTaskTypes(List<TypeTask> typeTaskList) {
+        recyclerViewAdapter.clear();
         recyclerViewAdapter.addAll(typeTaskList);
         recyclerViewAdapter.notifyDataSetChanged();
     }
@@ -95,16 +96,18 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void showNameTaskType(String name) {
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void openTasksScreen(TypeTask typeTask) {
         TasksActivity.open(TaskTypeActivity.this, typeTask);
     }
 
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        presenter.onRestart();
+    }
 
     @Override
     public void showLoading() {}

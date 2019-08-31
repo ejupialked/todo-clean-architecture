@@ -16,4 +16,6 @@ public interface DataSource {
     Observable<List<Task>> tasks(TypeTask typeTask);
 
     Observable<Integer> removeTaskType(Integer position);
+
+    Observable<TypeTask> createTask(TypeTask typeTask);
 }

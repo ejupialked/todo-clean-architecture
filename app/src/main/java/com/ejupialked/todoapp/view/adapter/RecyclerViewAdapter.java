@@ -39,7 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tasktype, parent, false);
         return new ViewHolder(view, presenter);
     }
@@ -61,6 +61,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public Context getContext() {
         return context;
+    }
+
+    public void clear() {
+        int size = taskList.size();
+        taskList.clear();
+        notifyItemRangeRemoved(0, size);
     }
 
     public void addAll(Collection<TypeTask> collection) {
