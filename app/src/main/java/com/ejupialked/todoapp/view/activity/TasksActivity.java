@@ -13,7 +13,6 @@ import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTask;
 import com.ejupialked.todoapp.view.activity.customcomponents.SwipeToDeleteCallBackTasks;
-import com.ejupialked.todoapp.view.activity.customcomponents.SwipeToDeleteCallbackTypeTasks;
 import com.ejupialked.todoapp.view.adapter.RecycleViewAdapterTasks;
 import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TasksPresenter;
@@ -28,11 +27,14 @@ import butterknife.BindView;
 
 public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
+
+    private final static String TYPE_TASK_KEY = "type_task_key"; //intent
+
     @Inject
     TasksPresenter presenter;
 
     @BindView(R.id.recycle_view_tasks)
-     RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
     @BindView(R.id.floatingActionButtonCreateTask)
     FloatingActionButton floatingActionButtonCreateTask;
@@ -40,73 +42,32 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     private RecycleViewAdapterTasks recyclerViewAdapter;
 
 
-    private final static String TYPE_TASK_KEY = "type_task_key"; //intent
-
-
-    public static void open(Context context, TypeTask typeTask) {
-        Intent intent = new Intent(context, TasksActivity.class);
-        intent.putExtra("type_task_key", typeTask);
-        context.startActivity(intent);
-    }
 
     @Override
     public void initView() {
         super.initView();
+
         initializeDagger();
         initializePresenter();
         initAdapter();
         initFAB();
         initRecycleViewer();
         initSwipeToDelete();
-
-    }
-
-    private void initFAB() {
-        floatingActionButtonCreateTask.setOnClickListener(v -> openDialog());
-
     }
 
     private void openDialog() {
         CustomDialogTask customDialogTask = new CustomDialogTask();
         customDialogTask.show(getSupportFragmentManager(), "example");
     }
-    private void initAdapter() {
-        recyclerViewAdapter = new RecycleViewAdapterTasks(presenter);
-
-    }
-
-    private void initRecycleViewer() {
-        recyclerViewAdapter = new RecycleViewAdapterTasks(presenter);
-        recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_tasks;
     }
 
-    private void initializeDagger() {
-        TODOApplication todoApplication = (TODOApplication) getApplication();
-        todoApplication.getMainComponent().inject(this);
-    }
-
-
-
-    public TypeTask getTypeTaskExtra() {
-        return (TypeTask) Objects.requireNonNull(getIntent().getExtras()).get(TYPE_TASK_KEY);
-    }
-
     @Override protected void onDestroy() {
         super.onDestroy();
         presenter.destroy();
-    }
-    private void initializePresenter() {
-        presenter.setView(this);
-        TypeTask typeTask = getTypeTaskExtra();
-        presenter.setTypeTask(typeTask);
-        presenter.initialize();
     }
 
 
@@ -118,30 +79,67 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
 
+    @Override
+    public void updateTasks(List<Task> tasks) {
+        recyclerViewAdapter.clear();
+        recyclerViewAdapter.addAll(tasks);
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
+
+
     private void initSwipeToDelete() {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallBackTasks(presenter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
-    @Override
-    public void updateTasks(List<Task> tasks) {
-        recyclerViewAdapter.addAll(tasks);
-        recyclerViewAdapter.notifyDataSetChanged();
+    private void initializePresenter() {
+        presenter.setView(this);
+        TypeTask typeTask = getTypeTaskExtra();
+        presenter.setTypeTask(typeTask);
+        presenter.initialize();
     }
 
-    @Override
-    public void showLoading() {
-
+    private void initializeDagger() {
+        TODOApplication todoApplication = (TODOApplication) getApplication();
+        todoApplication.getMainComponent().inject(this);
     }
 
-    @Override
-    public void hideLoading() {
-
+    private void initRecycleViewer() {
+        recyclerViewAdapter = new RecycleViewAdapterTasks(presenter);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    private void initAdapter() {
+        recyclerViewAdapter = new RecycleViewAdapterTasks(presenter);
+    }
+
+    private void initFAB() {
+        floatingActionButtonCreateTask.setOnClickListener(v -> openDialog());
+    }
+
+    public TypeTask getTypeTaskExtra() {
+        return (TypeTask) Objects.requireNonNull(getIntent().getExtras()).get(TYPE_TASK_KEY);
+    }
+
+    public static void open(Context context, TypeTask typeTask) {
+        Intent intent = new Intent(context, TasksActivity.class);
+        intent.putExtra("type_task_key", typeTask);
+        context.startActivity(intent);
+    }
 
     @Override
     public void applyTask(String description, String priority) {
         presenter.onTaskCreated(new Task(description, priority, "no"));
+    }
+    @Override
+    public void showLoading() {
+        // TODO: 31/08/2019
+    }
+
+    @Override
+    public void hideLoading() {
+        // TODO: 31/08/2019
+
     }
 }

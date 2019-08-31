@@ -25,18 +25,21 @@ public class CustomDialogTask extends AppCompatDialogFragment {
 
 
     @BindView(R.id.edit_taskdescription) EditText editDescription;
+    @BindView(R.id.radiogroup_task) RadioGroup radioGroup;
 
-    @BindView(R.id.radiogroup_task)
-    RadioGroup radioGroup;
     private RadioButton radioButton;
+
     private CustomDialogTask.CustomDialogListener listener;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
         LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
-        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.layout_dialogtask, null);
+
+        @SuppressLint("InflateParams")
+        View view = inflater.inflate(R.layout.layout_dialogtask, null);
 
         ButterKnife.bind(this, view);
 
@@ -46,7 +49,6 @@ public class CustomDialogTask extends AppCompatDialogFragment {
                 })
                 .setPositiveButton("Create", (dialogInterface, i) -> {
 
-
                     int ID = radioGroup.getCheckedRadioButtonId();
                     radioButton = view.findViewById(ID);
 
@@ -55,10 +57,9 @@ public class CustomDialogTask extends AppCompatDialogFragment {
 
                     listener.applyTask(taskDescription, taskPriority);
                 });
-        return  builder.create();
+
+        return builder.create();
     }
-
-
 
     @Override
     public void onAttach(Context context) {

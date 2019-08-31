@@ -31,19 +31,19 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         this.tasks = new ArrayList<>();
     }
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent, false);
-        return new RecycleViewAdapterTasks.ViewHolder(view, presenter);
+        View view = LayoutInflater
+                .from(parent.getContext())
+                .inflate(R.layout.item_row, parent, false);
+        return new RecycleViewAdapterTasks.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task task = tasks.get(position);
         holder.render(task);
-
     }
 
     public TasksPresenter getPresenter() {
@@ -55,40 +55,35 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         return tasks.size();
     }
 
-
     public void clear() {
         int size = tasks.size();
         tasks.clear();
         notifyItemRangeRemoved(0, size);
     }
+
     public void addAll(Collection<Task> collection) {
         tasks.addAll(collection);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
-        @BindView(R.id.txt_description)
-        TextView txt_description;
+        @BindView(R.id.txt_description) TextView txt_description;
+        @BindView(R.id.txt_priority)    TextView txt_priority;
+        @BindView(R.id.txt_isComplete)  TextView txt_isComplete;
 
-        @BindView(R.id.txt_priority)
-        TextView txt_priority;
-
-        @BindView(R.id.txt_isComplete)
-        TextView txt_isComplete;
-
-       public ViewHolder(@NonNull View itemView, TasksPresenter presenter) {
+       private ViewHolder(@NonNull View itemView) {
            super(itemView);
            ButterKnife.bind(this, itemView);
        }
 
-        public void render(Task task) {
-           renderDescription(task.getDescrption());
+        private void render(Task task) {
+           renderDescription(task.getDescription());
            renderPriority(task.getPriority());
            renderCompleted(task.getIsCompleted());
         }
 
-        private void renderDescription(String descrption) {
-           txt_description.setText(descrption);
+        private void renderDescription(String description) {
+           txt_description.setText(description);
         }
 
         private void renderPriority(String priority) {
@@ -98,6 +93,5 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         private void renderCompleted(String completed) {
            txt_isComplete.setText(completed);
         }
-
     }
 }

@@ -25,23 +25,24 @@ import butterknife.ButterKnife;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
-
     private final TaskTypesPresenter presenter;
     private final List<TypeTask> taskList;
     private Context context;
+
 
     public RecyclerViewAdapter(TaskTypesPresenter presenter) {
         this.presenter = presenter;
         this.taskList = new ArrayList<>();
         this.context = getContext();
-
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tasktype, parent, false);
-        return new ViewHolder(view, presenter);
+        View view = LayoutInflater
+                .from(parent.getContext())
+                .inflate(R.layout.layout_tasktype, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -63,7 +64,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return context;
     }
 
-    public void clear() {
+    //todo fix repositioning
+    public void clearAll() {
         int size = taskList.size();
         taskList.clear();
         notifyItemRangeRemoved(0, size);
@@ -80,23 +82,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        private final TaskTypesPresenter presenter;
+     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.nameTaskType) TextView typeTask;
         @BindView(R.id.numberOfTasks) TextView numberOfTasks;
         @BindView(R.id.imageTaskType) ImageView image;
         @BindView(R.id.parent_layout) RelativeLayout parentLayout;
 
-        public ViewHolder(View itemView, TaskTypesPresenter presenter) {
+        private ViewHolder(View itemView) {
             super(itemView);
-            this.presenter = presenter;
-
             ButterKnife.bind(this, itemView);
         }
 
-        public void render(TypeTask t) {
+        private void render(TypeTask t) {
             onItemClick(t);
             renderName(t.getName());
             renderNumber(t.getNumberOfTasks());

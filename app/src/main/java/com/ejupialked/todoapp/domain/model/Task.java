@@ -4,22 +4,22 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
 
-  private String descrption;
+  private String description;
   private String priority;
   private String isCompleted;
 
-    public Task(String descrption, String priority, String isCompleted) {
-        this.descrption = descrption;
+    public Task(String description, String priority, String isCompleted) {
+        this.description = description;
         this.priority = priority;
         this.isCompleted = isCompleted;
     }
 
-    public String getDescrption() {
-        return descrption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescrption(String descrption) {
-        this.descrption = descrption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPriority() {

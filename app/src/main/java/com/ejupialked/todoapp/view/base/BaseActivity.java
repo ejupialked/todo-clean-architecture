@@ -1,11 +1,7 @@
 package com.ejupialked.todoapp.view.base;
 
 import android.os.Bundle;
-
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.ejupialked.todoapp.R;
 
 import butterknife.ButterKnife;
 

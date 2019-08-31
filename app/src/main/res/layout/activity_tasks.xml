@@ -9,6 +9,16 @@
     tools:context=".view.activity.TasksActivity">
 
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/emptyRecycle"
+        android:layout_height="match_parent"
+        android:text="Add a new task with the button down below"
+        android:gravity="center"        />
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,3 +41,5 @@
 
 
 </RelativeLayout>
+
+

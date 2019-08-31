@@ -19,23 +19,24 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     private RemoveTask removeTask;
     private TypeTask typeTask;
 
-
     @Inject
-    public TasksPresenter(@NonNull GetTasks getTasks, @NonNull AddTask addTask, @NonNull RemoveTask removeTask) {
+    public TasksPresenter(@NonNull GetTasks getTasks,
+                          @NonNull AddTask addTask,
+                          @NonNull RemoveTask removeTask) {
+
         this.getTasks = getTasks;
         this.addTask = addTask;
         this.removeTask = removeTask;
     }
-
-
-
 
     @Override
     public void initialize() {
         super.initialize();
 
         getTasks.showTasksByTypetask(typeTask);
+
         getTasks.execute(new DisposableObserver<List<Task>>() {
+
             @Override
             public void onNext(List<Task> tasks) {
                 getView().showTasks(tasks);
@@ -52,13 +53,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
                 // TODO: 31/08/2019
             }
         });
-
-
     }
-
-
-
-
 
     public void destroy() {
         this.getTasks.dispose();

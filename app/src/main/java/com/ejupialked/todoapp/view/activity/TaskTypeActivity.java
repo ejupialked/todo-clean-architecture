@@ -31,12 +31,12 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     @Override
     public void initView() {
         super.initView();
+
         initializeDagger();
         initializePresenter();
         initRecycleView();
         initSwipeToDelete();
         initFAB();
-        presenter.initialize();
     }
 
     private void initSwipeToDelete() {
@@ -61,6 +61,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
     private void initializePresenter() {
         presenter.setView(this);
+        presenter.initialize();
     }
 
     private void initializeDagger() {
@@ -73,21 +74,18 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         return R.layout.activity_tasktypes;
     }
 
-
     @Override
     public void showTaskTypes(List<TypeTask> typeTaskList) {
-        recyclerViewAdapter.clear();
+        recyclerViewAdapter.clearAll();
         recyclerViewAdapter.addAll(typeTaskList);
         recyclerViewAdapter.notifyDataSetChanged();
     }
-
 
     @Override
     public void updateTypeTasks(TypeTask typeTask) {
         recyclerViewAdapter.addAll(Collections.singleton(typeTask));
         recyclerViewAdapter.notifyDataSetChanged();
     }
-
 
     @Override
     public void removeTypeTask(Integer p) {
@@ -101,7 +99,6 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     public void openTasksScreen(TypeTask typeTask) {
         TasksActivity.open(TaskTypeActivity.this, typeTask);
     }
-
 
     @Override
     protected void onRestart() {
