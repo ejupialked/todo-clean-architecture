@@ -1,5 +1,6 @@
 package com.ejupialked.todoapp.data.repository.datasource;
 
+import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 
@@ -11,6 +12,7 @@ import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 
+@SuppressWarnings("ALL")
 @Singleton
 public class DataSourceTasks implements DataSource{
 
@@ -36,6 +38,14 @@ public class DataSourceTasks implements DataSource{
         typeTasks.add(new TypeTask("Family"));
         typeTasks.add(new TypeTask("Shopping"));
         typeTasks.add(new TypeTask("Work"));
+
+
+        typeTasks.get(0).setImageID(R.drawable.band_aid);
+        typeTasks.get(1).setImageID(R.drawable.mortarboard);
+        typeTasks.get(2).setImageID(R.drawable.doughnut);
+        typeTasks.get(3).setImageID(R.drawable.heart);
+        typeTasks.get(4).setImageID(R.drawable.shopping_bag);
+        typeTasks.get(5).setImageID(R.drawable.briefcase);
 
 
         typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
@@ -185,6 +195,20 @@ public class DataSourceTasks implements DataSource{
         }
 
         throw new Exception("TaskType not found");
+    }
+
+
+    public static ArrayList<Integer> getImages(){
+        ArrayList<Integer> images = new ArrayList<>();
+
+        images.add(R.drawable.briefcase);
+        images.add(R.drawable.doughnut);
+        images.add(R.drawable.band_aid);
+        images.add(R.drawable.mortarboard);
+        images.add(R.drawable.shopping_bag);
+
+        return images;
+
     }
 
 }

@@ -8,8 +8,8 @@ import java.util.UUID;
 public class TypeTask implements Serializable {
 
     private String name;
-    private int numberOfTasks;
     private ArrayList<Task> tasks;
+    private int imageID;
     String uniqueID;
 
 
@@ -24,6 +24,14 @@ public class TypeTask implements Serializable {
         this.name = name;
     }
 
+
+    public void setImageID(int imageID) {
+        this.imageID = imageID;
+    }
+
+    public int getImageID() {
+        return imageID;
+    }
 
     public void removeTask(int index){
         this.tasks.remove(index);

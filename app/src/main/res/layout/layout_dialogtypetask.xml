@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
     <EditText
@@ -9,6 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="create task type" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclegrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager">
+
+
+        <com.ejupialked.todoapp.view.activity.customcomponents.SquareImageView
+            android:id="@+id/siv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
 
 
 

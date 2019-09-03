@@ -120,6 +120,7 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         void updateTypeTasks(TypeTask t);
         void removeTypeTask(Integer p);
         void openTasksScreen(TypeTask typeTask);
+        void openDialogCreateNewTask();
 
     }
 }

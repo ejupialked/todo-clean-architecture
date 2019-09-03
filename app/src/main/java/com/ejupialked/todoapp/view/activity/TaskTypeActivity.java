@@ -45,13 +45,10 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     private void initFAB() {
-        floatingActionButton.setOnClickListener(v -> openDialog());
+        floatingActionButton.setOnClickListener(v -> openDialogCreateNewTask());
     }
 
-    private void openDialog() {
-        CustomDialogTaskType customDialogTaskType = new CustomDialogTaskType();
-        customDialogTaskType.show(getSupportFragmentManager(), "example");
-    }
+
 
     private void initRecycleView(){
         recyclerViewAdapter = new RecyclerViewAdapter(presenter);
@@ -99,6 +96,11 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     public void openTasksScreen(TypeTask typeTask) {
         TasksActivity.open(TaskTypeActivity.this, typeTask);
     }
+
+    @Override
+    public void openDialogCreateNewTask() {
+        CustomDialogTaskType customDialogTaskType = new CustomDialogTaskType();
+        customDialogTaskType.show(getSupportFragmentManager(), "example");    }
 
     @Override
     protected void onRestart() {

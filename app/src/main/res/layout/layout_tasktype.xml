@@ -2,19 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content"
 
-    android:padding="10dp"
+    android:padding="16dp"
     android:id="@+id/parent_layout"
     android:foreground="?android:attr/selectableItemBackground"
     >
 
 
-
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/imageTaskType"
-        android:src="@mipmap/ic_launcher"
-        />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_launcher_background" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,21 +22,33 @@
         android:layout_marginStart="40dp"
         android:id="@+id/nameTaskType"
         android:layout_centerVertical="true"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:text="Alked"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="number of tasks:"
+        android:textSize="16dp"
+        android:layout_toLeftOf="@id/numberOfTasks"
+        android:layout_marginLeft="5dp"
+        />
 
     <TextView
         android:id="@+id/numberOfTasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginRight="30dp"
         android:layout_centerHorizontal="true"
         android:text="4"
         android:textColor="#000"
-        android:textSize="20sp" />
+        android:textSize="16dp" />
 
 
 
