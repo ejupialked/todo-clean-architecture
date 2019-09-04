@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.TODOApplication;
 import com.ejupialked.todoapp.domain.model.TypeTask;
-import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTaskType;
-import com.ejupialked.todoapp.view.activity.customcomponents.SwipeToDeleteCallbackTypeTasks;
+import com.ejupialked.todoapp.view.customview.CustomDialogTaskType;
+import com.ejupialked.todoapp.view.customview.SwipeToDeleteCallbackTypeTasks;
 import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
 import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
@@ -57,6 +57,8 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
 
 
+
+
     private void initRecycleView(){
         recyclerViewAdapter = new RecyclerViewAdapter(presenter);
         recyclerView.setAdapter(recyclerViewAdapter);
@@ -86,8 +88,14 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     @Override
-    public void updateTypeTasks(TypeTask typeTask) {
+    public void addTypeTask(TypeTask typeTask) {
         recyclerViewAdapter.addAll(Collections.singleton(typeTask));
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showEditTypeTask(TypeTask t) {
+        recyclerViewAdapter.updateEditedTypeTask(t);
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
@@ -105,6 +113,15 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     @Override
+    public void openDialogEditTask(int position) {
+        TypeTask t = recyclerViewAdapter.getTaskTypeAtPosition(position);
+        CustomDialogTaskType customDialogTaskType = new CustomDialogTaskType();
+        customDialogTaskType.setT(t);
+        customDialogTaskType.show(getSupportFragmentManager(), "example");
+
+    }
+
+    @Override
     public void openDialogCreateNewTask() {
         CustomDialogTaskType customDialogTaskType = new CustomDialogTaskType();
         customDialogTaskType.show(getSupportFragmentManager(), "example");    }
@@ -116,14 +133,13 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     @Override
-    public void showLoading() {}
-
-    @Override
-    public void hideLoading() {}
-
-    @Override
-    public void applyTask(String taskName) {
+    public void createTypeTask(String taskName) {
         presenter.onTaskTypeCreated(new TypeTask(taskName));
     }
 
+
+    @Override
+    public void editTypeTask(TypeTask typeTask) {
+        presenter.onTaskTaskEdited(typeTask);
+    }
 }

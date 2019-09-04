@@ -20,4 +20,6 @@ public interface DataSource {
     Observable<TypeTask> createTask(TypeTask typeTask);
 
     Observable<TypeTask> removeTask(TypeTask typeTask);
+
+    Observable<TypeTask> editTask(TypeTask typeTask);
 }

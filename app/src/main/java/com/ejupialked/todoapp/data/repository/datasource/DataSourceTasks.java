@@ -37,7 +37,7 @@ public class DataSourceTasks implements DataSource{
         typeTasks.add(new TypeTask("Diet"));
         typeTasks.add(new TypeTask("Family"));
         typeTasks.add(new TypeTask("Shopping"));
-        typeTasks.add(new TypeTask("Meetings"));
+        typeTasks.add(new TypeTask("Meeting"));
         typeTasks.add(new TypeTask("Expenses"));
         typeTasks.add(new TypeTask("Goals"));
 
@@ -161,6 +161,28 @@ public class DataSourceTasks implements DataSource{
         throw new Exception("Tasks not found");
     }
 
+
+    @Override
+    public Observable<TypeTask> editTask(TypeTask typeTask) {
+
+        for (TypeTask t: typeTasks) {
+
+            if(t.equals(typeTask)){
+                t = typeTask;
+            }
+
+        }
+
+        return  Observable.create(emitter -> {
+            if (typeTask != null) {
+                emitter.onNext(typeTask);
+                emitter.onComplete();
+            } else {
+                emitter.onError(
+                        new Throwable("Error task type"));
+            }
+        });
+    }
 
     @Override
     public Observable<TypeTask> removeTask(TypeTask typeTask) {

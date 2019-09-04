@@ -38,6 +38,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonCreateTask"
         android:layout_width="wrap_content"
+        android:backgroundTint="@color/blue"
         android:layout_margin="17dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

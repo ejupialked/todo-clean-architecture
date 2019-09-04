@@ -2,9 +2,7 @@ package com.ejupialked.todoapp.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,8 +11,8 @@ import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.TODOApplication;
 import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
-import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTask;
-import com.ejupialked.todoapp.view.activity.customcomponents.SwipeToDeleteCallBackTasks;
+import com.ejupialked.todoapp.view.customview.CustomDialogTask;
+import com.ejupialked.todoapp.view.customview.SwipeToDeleteCallBackTasks;
 import com.ejupialked.todoapp.view.adapter.RecycleViewAdapterTasks;
 import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TasksPresenter;
@@ -29,7 +27,6 @@ import butterknife.BindView;
 
 public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
-
     private final static String TYPE_TASK_KEY = "type_task_key"; //intent
 
     @Inject
@@ -42,8 +39,6 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     FloatingActionButton floatingActionButtonCreateTask;
 
     private RecycleViewAdapterTasks recyclerViewAdapter;
-
-
 
     @Override
     public void initView() {
@@ -140,15 +135,5 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     @Override
     public void applyTask(String description, String priority) {
         presenter.onTaskCreated(new Task(description, priority, "no"));
-    }
-    @Override
-    public void showLoading() {
-        // TODO: 31/08/2019
-    }
-
-    @Override
-    public void hideLoading() {
-        // TODO: 31/08/2019
-
     }
 }

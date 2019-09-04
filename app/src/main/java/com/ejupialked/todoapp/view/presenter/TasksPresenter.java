@@ -6,7 +6,7 @@ import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.AddTask;
 import com.ejupialked.todoapp.domain.usecase.GetTasks;
 import com.ejupialked.todoapp.domain.usecase.RemoveTask;
-import com.ejupialked.todoapp.view.activity.customcomponents.CustomDialogTask;
+import com.ejupialked.todoapp.view.customview.CustomDialogTask;
 
 import java.util.List;
 import javax.inject.Inject;
@@ -44,7 +44,6 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
             @Override
             public void onError(Throwable e) {
-                getView().hideLoading();
                 e.printStackTrace();
             }
 
@@ -59,7 +58,6 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
         this.getTasks.dispose();
         setView(null);
     }
-
 
     public void setTypeTask(TypeTask typeTask) {
         this.typeTask = typeTask;
@@ -110,7 +108,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     }
 
     public void onTaskEdited(int position) {
-        // TODO: 04/09/2019 implementation 
+
     }
 
     public interface View extends Presenter.View, CustomDialogTask.CustomDialogListener  {

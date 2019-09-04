@@ -1,4 +1,4 @@
-package com.ejupialked.todoapp.view.activity.customcomponents;
+package com.ejupialked.todoapp.view.customview;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;

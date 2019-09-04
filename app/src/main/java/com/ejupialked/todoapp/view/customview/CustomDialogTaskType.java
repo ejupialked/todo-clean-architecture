@@ -1,4 +1,4 @@
-package com.ejupialked.todoapp.view.activity.customcomponents;
+package com.ejupialked.todoapp.view.customview;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.ejupialked.todoapp.R;
+import com.ejupialked.todoapp.domain.model.TypeTask;
 
 import java.util.Objects;
 
@@ -26,6 +27,9 @@ public class CustomDialogTaskType extends DialogFragment {
 
     private CustomDialogListener listener;
 
+
+    TypeTask t;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -37,27 +41,36 @@ public class CustomDialogTaskType extends DialogFragment {
 
         ButterKnife.bind(this, view);
 
-
+        if(t != null){
+            editText.setText(t.getName());
+        }
 
         builder.setView(view)
                 .setTitle("Create new task type")
                 .setNegativeButton("Cancel", (dialogInterface, i) -> {
-
-                })
-                .setPositiveButton("Create", (dialogInterface, i) -> {
-                    String taskName = editText.getText().toString();
-                    listener.applyTask(taskName);
                 });
-
+        if(t == null) {
+            builder.setPositiveButton("Create", (dialogInterface, i) -> {
+                String taskName = editText.getText().toString();
+                listener.createTypeTask(taskName);
+            });
+        }else{
+            builder.setPositiveButton("Edit", (dialogInterface, i) -> {
+                t.setName(editText.getText().toString());
+                listener.editTypeTask(t);
+            });
+        }
 
         return  builder.create();
     }
 
+    public void setT(TypeTask t) {
+        this.t = t;
+    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         try{
             listener = (CustomDialogListener) context;
 
@@ -67,6 +80,7 @@ public class CustomDialogTaskType extends DialogFragment {
     }
 
     public interface  CustomDialogListener{
-        void applyTask(String taskName);
+        void createTypeTask(String newTaskName);
+        void editTypeTask(TypeTask t);
     }
 }
