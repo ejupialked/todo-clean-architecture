@@ -1,26 +1,17 @@
 package com.ejupialked.todoapp.view.activity.customcomponents;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.ejupialked.todoapp.R;
-import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
-import com.ejupialked.todoapp.view.adapter.RecycleviewAdapterGrid;
 
 import java.util.Objects;
 

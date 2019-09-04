@@ -5,8 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     tools:context=".view.activity.TasksActivity">
+
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"
+        />
 
 
 
@@ -21,6 +26,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:layout_below="@id/toolbar"
         android:layout_height="match_parent"
         android:padding="4dp"
         android:scrollbars="vertical"

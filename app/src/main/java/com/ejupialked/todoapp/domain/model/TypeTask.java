@@ -1,8 +1,9 @@
 package com.ejupialked.todoapp.domain.model;
 
+import com.ejupialked.todoapp.R;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class TypeTask implements Serializable {
@@ -16,6 +17,7 @@ public class TypeTask implements Serializable {
     public TypeTask(String name) {
         this.name = name;
         this.tasks = new ArrayList<>();
+        this.imageID = R.drawable.clipboard;
         uniqueID = UUID.randomUUID().toString();
 
     }

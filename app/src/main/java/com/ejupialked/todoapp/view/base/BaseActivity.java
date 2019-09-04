@@ -1,7 +1,11 @@
 package com.ejupialked.todoapp.view.base;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.ejupialked.todoapp.R;
 
 import butterknife.ButterKnife;
 
@@ -14,11 +18,14 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    private Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        setupToolbar();
         bindViews();
         initView();
     }
@@ -31,6 +38,20 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Its common use a toolbar within activity, if it exists in the
+     * layout this will be configured
+     */
+    public void setupToolbar() {
+        mToolbar = findViewById(R.id.toolbar);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+        }
+    }
+
+    public Toolbar getmToolbar() {
+        return mToolbar;
+    }
 
     /**
      * Every object annotated with {@link butterknife} its gonna injected trough butterknife

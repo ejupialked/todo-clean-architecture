@@ -24,22 +24,26 @@
             android:padding="1dp"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/txt_priority"
-            android:text="ddsddsd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="1dp"
-            />
 
         <TextView
             android:id="@+id/txt_isComplete"
-            android:text="ddsddsd"
+            android:layout_width="match_parent"
 
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:text="ddsddsd" />
+
+        <TextView
+            android:id="@+id/txt_priority"
+            android:text="ddsddsd"
+            android:textSize="20dp"
+            android:textAlignment="textEnd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
-       />
+
+            />
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

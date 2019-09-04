@@ -37,7 +37,9 @@ public class DataSourceTasks implements DataSource{
         typeTasks.add(new TypeTask("Diet"));
         typeTasks.add(new TypeTask("Family"));
         typeTasks.add(new TypeTask("Shopping"));
-        typeTasks.add(new TypeTask("Work"));
+        typeTasks.add(new TypeTask("Meetings"));
+        typeTasks.add(new TypeTask("Expenses"));
+        typeTasks.add(new TypeTask("Goals"));
 
 
         typeTasks.get(0).setImageID(R.drawable.band_aid);
@@ -45,7 +47,10 @@ public class DataSourceTasks implements DataSource{
         typeTasks.get(2).setImageID(R.drawable.doughnut);
         typeTasks.get(3).setImageID(R.drawable.heart);
         typeTasks.get(4).setImageID(R.drawable.shopping_bag);
-        typeTasks.get(5).setImageID(R.drawable.briefcase);
+        typeTasks.get(5).setImageID(R.drawable.chat);
+        typeTasks.get(6).setImageID(R.drawable.wallet);
+        typeTasks.get(7).setImageID(R.drawable.cup);
+
 
 
         typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));

@@ -109,6 +109,10 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
     }
 
+    public void onTaskEdited(int position) {
+        // TODO: 04/09/2019 implementation 
+    }
+
     public interface View extends Presenter.View, CustomDialogTask.CustomDialogListener  {
         void showTasks(List<Task> tasks);
         void updateTasks(List<Task> tasks);

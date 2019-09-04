@@ -2,7 +2,9 @@ package com.ejupialked.todoapp.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,8 +53,15 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         initializePresenter();
         initAdapter();
         initFAB();
+        initToolbar();
         initRecycleViewer();
         initSwipeToDelete();
+    }
+
+    private void initToolbar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getTypeTaskExtra().getName());
+        }
     }
 
     private void openDialog() {

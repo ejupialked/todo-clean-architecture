@@ -1,6 +1,7 @@
 package com.ejupialked.todoapp.view.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +88,20 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         }
 
         private void renderPriority(String priority) {
+           switch (priority) {
+               case "high":
+                   txt_priority.setTextColor(Color.RED);
+                   break;
+               case "medium":
+                   txt_priority.setTextColor(Color.YELLOW);
+                   break;
+
+               case "low":
+                   txt_priority.setTextColor(Color.GREEN);
+                   break;
+
+           }
+
            txt_priority.setText(priority);
         }
 

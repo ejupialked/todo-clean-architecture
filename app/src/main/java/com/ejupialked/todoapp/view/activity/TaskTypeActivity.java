@@ -36,7 +36,14 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         initializePresenter();
         initRecycleView();
         initSwipeToDelete();
+        initToolbar();
         initFAB();
+    }
+
+    private void initToolbar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("TODO by ejupialked");
+        }
     }
 
     private void initSwipeToDelete() {
