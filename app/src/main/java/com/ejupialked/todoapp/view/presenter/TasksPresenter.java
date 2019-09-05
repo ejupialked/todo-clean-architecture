@@ -17,6 +17,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     private GetTasks getTasks;
     private AddTask addTask;
     private RemoveTask removeTask;
+
     private TypeTask typeTask;
 
     @Inject
@@ -65,14 +66,12 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
     public void onTaskCreated(Task task) {
 
-        typeTask.addNewTask(task);
-
-        addTask.createTask(typeTask);
+        addTask.createTask(typeTask, task);
 
         addTask.execute(new DisposableObserver<TypeTask>() {
             @Override
             public void onNext(TypeTask typeTask) {
-                getView().updateTasks(typeTask.getTasks());
+                getView().addTask(task);
             }
 
             @Override
@@ -92,7 +91,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
         removeTask.execute(new DisposableObserver<TypeTask>() {
             @Override
             public void onNext(TypeTask typeTask) {
-                getView().showTasks(typeTask.getTasks());
+                getView().removeTask(position);
             }
 
             @Override
@@ -113,6 +112,8 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
     public interface View extends Presenter.View, CustomDialogTask.CustomDialogListener  {
         void showTasks(List<Task> tasks);
+        void removeTask(int i);
+        void addTask(Task t);
         void updateTasks(List<Task> tasks);
     }
 }

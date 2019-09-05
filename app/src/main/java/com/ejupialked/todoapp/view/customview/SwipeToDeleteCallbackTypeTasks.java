@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ejupialked.todoapp.R;
+import com.ejupialked.todoapp.domain.model.TypeTask;
+import com.ejupialked.todoapp.utils.Utils;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
@@ -44,12 +46,13 @@ public class SwipeToDeleteCallbackTypeTasks extends ItemTouchHelper.SimpleCallba
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
+
         if(direction == 4){
             presenter.getView().openDialogEditTask(position);
 
+
         }else {
             presenter.onTaskTypeRemoved(position);
-
         }
     }
 }

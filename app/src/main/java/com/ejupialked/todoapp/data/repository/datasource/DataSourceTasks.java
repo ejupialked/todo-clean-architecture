@@ -116,7 +116,7 @@ public class DataSourceTasks implements DataSource{
     @Override
     public Observable<Integer> removeTaskType(Integer position) {
 
-         typeTasks.remove(position);
+         typeTasks.remove((int)position);
 
          return Observable.create(emitter -> {
             if (position != null) {

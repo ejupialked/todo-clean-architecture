@@ -1,17 +1,22 @@
 package com.ejupialked.todoapp.view.activity;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.TodoApp;
+import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
+import com.ejupialked.todoapp.utils.Utils;
 import com.ejupialked.todoapp.view.customview.CustomDialogTaskType;
 import com.ejupialked.todoapp.view.customview.SwipeToDeleteCallbackTypeTasks;
 import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
@@ -21,9 +26,11 @@ import butterknife.BindView;
 public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter.View {
 
     @Inject TaskTypesPresenter presenter;
+
+    @BindView(R.id.coordinatorTaskTypes) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.recycle) RecyclerView recyclerView;
     @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
-    RecyclerViewAdapter recyclerViewAdapter;
+    public RecyclerViewAdapter recyclerViewAdapter;
 
 
 
@@ -53,9 +60,6 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     private void initFAB() {
         floatingActionButton.setOnClickListener(v -> openDialogCreateNewTask());
     }
-
-
-
 
 
     private void initRecycleView(){
@@ -103,6 +107,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         recyclerViewAdapter.notifyItemRemoved(p);
         recyclerViewAdapter.removeTaskTypeAtPosition(p);
         recyclerViewAdapter.notifyDataSetChanged();
+        showSnackBarUndo();
     }
 
 
@@ -117,8 +122,11 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         CustomDialogTaskType customDialogTaskType = new CustomDialogTaskType();
         customDialogTaskType.setT(t);
         customDialogTaskType.show(getSupportFragmentManager(), "example");
+        //restore swipe back
+        recyclerViewAdapter.notifyItemChanged(position);
 
     }
+
 
     @Override
     public void openDialogCreateNewTask() {
@@ -131,14 +139,25 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         presenter.onRestart();
     }
 
+    public void showSnackBarUndo(){
+
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, recyclerViewAdapter.getRecentlyDeletedTypeTask().getName(), Snackbar.LENGTH_LONG);
+        snackbar.setAction("UNDO", view -> {
+            recyclerViewAdapter.undoDelete();
+        });
+
+        snackbar.show();
+    }
+
     @Override
     public void createTypeTask(String taskName) {
         presenter.onTaskTypeCreated(new TypeTask(taskName));
+        Utils.showSnackBarMessage(taskName + " created!", coordinatorLayout);
     }
-
 
     @Override
     public void editTypeTask(TypeTask typeTask) {
         presenter.onTaskTaskEdited(typeTask);
+
     }
 }

@@ -26,6 +26,8 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
     private final TasksPresenter presenter;
     private final List<Task> tasks;
 
+    private Task recentlyDeletedTask;
+    private int recentlyDeletedPosition;
 
     public RecycleViewAdapterTasks(TasksPresenter presenter) {
         this.presenter = presenter;
@@ -41,16 +43,36 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         return new RecycleViewAdapterTasks.ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task task = tasks.get(position);
         holder.render(task);
     }
 
+    public void removeTaskTypeAtPosition(int p){
+        recentlyDeletedPosition = p;
+        recentlyDeletedTask = tasks.remove(p);
+    }
+
+
+    public Task getRecentlyDeletedTask() {
+        return recentlyDeletedTask;
+    }
+
     public TasksPresenter getPresenter() {
         return presenter;
     }
 
+    public Task getTaskTypeAtPosition(int index){
+        return tasks.get(index);
+    }
+
+    public void undoDelete(){
+        tasks.add(recentlyDeletedPosition, recentlyDeletedTask);
+        notifyItemInserted(recentlyDeletedPosition);
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return tasks.size();
@@ -99,11 +121,10 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
                case "low":
                    txt_priority.setTextColor(Color.GREEN);
                    break;
-
            }
-
            txt_priority.setText(priority);
         }
+
 
         private void renderCompleted(String completed) {
            txt_isComplete.setText(completed);

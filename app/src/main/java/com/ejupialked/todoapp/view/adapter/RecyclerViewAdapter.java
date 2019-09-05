@@ -29,6 +29,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private final List<TypeTask> taskList;
     private Context context;
 
+    private TypeTask recentlyDeletedTypeTask;
+    private int recentlyDeletedPosition;
 
     public RecyclerViewAdapter(TaskTypesPresenter presenter) {
         this.presenter = presenter;
@@ -55,6 +57,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return taskList.get(index);
     }
 
+    public TypeTask getRecentlyDeletedTypeTask() {
+        return recentlyDeletedTypeTask;
+    }
+
     public List<TypeTask> getTaskList() {
         return taskList;
     }
@@ -66,8 +72,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         }
     }
+
+    public void undoDelete(){
+        taskList.add(recentlyDeletedPosition, recentlyDeletedTypeTask);
+        notifyItemInserted(recentlyDeletedPosition);
+        notifyDataSetChanged();
+    }
+
     public void removeTaskTypeAtPosition(int p){
-        taskList.remove(p);
+        recentlyDeletedPosition = p;
+        recentlyDeletedTypeTask = taskList.remove(p);
     }
 
     public TaskTypesPresenter getPresenter() {

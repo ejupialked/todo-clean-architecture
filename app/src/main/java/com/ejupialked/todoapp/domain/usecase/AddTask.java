@@ -1,6 +1,7 @@
 package com.ejupialked.todoapp.domain.usecase;
 
 import com.ejupialked.todoapp.data.repository.Repository;
+import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 
 import javax.inject.Inject;
@@ -21,7 +22,8 @@ public class AddTask extends UseCase<TypeTask> {
     }
 
 
-    public void createTask(TypeTask t){
+    public void createTask(TypeTask t, Task task){
+        t.addNewTask(task);
         this.typeTask = t;
     }
 

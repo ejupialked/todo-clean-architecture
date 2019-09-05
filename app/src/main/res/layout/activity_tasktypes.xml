@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorTaskTypes"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.activity.TaskTypeActivity">
 
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
-  <include
-      layout="@layout/toolbar"
-      android:id="@+id/toolbar"
-      />
+
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"
+        />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -34,9 +40,5 @@
         android:layout_alignParentBottom="true"
         android:src="@drawable/create"
         />
-
-
-
-
-
-</RelativeLayout>
+  </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
