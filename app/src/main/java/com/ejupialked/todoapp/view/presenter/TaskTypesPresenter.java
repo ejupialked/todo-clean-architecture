@@ -110,7 +110,7 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
     public void destroy(){
         this.getTaskTypes.dispose();
-        setView(null);
+        bindView(null);
     }
 
     public void onTaskTypeClicked(TypeTask typeTask){

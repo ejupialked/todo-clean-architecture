@@ -11,7 +11,7 @@ public class TypeTask implements Serializable {
     private String name;
     private ArrayList<Task> tasks;
     private int imageID;
-    String uniqueID;
+    private String uniqueID;
 
 
     public TypeTask(String name) {

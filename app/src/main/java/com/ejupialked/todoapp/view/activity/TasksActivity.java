@@ -8,13 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ejupialked.todoapp.R;
-import com.ejupialked.todoapp.TODOApplication;
+import com.ejupialked.todoapp.TodoApp;
 import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.view.customview.CustomDialogTask;
 import com.ejupialked.todoapp.view.customview.SwipeToDeleteCallBackTasks;
 import com.ejupialked.todoapp.view.adapter.RecycleViewAdapterTasks;
-import com.ejupialked.todoapp.view.base.BaseActivity;
 import com.ejupialked.todoapp.view.presenter.TasksPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -49,6 +48,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         initAdapter();
         initFAB();
         initToolbar();
+        initBackButtonToolbar();
         initRecycleViewer();
         initSwipeToDelete();
     }
@@ -97,15 +97,15 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     private void initializePresenter() {
-        presenter.setView(this);
+        presenter.bindView(this);
         TypeTask typeTask = getTypeTaskExtra();
         presenter.setTypeTask(typeTask);
         presenter.initialize();
     }
 
     private void initializeDagger() {
-        TODOApplication todoApplication = (TODOApplication) getApplication();
-        todoApplication.getMainComponent().inject(this);
+        TodoApp todoApp = (TodoApp) getApplication();
+        todoApp.getMainComponent().inject(this);
     }
 
     private void initRecycleViewer() {

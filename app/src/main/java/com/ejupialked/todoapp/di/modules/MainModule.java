@@ -2,7 +2,7 @@ package com.ejupialked.todoapp.di.modules;
 
 import android.content.Context;
 
-import com.ejupialked.todoapp.TODOApplication;
+import com.ejupialked.todoapp.TodoApp;
 import com.ejupialked.todoapp.data.repository.Repository;
 import com.ejupialked.todoapp.data.repository.TasksRepository;
 import com.ejupialked.todoapp.data.repository.datasource.DataSource;
@@ -20,16 +20,16 @@ import io.reactivex.schedulers.Schedulers;
 @Module
 public class MainModule {
 
-    private final TODOApplication todoApplication;
+    private final TodoApp todoApp;
 
-    public MainModule(TODOApplication todoApplication) {
-        this.todoApplication = todoApplication;
+    public MainModule(TodoApp todoApp) {
+        this.todoApp = todoApp;
     }
 
     @Provides
     @Singleton
     Context provideApplicationContext() {
-        return todoApplication;
+        return todoApp;
     }
 
     @Provides

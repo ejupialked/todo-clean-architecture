@@ -1,4 +1,4 @@
-package com.ejupialked.todoapp.view.base;
+package com.ejupialked.todoapp.view.activity;
 
 import android.os.Bundle;
 
@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +48,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+
+    public void initBackButtonToolbar(){
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
     public Toolbar getmToolbar() {
         return mToolbar;
     }

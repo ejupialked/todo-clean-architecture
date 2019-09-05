@@ -56,7 +56,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
     public void destroy() {
         this.getTasks.dispose();
-        setView(null);
+        bindView(null);
     }
 
     public void setTypeTask(TypeTask typeTask) {

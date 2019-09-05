@@ -6,7 +6,7 @@ import com.ejupialked.todoapp.di.components.DaggerMainComponent;
 import com.ejupialked.todoapp.di.components.MainComponent;
 import com.ejupialked.todoapp.di.modules.MainModule;
 
-public class TODOApplication extends Application {
+public class TodoApp extends Application {
 
     private MainComponent mainComponent;
 

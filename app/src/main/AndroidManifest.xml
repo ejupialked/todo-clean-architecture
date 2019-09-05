@@ -3,7 +3,7 @@
     package="com.ejupialked.todoapp">
 
     <application
-        android:name=".TODOApplication"
+        android:name=".TodoApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,8 +18,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.activity.TasksActivity">
-         </activity>
+        <activity android:name=".view.activity.TasksActivity"
+            android:parentActivityName=".view.activity.TaskTypeActivity"/>
+
     </application>
 
 </manifest>
