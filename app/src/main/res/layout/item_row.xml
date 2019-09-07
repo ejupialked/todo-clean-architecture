@@ -5,45 +5,74 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="6dp"
+    android:layout_margin="2dp"
+    app:cardCornerRadius="5dp"
+    android:layout_marginBottom="5dp"
     android:clickable="true"
+    android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardElevation="6dp">
+    >
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:orientation="vertical">
+        android:orientation="horizontal"
 
-        <TextView
-            android:id="@+id/txt_description"
-            android:text="Eat 3 apples a day"
-             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="1dp"
-            android:textSize="18sp" />
+        >
 
 
-        <TextView
-            android:id="@+id/txt_isComplete"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:padding="1dp"
-            android:text="ddsddsd" />
-
-        <TextView
-            android:id="@+id/txt_priority"
-            android:text="ddsddsd"
-            android:textSize="20dp"
-            android:textAlignment="textEnd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="1dp"
-
+        <View
+            android:id="@+id/myRectangleView"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle"
+            android:layout_marginRight="4dp"
             />
 
 
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:id="@+id/txt_description"
+                android:text="Eat 3 apples a day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="1dp"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:id="@+id/txt_isComplete"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:padding="1dp"
+                android:text="ddsddsd" />
+
+            <TextView
+                android:id="@+id/txt_priority"
+                android:text="ddsddsd"
+                android:textSize="20dp"
+                android:textAlignment="textEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="1dp"
+
+                />
+
+
+        </LinearLayout>
+
     </LinearLayout>
+
+
 </androidx.cardview.widget.CardView>

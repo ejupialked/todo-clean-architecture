@@ -28,8 +28,6 @@ public class GetTasks extends UseCase<List<Task>> {
         this.typeTask = typeTask;
     }
 
-
-
     @Override
     protected Observable<List<Task>> createObservableUseCase() {
         return this.repository.tasks(typeTask);
