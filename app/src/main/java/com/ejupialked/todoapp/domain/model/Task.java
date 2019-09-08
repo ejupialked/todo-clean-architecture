@@ -7,6 +7,7 @@ public class Task implements Serializable {
   private String description;
   private String priority;
   private String isCompleted;
+  private String date;
 
     public Task(String description, String priority, String isCompleted) {
         this.description = description;
@@ -16,6 +17,14 @@ public class Task implements Serializable {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public void setDescription(String description) {

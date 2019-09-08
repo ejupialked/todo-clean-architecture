@@ -2,9 +2,12 @@ package com.ejupialked.todoapp.view.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,7 +32,10 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
     private Task recentlyDeletedTask;
     private int recentlyDeletedPosition;
 
-    public RecycleViewAdapterTasks(TasksPresenter presenter) {
+    private Context context;
+
+    public RecycleViewAdapterTasks(TasksPresenter presenter, Context context) {
+        this.context = context;
         this.presenter = presenter;
         this.tasks = new ArrayList<>();
     }
@@ -39,7 +45,7 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.item_row, parent, false);
+                .inflate(R.layout.item_task, parent, false);
         return new RecycleViewAdapterTasks.ViewHolder(view);
     }
 
@@ -58,6 +64,10 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
 
     public Task getRecentlyDeletedTask() {
         return recentlyDeletedTask;
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     public TasksPresenter getPresenter() {
@@ -90,9 +100,12 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        @BindView(R.id.txt_description) TextView txt_description;
-        @BindView(R.id.txt_priority)    TextView txt_priority;
-        @BindView(R.id.txt_isComplete)  TextView txt_isComplete;
+        @BindView(R.id.txt_description)    TextView txt_description;
+        @BindView(R.id.txt_date)           TextView txt_date;
+        @BindView(R.id.colorbar)           View colorBar;
+        @BindView(R.id.checkbox_completed) CheckBox checkBox_completed;
+        @BindView(R.id.date_image)          ImageView date_image;
+
 
        private ViewHolder(@NonNull View itemView) {
            super(itemView);
@@ -102,7 +115,37 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         private void render(Task task) {
            renderDescription(task.getDescription());
            renderPriority(task.getPriority());
-           renderCompleted(task.getIsCompleted());
+           renderDate(task.getDate());
+           onCheckBoxTicked(task);
+        }
+
+        private void onCheckBoxTicked(Task task) {
+           checkBox_completed.setOnClickListener(view ->{
+            boolean checked = checkBox_completed.isChecked();
+            checkCompleted(checked, task);
+           });
+        }
+
+
+        private void checkCompleted(boolean isCompleted, Task task){
+            if(!isCompleted){
+                txt_date.setTextColor(getContext().getColor(R.color.black));
+                txt_description.setTextColor(getContext().getColor(R.color.black));
+                txt_description.setPaintFlags(0);
+                date_image.setImageResource(R.drawable.ic_date_range_notcompleted);
+                renderPriority(task.getPriority());
+
+            }else{
+                txt_description.setTextColor(Color.GRAY);
+                txt_description.setPaintFlags(txt_description.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                txt_date.setTextColor(Color.GRAY);
+                date_image.setImageResource(R.drawable.ic_date_range_completed);
+                colorBar.setBackgroundColor(Color.GRAY);
+            }
+        }
+
+        private void renderDate(String date) {
+           txt_date.setText(date);
         }
 
         private void renderDescription(String description) {
@@ -112,22 +155,18 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         private void renderPriority(String priority) {
            switch (priority) {
                case "high":
-                   txt_priority.setTextColor(Color.RED);
+                   colorBar.setBackgroundColor(getContext().getColor(R.color.high_color));
                    break;
                case "medium":
-                   txt_priority.setTextColor(Color.YELLOW);
+                   colorBar.setBackgroundColor(getContext().getColor(R.color.medium_color));
                    break;
 
                case "low":
-                   txt_priority.setTextColor(Color.GREEN);
+                   colorBar.setBackgroundColor(getContext().getColor(R.color.low_color));
                    break;
            }
-           txt_priority.setText(priority);
         }
 
 
-        private void renderCompleted(String completed) {
-           txt_isComplete.setText(completed);
-        }
     }
 }

@@ -107,12 +107,6 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         });
     }
 
-
-    public void destroy(){
-        this.getTaskTypes.dispose();
-        bindView(null);
-    }
-
     public void onTaskTypeClicked(TypeTask typeTask){
         getView().openTasksScreen(typeTask);
     }
@@ -141,14 +135,21 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
     }
 
 
+
+    public void destroy(){
+        this.getTaskTypes.dispose();
+        bindView(null);
+    }
+
+
     public interface View extends Presenter.View, CustomDialogTaskType.CustomDialogListener {
         void showTaskTypes(List<TypeTask> typeTaskList);
         void addTypeTask(TypeTask t);
         void showEditTypeTask(TypeTask t);
         void removeTypeTask(Integer p);
         void openTasksScreen(TypeTask typeTask);
-        void openDialogEditTask(int position);
-        void openDialogCreateNewTask();
+        void openDialogEditTypeTask(int position);
+        void openDialogCreateNewTypeTask();
 
     }
 }

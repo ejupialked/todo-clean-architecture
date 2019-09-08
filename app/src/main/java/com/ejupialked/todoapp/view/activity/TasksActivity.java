@@ -98,6 +98,21 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     @Override
+    public void editTask(Task t) {
+
+    }
+
+    @Override
+    public void openDialogCreateNewTask() {
+
+    }
+
+    @Override
+    public void openDialogEditTask(Task t) {
+
+    }
+
+    @Override
     public void addTask(Task t) {
         recyclerViewAdapter.addAll(Collections.singleton(t));
         recyclerViewAdapter.notifyDataSetChanged();
@@ -105,12 +120,6 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
     }
 
-    @Override
-    public void updateTasks(List<Task> tasks) {
-        recyclerViewAdapter.clear();
-        recyclerViewAdapter.addAll(tasks);
-        recyclerViewAdapter.notifyDataSetChanged();
-    }
 
     public void showSnackBarUndo(Task t){
 
@@ -141,13 +150,12 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     private void initRecycleViewer() {
-        recyclerViewAdapter = new RecycleViewAdapterTasks(presenter);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void initAdapter() {
-        recyclerViewAdapter = new RecycleViewAdapterTasks(presenter);
+        recyclerViewAdapter = new RecycleViewAdapterTasks(presenter, this);
     }
 
     private void initFAB() {
@@ -165,7 +173,9 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     @Override
-    public void applyTask(String description, String priority) {
-        presenter.onTaskCreated(new Task(description, priority, "no"));
+    public void applyTask(String description, String priority, String date) {
+        Task task = new Task(description, priority, "no");
+        task.setDate(date);
+        presenter.onTaskCreated(task);
     }
 }

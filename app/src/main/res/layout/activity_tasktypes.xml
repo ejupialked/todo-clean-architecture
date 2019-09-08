@@ -36,7 +36,7 @@
         android:layout_margin="17dp"
         android:backgroundTint="@color/blue"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/create"
         />

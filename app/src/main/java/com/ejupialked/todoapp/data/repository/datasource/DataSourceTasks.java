@@ -56,17 +56,7 @@ public class DataSourceTasks implements DataSource{
         typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
         typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
         typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
-        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
-        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
-        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
-        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
-        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
-        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
-        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
-        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
-        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
-        typeTasks.get(0).addNewTask(new Task("Drink water", "high", "no" ));
-        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", "yes"));
+
 
 
 

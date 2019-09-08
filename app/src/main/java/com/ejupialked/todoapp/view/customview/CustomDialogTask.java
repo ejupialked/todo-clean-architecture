@@ -30,22 +30,19 @@ import butterknife.ButterKnife;
 
 public class CustomDialogTask extends AppCompatDialogFragment {
 
-    private Context context;
-
     @BindView(R.id.edit_taskdescription) EditText editDescription;
     @BindView(R.id.radiogroup_task) RadioGroup radioGroup;
-    @BindView(R.id.date_button)
-    ImageButton dateButton;
-
-    @BindView(R.id.txt_date)
-    TextView txtDate;
-    @BindView(R.id.txt_time)
-    TextView txtTime;
-
+    @BindView(R.id.date_button) ImageButton dateButton;
+    @BindView(R.id.txt_date) TextView txtDate;
 
     private RadioButton radioButton;
-
     private CustomDialogTask.CustomDialogListener listener;
+    private Context context;
+
+
+    private String taskDescription;
+    private String taskPriority;
+    private String taskDate;
 
     @NonNull
     @Override
@@ -68,10 +65,11 @@ public class CustomDialogTask extends AppCompatDialogFragment {
                     int ID = radioGroup.getCheckedRadioButtonId();
                     radioButton = view.findViewById(ID);
 
-                    String taskDescription = editDescription.getText().toString();
-                    String taskPriority = radioButton.getText().toString();
+                     taskDescription = editDescription.getText().toString();
+                     taskPriority = radioButton.getText().toString();
+                     taskDate = txtDate.getText().toString();
 
-                    listener.applyTask(taskDescription, taskPriority);
+                    listener.applyTask(taskDescription, taskPriority, taskDate);
                 });
 
 
@@ -86,38 +84,28 @@ public class CustomDialogTask extends AppCompatDialogFragment {
     private void chooseDate(){
         Calendar calendar = Calendar.getInstance();
 
-
         int YEAR = calendar.get(Calendar.YEAR);
         int MONTH = calendar.get(Calendar.MONTH);
         int DATE = calendar.get(Calendar.DATE);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(context, (datePicker, i, i1, i2) -> {
-
-            String date = i + "/" + i2 + "/" + i2;
-            txtDate.setText(date);
+            taskDate =  i + "/" + i2 + "/" + i2;
             chooseTime();
 
-
         }, YEAR, MONTH, DATE);
-
         datePickerDialog.show();
-
     }
 
     private void chooseTime() {
         Calendar calendar = Calendar.getInstance();
 
-
         int MINUTE = calendar.get(Calendar.MINUTE);
         int HOUR = calendar.get(Calendar.HOUR);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(context, (timePicker, i, i1) -> {
-
             String time = i+ ":" + i1;
-
-            txtTime.setText(time);
-
-
+            taskDate = taskDate + " " + time;
+            txtDate.setText(taskDate);
         }, HOUR, MINUTE, true);
 
         timePickerDialog.show();
@@ -135,6 +123,6 @@ public class CustomDialogTask extends AppCompatDialogFragment {
     }
 
     public interface CustomDialogListener{
-        void applyTask(String description, String priority);
+        void applyTask(String description, String priority, String date);
     }
 }

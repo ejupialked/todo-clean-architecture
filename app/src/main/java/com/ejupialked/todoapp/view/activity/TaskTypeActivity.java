@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.TodoApp;
-import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.utils.Utils;
 import com.ejupialked.todoapp.view.customview.CustomDialogTaskType;
@@ -58,7 +57,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     private void initFAB() {
-        floatingActionButton.setOnClickListener(v -> openDialogCreateNewTask());
+        floatingActionButton.setOnClickListener(v -> openDialogCreateNewTypeTask());
     }
 
 
@@ -117,7 +116,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     @Override
-    public void openDialogEditTask(int position) {
+    public void openDialogEditTypeTask(int position) {
         TypeTask t = recyclerViewAdapter.getTaskTypeAtPosition(position);
         CustomDialogTaskType customDialogTaskType = new CustomDialogTaskType();
         customDialogTaskType.setT(t);
@@ -129,7 +128,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
 
     @Override
-    public void openDialogCreateNewTask() {
+    public void openDialogCreateNewTypeTask() {
         CustomDialogTaskType customDialogTaskType = new CustomDialogTaskType();
         customDialogTaskType.show(getSupportFragmentManager(), "example");    }
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp">
 
     <EditText
         android:id="@+id/edit_taskdescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLength="40"
-        android:hint="insert a short description (max 50 char)" />
+        android:maxLength="20"
+        android:hint="insert a short description" />
 
 
     <RadioGroup
@@ -31,19 +31,19 @@
             android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="High"/>
+            android:text="high"/>
 
         <RadioButton
             android:id="@+id/radio_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium"/>
+            android:text="medium"/>
 
         <RadioButton
             android:id="@+id/radio_low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Low"/>
+            android:text="low"/>
     </RadioGroup>
 
 
@@ -52,32 +52,39 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/radiogroup_task"
         android:orientation="horizontal"
+        android:padding="10dp"
+
         >
-        <ImageButton
-            android:id="@+id/date_button"
-            android:backgroundTint="@color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_date_range_black_24dp"
-            />
 
         <TextView
             android:id="@+id/txt_date"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_marginEnd="20dp"
+            android:hint="Set your deadline"
+            android:layout_marginRight="20dp"
             android:orientation="vertical"
-            android:text="02/01/2019" />
+            android:text="Pick a date" />
 
 
-        <TextView
-            android:id="@+id/txt_time"
-            android:layout_width="wrap_content"
+        <ImageButton
+            android:id="@+id/cancel_button"
+            android:layout_width="36dp"
+            android:clickable="true"
+            android:layout_marginRight="15dp"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginLeft="12dp"
-            android:text="03:23" />
+            android:background="@drawable/roundcorners"
+            android:src="@drawable/ic_cancel_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/date_button"
+            android:layout_width="36dp"
+            android:clickable="true"
+            android:layout_height="match_parent"
+            android:background="@drawable/roundcorners"
+            android:src="@drawable/ic_date_range_notcompleted"
+            />
 
 
 

@@ -106,14 +106,24 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
     }
 
+
+
+    /**
+     * todo
+     * @param position the position of the task in the list
+     */
     public void onTaskEdited(int position) {
 
     }
 
+
+
     public interface View extends Presenter.View, CustomDialogTask.CustomDialogListener  {
         void showTasks(List<Task> tasks);
         void removeTask(int i);
+        void editTask(Task t);
+        void openDialogCreateNewTask();
+        void openDialogEditTask(Task t);
         void addTask(Task t);
-        void updateTasks(List<Task> tasks);
     }
 }
