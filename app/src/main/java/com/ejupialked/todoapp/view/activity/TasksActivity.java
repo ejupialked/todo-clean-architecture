@@ -35,14 +35,9 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     @Inject
     TasksPresenter presenter;
 
-    @BindView(R.id.recycle_view_tasks)
-    RecyclerView recyclerView;
-
-    @BindView(R.id.floatingActionButtonCreateTask)
-    FloatingActionButton floatingActionButtonCreateTask;
-
-    @BindView(R.id.coordinator_tasks)
-    CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.recycle_view_tasks) RecyclerView recyclerView;
+    @BindView(R.id.floatingActionButtonCreateTask) FloatingActionButton floatingActionButtonCreateTask;
+    @BindView(R.id.coordinator_tasks) CoordinatorLayout coordinatorLayout;
 
     private RecycleViewAdapterTasks recyclerViewAdapter;
 
@@ -66,10 +61,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         }
     }
 
-    private void openDialog() {
-        CustomDialogTask customDialogTask = new CustomDialogTask();
-        customDialogTask.show(getSupportFragmentManager(), "example");
-    }
+
 
     @Override
     protected int getLayoutId() {
@@ -104,7 +96,8 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
     @Override
     public void openDialogCreateNewTask() {
-
+        CustomDialogTask customDialogTask = new CustomDialogTask();
+        customDialogTask.show(getSupportFragmentManager(), "example");
     }
 
     @Override
@@ -116,7 +109,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     public void addTask(Task t) {
         recyclerViewAdapter.addAll(Collections.singleton(t));
         recyclerViewAdapter.notifyDataSetChanged();
-        Utils.showSnackBarMessage(t.getDescription(),coordinatorLayout);
+        Utils.showSnackBarMessage(t.getDescription(), coordinatorLayout);
 
     }
 
@@ -159,7 +152,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     private void initFAB() {
-        floatingActionButtonCreateTask.setOnClickListener(v -> openDialog());
+        floatingActionButtonCreateTask.setOnClickListener(v -> openDialogCreateNewTask());
     }
 
     public TypeTask getTypeTaskExtra() {
@@ -174,7 +167,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
     @Override
     public void applyTask(String description, String priority, String date) {
-        Task task = new Task(description, priority, "no");
+        Task task = new Task(description, priority, false);
         task.setDate(date);
         presenter.onTaskCreated(task);
     }

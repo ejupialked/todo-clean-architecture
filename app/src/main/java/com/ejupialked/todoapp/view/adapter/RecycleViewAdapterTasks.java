@@ -91,7 +91,7 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
     public void clear() {
         int size = tasks.size();
         tasks.clear();
-        notifyItemRangeRemoved(0, size);
+            notifyItemRangeRemoved(0, size);
     }
 
     public void addAll(Collection<Task> collection) {
@@ -116,19 +116,25 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
            renderDescription(task.getDescription());
            renderPriority(task.getPriority());
            renderDate(task.getDate());
+           renderCompletion(task);
            onCheckBoxTicked(task);
+        }
+
+        private void renderCompletion(Task isCompleted) {
+           checkCompleted(isCompleted);
         }
 
         private void onCheckBoxTicked(Task task) {
            checkBox_completed.setOnClickListener(view ->{
             boolean checked = checkBox_completed.isChecked();
-            checkCompleted(checked, task);
+            task.setIsCompleted(checked);
+            checkCompleted(task);
            });
         }
 
 
-        private void checkCompleted(boolean isCompleted, Task task){
-            if(!isCompleted){
+        private void checkCompleted(Task task){
+            if(!task.getIsCompleted()){
                 txt_date.setTextColor(getContext().getColor(R.color.black));
                 txt_description.setTextColor(getContext().getColor(R.color.black));
                 txt_description.setPaintFlags(0);
@@ -136,6 +142,7 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
                 renderPriority(task.getPriority());
 
             }else{
+                checkBox_completed.setChecked(true);
                 txt_description.setTextColor(Color.GRAY);
                 txt_description.setPaintFlags(txt_description.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 txt_date.setTextColor(Color.GRAY);

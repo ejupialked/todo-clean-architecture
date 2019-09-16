@@ -4,37 +4,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     app:cardCornerRadius="5dp"
-    android:layout_marginBottom="15dp"
-    android:layout_marginLeft="3dp"
-    android:layout_marginRight="3dp"
-    android:layout_marginTop="2dp"
     android:clickable="true"
     android:focusable="true"
+    android:layout_margin="10dp"
     app:cardElevation="5dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    ><LinearLayout
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="top">
 
-        <View
-            android:id="@+id/colorbar"
-            android:layout_width="10dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/rectangle"
-            android:layout_marginRight="4dp"/>
+
+
+
         <LinearLayout
+            android:id="@+id/colorbarR"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_margin="3dp">
+            >
+            <View
+                android:id="@+id/colorbar"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/rectangle" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+
+
+                >
                 <TextView
                     android:id="@+id/txt_description"
                     android:layout_width="wrap_content"
@@ -47,7 +52,7 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
                     <ImageView
                         android:id="@+id/date_image"
@@ -55,28 +60,29 @@
                         android:layout_height="match_parent"
                         android:layout_marginRight="3dp"
                         android:src="@drawable/ic_date_range_24dp" />
+
                     <TextView
                         android:id="@+id/txt_date"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:padding="1dp"
+                        android:gravity="center_vertical"
                         android:text="23/02/2019 13:00"
                         android:textSize="16sp"
-                        android:textStyle="italic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="1dp" />
+                        android:textStyle="italic" />
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginRight="5dp">
-                <CheckBox
-                    android:id="@+id/checkbox_completed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end" />
-            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkbox_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="4dp" />
+    </RelativeLayout>
+
+
 </androidx.cardview.widget.CardView>

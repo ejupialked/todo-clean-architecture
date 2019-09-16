@@ -1,15 +1,16 @@
 package com.ejupialked.todoapp.domain.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 public class Task implements Serializable {
 
   private String description;
   private String priority;
-  private String isCompleted;
+  private boolean isCompleted;
   private String date;
 
-    public Task(String description, String priority, String isCompleted) {
+    public Task(String description, String priority,boolean isCompleted) {
         this.description = description;
         this.priority = priority;
         this.isCompleted = isCompleted;
@@ -24,7 +25,7 @@ public class Task implements Serializable {
     }
 
     public String getDate() {
-        return date;
+        return "22/02/19 3:00";
     }
 
     public void setDescription(String description) {
@@ -39,11 +40,11 @@ public class Task implements Serializable {
         this.priority = priority;
     }
 
-    public String getIsCompleted() {
+    public boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setIsCompleted(String isCompleted) {
+    public void setIsCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 }

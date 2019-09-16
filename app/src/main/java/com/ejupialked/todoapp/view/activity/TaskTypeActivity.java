@@ -52,7 +52,8 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     private void initSwipeToDelete() {
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallbackTypeTasks(presenter));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(
+                new SwipeToDeleteCallbackTypeTasks(presenter, this));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
@@ -157,6 +158,5 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     @Override
     public void editTypeTask(TypeTask typeTask) {
         presenter.onTaskTaskEdited(typeTask);
-
     }
 }

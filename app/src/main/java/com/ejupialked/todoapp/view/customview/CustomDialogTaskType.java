@@ -79,7 +79,7 @@ public class CustomDialogTaskType extends DialogFragment {
         }
     }
 
-    public interface  CustomDialogListener{
+    public interface CustomDialogListener{
         void createTypeTask(String newTaskName);
         void editTypeTask(TypeTask t);
     }
