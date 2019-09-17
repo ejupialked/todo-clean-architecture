@@ -10,11 +10,10 @@ import javax.inject.Named;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 
-public class AddTask extends UseCase<TypeTask> {
+public class AddTask extends UseCase<Task> {
 
     private final Repository repository;
-    private TypeTask typeTask;
-
+    private Task t;
     @Inject
     public AddTask(@Named("executor_thread") Scheduler executorThread, @Named("ui_thread") Scheduler uiThread, Repository repository) {
         super(executorThread, uiThread);
@@ -22,14 +21,12 @@ public class AddTask extends UseCase<TypeTask> {
     }
 
 
-    public void createTask(TypeTask t, Task task){
-        t.addNewTask(task);
-        this.typeTask = t;
+    public void createTask(Task task){
+        this.t = task;
     }
 
-
     @Override
-    protected Observable<TypeTask> createObservableUseCase() {
-        return this.repository.createTask(typeTask);
+    protected Observable<Task> createObservableUseCase() {
+        return this.repository.createTask(t);
     }
 }

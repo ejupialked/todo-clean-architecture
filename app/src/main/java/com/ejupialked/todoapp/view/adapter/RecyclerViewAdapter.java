@@ -27,6 +27,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private final TaskTypesPresenter presenter;
     private final List<TypeTask> taskList;
+
     private Context context;
 
     private TypeTask recentlyDeletedTypeTask;
@@ -123,7 +124,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private void render(TypeTask t) {
             onItemClick(t);
             renderName(t.getName());
-            renderNumber(t.getNumberOfTasks());
+            renderNumber(t.getNoTasks());
             renderImage(t);
         }
 

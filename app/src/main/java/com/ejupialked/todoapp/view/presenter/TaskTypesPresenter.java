@@ -1,11 +1,15 @@
 package com.ejupialked.todoapp.view.presenter;
 
 import androidx.annotation.NonNull;
+
+import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.AddTaskType;
 import com.ejupialked.todoapp.domain.usecase.EditTaskType;
 import com.ejupialked.todoapp.domain.usecase.GetTaskTypes;
 import com.ejupialked.todoapp.domain.usecase.RemoveTaskType;
+import com.ejupialked.todoapp.view.activity.TaskTypeActivity;
+import com.ejupialked.todoapp.view.activity.TasksActivity;
 import com.ejupialked.todoapp.view.customview.CustomDialogTaskType;
 
 import java.util.List;
@@ -59,14 +63,18 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
     });
     }
 
-    public void onTaskTypeRemoved(Integer p){
+    public void onTaskTypeRemoved(Integer i){
 
-        removeTaskType.removeTaskTypeAtPosition(p);
+        TypeTask t = ((TaskTypeActivity) getView())
+                .getRecyclerViewAdapter()
+                .getTaskTypeAtPosition(i);
 
-        removeTaskType.execute(new DisposableObserver<Integer>() {
+        removeTaskType.removeTaskType(t);
+
+        removeTaskType.execute(new DisposableObserver<TypeTask>() {
             @Override
-            public void onNext(Integer integer) {
-                getView().removeTypeTask(integer);
+            public void onNext(TypeTask typeTask) {
+                getView().removeTypeTask(i);
             }
 
             @Override
@@ -138,7 +146,7 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
     public void destroy(){
         this.getTaskTypes.dispose();
-        bindView(null);
+        bind(null);
     }
 
 
@@ -150,6 +158,5 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         void openTasksScreen(TypeTask typeTask);
         void openDialogEditTypeTask(int position);
         void openDialogCreateNewTypeTask();
-
     }
 }

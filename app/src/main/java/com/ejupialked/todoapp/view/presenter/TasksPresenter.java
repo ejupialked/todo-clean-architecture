@@ -6,6 +6,8 @@ import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.AddTask;
 import com.ejupialked.todoapp.domain.usecase.GetTasks;
 import com.ejupialked.todoapp.domain.usecase.RemoveTask;
+
+import com.ejupialked.todoapp.view.activity.TasksActivity;
 import com.ejupialked.todoapp.view.customview.CustomDialogTask;
 
 import java.util.List;
@@ -57,21 +59,24 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
     public void destroy() {
         this.getTasks.dispose();
-        bindView(null);
+        bind(null);
     }
 
     public void setTypeTask(TypeTask typeTask) {
         this.typeTask = typeTask;
     }
 
-    public void onTaskCreated(Task task) {
+    public void onTaskCreated(String description, String priority, String date) {
 
-        addTask.createTask(typeTask, task);
+        Task t = new Task(description, priority, typeTask.getID());
+        t.setDate(date);
 
-        addTask.execute(new DisposableObserver<TypeTask>() {
+        addTask.createTask(t);
+
+        addTask.execute(new DisposableObserver<Task>() {
             @Override
-            public void onNext(TypeTask typeTask) {
-                getView().addTask(task);
+            public void onNext(Task t) {
+                getView().addTask(t);
             }
 
             @Override
@@ -85,12 +90,15 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     }
 
     public void onTaskRemoved(int position) {
+        Task task = ((TasksActivity) getView())
+                .getRecyclerViewAdapter()
+                .getTaskTypeAtPosition(position);
 
-        removeTask.removeTaskAtPostion(typeTask, position);
+        removeTask.removeTask(task);
 
-        removeTask.execute(new DisposableObserver<TypeTask>() {
+        removeTask.execute(new DisposableObserver<Task>() {
             @Override
-            public void onNext(TypeTask typeTask) {
+            public void onNext(Task t) {
                 getView().removeTask(position);
             }
 
@@ -115,7 +123,6 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     public void onTaskEdited(int position) {
 
     }
-
 
 
     public interface View extends Presenter.View, CustomDialogTask.CustomDialogListener  {

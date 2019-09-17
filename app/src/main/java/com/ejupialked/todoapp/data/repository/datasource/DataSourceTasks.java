@@ -1,10 +1,12 @@
 package com.ejupialked.todoapp.data.repository.datasource;
 
+
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,75 +16,120 @@ import io.reactivex.Observable;
 
 @SuppressWarnings("ALL")
 @Singleton
-public class DataSourceTasks implements DataSource{
+public class DataSourceTasks implements DataSource {
 
 
-    private ArrayList<TypeTask> typeTasks;
+    private final LinkedHashMap<String, TypeTask> typeTasks;
+    private LinkedHashMap<String, ArrayList<Task>> tasks;
+
 
 
     @Inject
     DataSourceTasks(){
+        this.typeTasks = new LinkedHashMap<>();
+        tasks = new LinkedHashMap<>();
 
         initDataset();
     }
 
     private void initDataset() {
 
-        typeTasks = new ArrayList<>();
+
+
+        TypeTask health = new TypeTask("Health");
+        TypeTask education = new TypeTask("Education");
+        TypeTask diet = new TypeTask("Diet");
+        TypeTask family = new TypeTask("Family");
+        TypeTask shopping = new TypeTask("Shopping");
+        TypeTask meeting = new TypeTask("Meeting");
+        TypeTask expenses = new TypeTask("Expenses");
+        TypeTask goals = new TypeTask("Goals");
+
+
+        //add ith the method
+/////////////////////////////////////////////////////////////////////////////////////
+        addNewTypeTask(health);
+        addNewTypeTask(education);
+        addNewTypeTask(diet);
+        addNewTypeTask(family);
+        addNewTypeTask(shopping);
+        addNewTypeTask(meeting);
+        addNewTypeTask(expenses);
+        addNewTypeTask(goals);
+
+        ArrayList<TypeTask> typeTasks1 = new ArrayList<>(typeTasks.values());
+
+        typeTasks1.get(0).setImageID(R.drawable.band_aid);
+        typeTasks1.get(1).setImageID(R.drawable.mortarboard);
+        typeTasks1.get(2).setImageID(R.drawable.doughnut);
+        typeTasks1.get(3).setImageID(R.drawable.heart);
+        typeTasks1.get(4).setImageID(R.drawable.shopping_bag);
+        typeTasks1.get(5).setImageID(R.drawable.chat);
+        typeTasks1.get(6).setImageID(R.drawable.wallet);
+        typeTasks1.get(7).setImageID(R.drawable.cup);
 
 
 
-        typeTasks.add(new TypeTask("Health"));
-        typeTasks.add(new TypeTask("Education"));
-        typeTasks.add(new TypeTask("Diet"));
-        typeTasks.add(new TypeTask("Family"));
-        typeTasks.add(new TypeTask("Shopping"));
-        typeTasks.add(new TypeTask("Meeting"));
-        typeTasks.add(new TypeTask("Expenses"));
-        typeTasks.add(new TypeTask("Goals"));
+        Task t1 = new Task("Drink water", "high", health.getID());
+        Task t2 =new Task("Train abs", "medium", health.getID());
+        Task t3 = new Task("Drink water", "high", health.getID());
 
-
-        typeTasks.get(0).setImageID(R.drawable.band_aid);
-        typeTasks.get(1).setImageID(R.drawable.mortarboard);
-        typeTasks.get(2).setImageID(R.drawable.doughnut);
-        typeTasks.get(3).setImageID(R.drawable.heart);
-        typeTasks.get(4).setImageID(R.drawable.shopping_bag);
-        typeTasks.get(5).setImageID(R.drawable.chat);
-        typeTasks.get(6).setImageID(R.drawable.wallet);
-        typeTasks.get(7).setImageID(R.drawable.cup);
+        addNewTask(t1);
+        addNewTask(t2);
+        addNewTask(t3);
 
 
 
-        typeTasks.get(0).addNewTask(new Task("Drink water", "high", true ));
-        typeTasks.get(0).addNewTask(new Task("Train abs", "medium", true));
-        typeTasks.get(0).addNewTask(new Task("Drink water", "high", true ));
+        Task t4 =new Task("Call father", "high", family.getID());
+        Task t5 =new Task("birthday sister", "high", family.getID());
 
-
-
-
-        typeTasks.get(3).addNewTask(new Task("Call father", "high", false));
-        typeTasks.get(3).addNewTask(new Task("birthday sister", "high", false));
-
+        addNewTask(t4);
+        addNewTask(t5);
     }
 
 
     @Override
-    public Observable<TypeTask> createTask(TypeTask typeTask)  {
-        TypeTask found = null;
+    public Observable<Task> createTask(Task task)  {
 
+        addNewTask(task);
+        return Observable.create(emitter -> {
+            if (task != null) {
+                emitter.onNext(task);
+                emitter.onComplete();
+            } else {
+                emitter.onError(new Throwable("Error task type"));
+            }
+        });
+    }
+
+    @Override
+    public Observable<Task> removeTask(Task t) {
+
+        removeNewTask(t);
+        return Observable.create(emitter -> {
+            if (t != null) {
+                emitter.onNext(t);
+                emitter.onComplete();
+            } else {
+                emitter.onError(
+                        new Throwable("Error task type"));
+            }
+        });
+    }
+
+    @Override
+    public Observable<Task> editTask(Task t) {
+        Task t1;
         try {
-            found = searchTaskType(typeTask, typeTasks);
-        } catch (Exception e) {
+            t1 = searchTaskByID(t);
+            t1 = t;
+        }catch (Exception e){
             e.printStackTrace();
         }
 
-        typeTasks.remove(found);
-        typeTasks.add(typeTask);
-
         return Observable.create(emitter -> {
-
-            if (typeTask != null) {
-                emitter.onNext(typeTask);
+            if (t != null) {
+                emitter.onNext(t);
                 emitter.onComplete();
             } else {
                 emitter.onError(
@@ -92,40 +139,25 @@ public class DataSourceTasks implements DataSource{
     }
 
     public Observable<List<Task>> tasks(TypeTask typeTask){
-
-        ArrayList<Task> found = null;
-        try {
-           found = searchTasks(typeTask, typeTasks);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return Observable.fromArray(found);
+        ArrayList<Task> o = tasks.get(typeTask.getID());
+        return Observable.fromArray(o);
     }
 
-    @Override
-    public Observable<Integer> removeTaskType(Integer position) {
 
-         typeTasks.remove((int)position);
-
-         return Observable.create(emitter -> {
-            if (position != null) {
-                emitter.onNext(position);
-                emitter.onComplete();
-            } else {
-                emitter.onError(
-                        new Throwable("Error task type"));
-            }
-        });
-    }
 
     public Observable<List<TypeTask>> typeTaskList() {
-        return Observable.fromArray(new ArrayList<>(typeTasks));
+        ArrayList<TypeTask> t = new ArrayList<TypeTask>(typeTasks.values());
+        return Observable.fromArray(t);
     }
 
+
+
+
     @Override
-    public Observable<TypeTask> createType(TypeTask t) {
-        typeTasks.add(t);
+    public Observable<TypeTask> createTypeTask(TypeTask t) {
+
+        typeTasks.put(t.getID(), t);
+        tasks.put(t.getID(), new ArrayList<>()); // for tasks
         return Observable.create(emitter -> {
 
             if (t != null) {
@@ -139,29 +171,10 @@ public class DataSourceTasks implements DataSource{
     }
 
 
-
-    public ArrayList<Task> searchTasks(TypeTask t, ArrayList<TypeTask> taskTypes) throws Exception {
-
-        for(TypeTask x: taskTypes){
-            if(x.equals(t)){
-                return t.getTasks();
-            }
-        }
-
-        throw new Exception("Tasks not found");
-    }
-
-
     @Override
-    public Observable<TypeTask> editTask(TypeTask typeTask) {
+    public Observable<TypeTask> editTaskType(TypeTask typeTask) {
 
-        for (TypeTask t: typeTasks) {
-
-            if(t.equals(typeTask)){
-                t = typeTask;
-            }
-
-        }
+        typeTasks.put(typeTask.getID(), typeTask);
 
         return  Observable.create(emitter -> {
             if (typeTask != null) {
@@ -175,44 +188,58 @@ public class DataSourceTasks implements DataSource{
     }
 
     @Override
-    public Observable<TypeTask> removeTask(TypeTask typeTask) {
-
-
-        TypeTask found = null;
-
-        try {
-            found = searchTaskType(typeTask, typeTasks);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        typeTasks.remove(found);
-        typeTasks.add(typeTask);
-
-
-        return Observable.create(emitter -> {
-            if (typeTask != null) {
-                emitter.onNext(typeTask);
+    public Observable<TypeTask> removeTaskType(TypeTask t) {
+        typeTasks.remove(t.getID());
+        return  Observable.create(emitter -> {
+            if (t != null) {
+                emitter.onNext(t);
                 emitter.onComplete();
             } else {
                 emitter.onError(
                         new Throwable("Error task type"));
             }
         });
-
-
     }
 
-    public TypeTask searchTaskType(TypeTask t, ArrayList<TypeTask> taskTypes) throws Exception {
+    public Task searchTaskByID(Task t) throws Exception {
 
-        for(TypeTask x: taskTypes){
+
+        for(Task x: tasks.get(t.getParentID())){
             if(x.equals(t)){
-                return t;
+                return x;
             }
         }
 
-        throw new Exception("TaskType not found");
+        throw new Exception("task not found");
     }
+
+
+    public void addNewTypeTask(TypeTask t){
+        typeTasks.put(t.getID(), t);
+        tasks.put(t.getID(), new ArrayList<>());
+    }
+
+    public void addNewTask(Task t){
+        TypeTask tt = typeTasks.get(t.getParentID());
+
+        tt.increseTask();
+        if(tasks.get(tt.getID()) == null){
+            tasks.put(tt.getID(), new ArrayList<>());
+        }else{
+            tasks.get(tt.getID()).add(t);
+        }
+    }
+
+    public void removeNewTask(Task t){
+        TypeTask tt = typeTasks.get(t.getParentID());
+
+
+        tasks.get(tt.getID()).remove(t);
+        tt.decreaseTask();
+
+
+    }
+
 
 
     public static ArrayList<Integer> getImages(){
@@ -227,5 +254,6 @@ public class DataSourceTasks implements DataSource{
         return images;
 
     }
+
 
 }

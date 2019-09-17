@@ -9,17 +9,22 @@ import java.util.UUID;
 public class TypeTask implements Serializable {
 
     private String name;
-    private ArrayList<Task> tasks;
     private int imageID;
-    private String uniqueID;
+    private int noTasks;
+    private String ID;
 
 
     public TypeTask(String name) {
         this.name = name;
-        this.tasks = new ArrayList<>();
         this.imageID = R.drawable.clipboard;
-        uniqueID = UUID.randomUUID().toString();
+        this.noTasks = 0;
+        ID = UUID.randomUUID().toString();
 
+    }
+
+
+    public void increseTask(){
+        noTasks++;
     }
 
     public void setName(String name) {
@@ -35,28 +40,17 @@ public class TypeTask implements Serializable {
         return imageID;
     }
 
-    public void removeTask(int index){
-        this.tasks.remove(index);
+    public int getNoTasks() {
+        return noTasks;
     }
+
 
     public String getName() {
         return name;
     }
 
-    public void addNewTask(Task task){
-        tasks.add(task);
-    }
-
-    public ArrayList<Task> getTasks() {
-        return tasks;
-    }
-
-    public int getNumberOfTasks() {
-        return tasks.size();
-    }
-
-    public String getUniqueID() {
-        return uniqueID;
+    public String getID() {
+        return ID;
     }
 
 
@@ -66,12 +60,11 @@ public class TypeTask implements Serializable {
             return false;
         }
         TypeTask model = ((TypeTask) obj);
-        return this.getUniqueID().equals(model.getUniqueID());
+        return this.getID().equals(model.getID());
     }
 
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks.clear();
-        this.tasks.addAll(tasks);
+    public void decreaseTask() {
+        noTasks--;
     }
 }
 

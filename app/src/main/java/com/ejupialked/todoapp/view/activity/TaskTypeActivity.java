@@ -69,7 +69,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     private void initializePresenter() {
-        presenter.bindView(this);
+        presenter.bind(this);
         presenter.initialize();
     }
 
@@ -153,6 +153,10 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     public void createTypeTask(String taskName) {
         presenter.onTaskTypeCreated(new TypeTask(taskName));
         Utils.showSnackBarMessage(taskName + " created!", coordinatorLayout);
+    }
+
+    public RecyclerViewAdapter getRecyclerViewAdapter() {
+        return recyclerViewAdapter;
     }
 
     @Override

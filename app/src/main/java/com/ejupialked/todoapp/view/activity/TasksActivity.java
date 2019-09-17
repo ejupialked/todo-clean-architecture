@@ -16,6 +16,7 @@ import com.ejupialked.todoapp.utils.Utils;
 import com.ejupialked.todoapp.view.customview.CustomDialogTask;
 import com.ejupialked.todoapp.view.customview.SwipeToDeleteCallBackTasks;
 import com.ejupialked.todoapp.view.adapter.RecycleViewAdapterTasks;
+import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 import com.ejupialked.todoapp.view.presenter.TasksPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -38,6 +39,8 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     @BindView(R.id.recycle_view_tasks) RecyclerView recyclerView;
     @BindView(R.id.floatingActionButtonCreateTask) FloatingActionButton floatingActionButtonCreateTask;
     @BindView(R.id.coordinator_tasks) CoordinatorLayout coordinatorLayout;
+
+
 
     private RecycleViewAdapterTasks recyclerViewAdapter;
 
@@ -108,11 +111,16 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     @Override
     public void addTask(Task t) {
         recyclerViewAdapter.addAll(Collections.singleton(t));
+
         recyclerViewAdapter.notifyDataSetChanged();
         Utils.showSnackBarMessage(t.getDescription(), coordinatorLayout);
 
     }
 
+
+    public RecycleViewAdapterTasks getRecyclerViewAdapter() {
+        return recyclerViewAdapter;
+    }
 
     public void showSnackBarUndo(Task t){
 
@@ -131,7 +139,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     private void initializePresenter() {
-        presenter.bindView(this);
+        presenter.bind(this);
         TypeTask typeTask = getTypeTaskExtra();
         presenter.setTypeTask(typeTask);
         presenter.initialize();
@@ -162,13 +170,13 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     public static void open(Context context, TypeTask typeTask) {
         Intent intent = new Intent(context, TasksActivity.class);
         intent.putExtra("type_task_key", typeTask);
+
         context.startActivity(intent);
+
     }
 
     @Override
     public void applyTask(String description, String priority, String date) {
-        Task task = new Task(description, priority, false);
-        task.setDate(date);
-        presenter.onTaskCreated(task);
+        presenter.onTaskCreated(description, priority, date);
     }
 }

@@ -1,6 +1,7 @@
 package com.ejupialked.todoapp.domain.usecase;
 
 import com.ejupialked.todoapp.data.repository.Repository;
+import com.ejupialked.todoapp.domain.model.TypeTask;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -8,10 +9,10 @@ import javax.inject.Named;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 
-public class RemoveTaskType extends UseCase<Integer> {
+public class RemoveTaskType extends UseCase<TypeTask> {
 
     private final Repository repository;
-    private Integer position;
+    private TypeTask t;
 
 
     @Inject
@@ -21,13 +22,13 @@ public class RemoveTaskType extends UseCase<Integer> {
     }
 
 
-    public void removeTaskTypeAtPosition(Integer p){
-        this.position = p;
+    public void removeTaskType(TypeTask t){
+        this.t = t;
     }
 
 
     @Override
-    protected Observable<Integer> createObservableUseCase() {
-        return this.repository.removeTaskType(position);
+    protected Observable<TypeTask> createObservableUseCase() {
+        return this.repository.removeTaskType(t);
     }
 }

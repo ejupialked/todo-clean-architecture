@@ -9,17 +9,17 @@ import io.reactivex.Observable;
 
 public interface Repository {
 
+    /// add exceptions
     Observable<List<TypeTask>> typeTaskList();
+    Observable<TypeTask> createTypeTask(TypeTask t);
+    Observable<TypeTask> editTaskType(TypeTask t);
+    Observable<TypeTask> removeTaskType(TypeTask t);
 
-    Observable<TypeTask> createTypeTask(TypeTask typeTask);
 
-    Observable<List<Task>> tasks(TypeTask typeTask);
+    Observable<List<Task>> tasks(TypeTask t);
+    Observable<Task> createTask(Task t);
+    Observable<Task> removeTask(Task t);
+    Observable<Task> editTask(Task t);
 
-    Observable<Integer> removeTaskType(Integer position);
 
-    Observable<TypeTask> createTask(TypeTask typeTask);
-
-    Observable<TypeTask> removeTask(TypeTask typeTask);
-
-    Observable<TypeTask> editTaskType(TypeTask typeTask);
 }

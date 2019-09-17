@@ -30,7 +30,7 @@ public class TasksRepository implements Repository {
 
     @Override
     public Observable<TypeTask> createTypeTask(TypeTask typeTask) {
-        return dataSource.createType(typeTask);
+        return dataSource.createTypeTask(typeTask);
     }
 
     @Override
@@ -39,23 +39,28 @@ public class TasksRepository implements Repository {
     }
 
     @Override
-    public Observable<Integer> removeTaskType(Integer position) {
-        return dataSource.removeTaskType(position);
+    public Observable<TypeTask> removeTaskType(TypeTask t) {
+        return dataSource.removeTaskType(t);
     }
 
 
     @Override
-    public Observable<TypeTask> createTask(TypeTask typeTask) {
-        return dataSource.createTask(typeTask);
+    public Observable<Task> createTask(Task t) {
+        return dataSource.createTask(t);
     }
 
     @Override
-    public Observable<TypeTask> removeTask(TypeTask typeTask) {
-        return dataSource.removeTask(typeTask);
+    public Observable<Task> removeTask(Task t) {
+        return dataSource.removeTask(t);
     }
 
     @Override
-    public Observable<TypeTask> editTaskType(TypeTask typeTask) {
-        return dataSource.editTask(typeTask);
+    public Observable<Task> editTask(Task t) {
+        return dataSource.editTask(t);
+    }
+
+    @Override
+    public Observable<TypeTask> editTaskType(TypeTask t) {
+        return dataSource.editTaskType(t);
     }
 }

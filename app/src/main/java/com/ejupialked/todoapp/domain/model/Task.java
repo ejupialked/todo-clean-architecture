@@ -1,19 +1,25 @@
 package com.ejupialked.todoapp.domain.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.UUID;
 
 public class Task implements Serializable {
 
-  private String description;
-  private String priority;
-  private boolean isCompleted;
+    private String ID;
+    private String parentID;
+    private String description;
+    private String priority;
+    private boolean isCompleted;
+
+
   private String date;
 
-    public Task(String description, String priority,boolean isCompleted) {
+    public Task(String description, String priority, String parentID) {
         this.description = description;
         this.priority = priority;
-        this.isCompleted = isCompleted;
+        this.isCompleted = false;
+        this.parentID = parentID;
+        this.ID = UUID.randomUUID().toString();
     }
 
     public String getDescription() {
@@ -34,6 +40,10 @@ public class Task implements Serializable {
 
     public String getPriority() {
         return priority;
+    }
+
+    public String getParentID() {
+        return parentID;
     }
 
     public void setPriority(String priority) {
