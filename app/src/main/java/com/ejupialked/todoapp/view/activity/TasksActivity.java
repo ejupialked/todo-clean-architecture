@@ -97,7 +97,6 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     @Override
     public void openDialogEditTask(int position) {
         Task t = recyclerViewAdapter.getTaskTypeAtPosition(position);
-
         CustomDialogTask customDialogTask = new CustomDialogTask();
         customDialogTask.setTask(t);
         customDialogTask.show(getSupportFragmentManager(), "example");

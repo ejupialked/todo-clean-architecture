@@ -61,7 +61,7 @@ public class SwipeToDeleteCallbackTypeTasks extends ItemTouchHelper.SimpleCallba
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
 
-        if(direction == 4){
+        if(direction == 16){
             presenter.getView().openDialogEditTypeTask(position);
 
 
@@ -70,7 +70,6 @@ public class SwipeToDeleteCallbackTypeTasks extends ItemTouchHelper.SimpleCallba
         }
     }
 
-    //drag and drop
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView,
                                 @NonNull RecyclerView.ViewHolder viewHolder) {

@@ -71,7 +71,7 @@ public class SwipeToDeleteCallBackTasks extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
-        if(direction == 4){
+        if(direction == 16){
             presenter.getView().openDialogEditTask(position);
         }else {
             presenter.onTaskRemoved(position);
