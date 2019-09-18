@@ -54,7 +54,6 @@ public class SwipeToDeleteCallBackTasks  extends ItemTouchHelper.SimpleCallback 
             presenter.onTaskEdited(position);
         }else {
             presenter.onTaskRemoved(position);
-
         }
     }
 }

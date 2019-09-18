@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.ejupialked.todoapp.R;
+import com.ejupialked.todoapp.domain.model.Task;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -35,6 +36,11 @@ public class CustomDialogTask extends AppCompatDialogFragment {
     @BindView(R.id.date_button) ImageButton dateButton;
     @BindView(R.id.txt_date) TextView txtDate;
 
+    @BindView(R.id.radio_high) RadioButton high;
+    @BindView(R.id.radio_medium) RadioButton medium;
+    @BindView(R.id.radio_low) RadioButton low;
+
+
     private RadioButton radioButton;
     private CustomDialogTask.CustomDialogListener listener;
     private Context context;
@@ -43,6 +49,9 @@ public class CustomDialogTask extends AppCompatDialogFragment {
     private String taskDescription;
     private String taskPriority;
     private String taskDate;
+
+
+    private Task t;
 
     @NonNull
     @Override
@@ -55,6 +64,22 @@ public class CustomDialogTask extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.layout_dialogtask, null);
 
         ButterKnife.bind(this, view);
+
+
+        if(t != null){
+            editDescription.setText(t.getDescription());
+            txtDate.setText(t.getDate());
+
+            if(t.getPriority().equalsIgnoreCase("high")){
+                high.setSelected(true);
+
+            }else if(t.getPriority().equalsIgnoreCase("medium")){
+                medium.setSelected(true);
+
+            }else if(t.getPriority().equalsIgnoreCase("low")){
+                low.setSelected(true);
+            }
+        }
 
         builder.setView(view)
                 .setTitle("Create a new task")
@@ -120,6 +145,10 @@ public class CustomDialogTask extends AppCompatDialogFragment {
         }catch (ClassCastException c){
             throw new ClassCastException(context.toString() + "Must implement listener ");
         }
+    }
+
+    public void setTask(Task t) {
+        this.t = t;
     }
 
     public interface CustomDialogListener{

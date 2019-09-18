@@ -14,6 +14,7 @@ import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.utils.Utils;
 import com.ejupialked.todoapp.view.customview.CustomDialogTask;
+import com.ejupialked.todoapp.view.customview.CustomDialogTaskType;
 import com.ejupialked.todoapp.view.customview.SwipeToDeleteCallBackTasks;
 import com.ejupialked.todoapp.view.adapter.RecycleViewAdapterTasks;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
@@ -93,7 +94,14 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     @Override
-    public void editTask(Task t) {
+    public void editTask(Task t, int index) {
+        CustomDialogTask customDialogTask = new CustomDialogTask();
+        customDialogTask.setTask(t);
+        customDialogTask.show(getSupportFragmentManager(), "example");
+
+        //restore swipe back
+        recyclerViewAdapter.notifyItemChanged(index);
+
 
     }
 
@@ -103,15 +111,11 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         customDialogTask.show(getSupportFragmentManager(), "example");
     }
 
-    @Override
-    public void openDialogEditTask(Task t) {
 
-    }
 
     @Override
     public void addTask(Task t) {
         recyclerViewAdapter.addAll(Collections.singleton(t));
-
         recyclerViewAdapter.notifyDataSetChanged();
         Utils.showSnackBarMessage(t.getDescription(), coordinatorLayout);
 

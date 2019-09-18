@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.AddTask;
+import com.ejupialked.todoapp.domain.usecase.EditTask;
 import com.ejupialked.todoapp.domain.usecase.GetTasks;
 import com.ejupialked.todoapp.domain.usecase.RemoveTask;
 
@@ -19,17 +20,20 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     private GetTasks getTasks;
     private AddTask addTask;
     private RemoveTask removeTask;
+    private EditTask editTask;
 
     private TypeTask typeTask;
 
     @Inject
     public TasksPresenter(@NonNull GetTasks getTasks,
                           @NonNull AddTask addTask,
-                          @NonNull RemoveTask removeTask) {
+                          @NonNull RemoveTask removeTask,
+                          @NonNull EditTask editTask) {
 
         this.getTasks = getTasks;
         this.addTask = addTask;
         this.removeTask = removeTask;
+        this.editTask = editTask;
     }
 
     @Override
@@ -121,6 +125,28 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
      * @param position the position of the task in the list
      */
     public void onTaskEdited(int position) {
+        Task task = ((TasksActivity) getView())
+                .getRecyclerViewAdapter()
+                .getTaskTypeAtPosition(position);
+        editTask.editTask(task);
+
+        editTask.execute(new DisposableObserver<Task>() {
+            @Override
+            public void onNext(Task task) {
+                getView().editTask(task, position);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
 
     }
 
@@ -128,9 +154,8 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     public interface View extends Presenter.View, CustomDialogTask.CustomDialogListener  {
         void showTasks(List<Task> tasks);
         void removeTask(int i);
-        void editTask(Task t);
+        void editTask(Task t, int index);
         void openDialogCreateNewTask();
-        void openDialogEditTask(Task t);
         void addTask(Task t);
     }
 }
