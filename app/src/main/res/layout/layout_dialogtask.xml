@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/radiogroup_task"
+        android:layout_margin="20dp"
         android:layout_below="@id/edit_taskdescription"
         android:layout_alignParentLeft="true"
         >
@@ -61,10 +62,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_marginEnd="20dp"
+            android:textStyle="bold"
+            android:layout_margin="8dp"
             android:hint="Set your deadline"
             android:layout_marginRight="20dp"
             android:orientation="vertical"
+
             android:text="Pick a date" />
 
 
@@ -72,7 +75,7 @@
             android:id="@+id/cancel_button"
             android:layout_width="36dp"
             android:clickable="true"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="10dp"
             android:layout_height="match_parent"
             android:background="@drawable/roundcorners"
             android:src="@drawable/ic_cancel_black_24dp" />
@@ -80,10 +83,11 @@
         <ImageButton
             android:id="@+id/date_button"
             android:layout_width="36dp"
+
             android:clickable="true"
             android:layout_height="match_parent"
             android:background="@drawable/roundcorners"
-            android:src="@drawable/ic_date_range_notcompleted"
+            android:src="@drawable/ic_date_range_24dp"
             />
 
 

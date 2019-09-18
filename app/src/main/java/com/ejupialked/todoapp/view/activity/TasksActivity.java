@@ -14,10 +14,8 @@ import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.utils.Utils;
 import com.ejupialked.todoapp.view.customview.CustomDialogTask;
-import com.ejupialked.todoapp.view.customview.CustomDialogTaskType;
 import com.ejupialked.todoapp.view.customview.SwipeToDeleteCallBackTasks;
 import com.ejupialked.todoapp.view.adapter.RecycleViewAdapterTasks;
-import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 import com.ejupialked.todoapp.view.presenter.TasksPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -93,14 +91,16 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         showSnackBarUndo(recyclerViewAdapter.getRecentlyDeletedTask());
     }
 
+
     @Override
-    public void editTask(Task t, int index) {
+    public void openDialogEditTask(int position) {
+        Task t = recyclerViewAdapter.getTaskTypeAtPosition(position);
+
         CustomDialogTask customDialogTask = new CustomDialogTask();
         customDialogTask.setTask(t);
         customDialogTask.show(getSupportFragmentManager(), "example");
-
         //restore swipe back
-        recyclerViewAdapter.notifyItemChanged(index);
+        recyclerViewAdapter.notifyItemChanged(position);
 
 
     }
@@ -138,7 +138,8 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
 
     private void initSwipeToDelete() {
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallBackTasks(presenter));
+        ItemTouchHelper itemTouchHelper =
+                new ItemTouchHelper(new SwipeToDeleteCallBackTasks(presenter, this));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
@@ -180,7 +181,18 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     @Override
-    public void applyTask(String description, String priority, String date) {
+    public void createTask(String description, String priority, String date) {
         presenter.onTaskCreated(description, priority, date);
+    }
+
+    @Override
+    public void showEditTask(Task task) {
+        recyclerViewAdapter.updateEditedTask(task);
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void editTask(Task t) {
+        presenter.onTaskEdited(t);
     }
 }

@@ -124,16 +124,12 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
      * todo
      * @param position the position of the task in the list
      */
-    public void onTaskEdited(int position) {
-        Task task = ((TasksActivity) getView())
-                .getRecyclerViewAdapter()
-                .getTaskTypeAtPosition(position);
-        editTask.editTask(task);
-
+    public void onTaskEdited(Task t) {
+        editTask.editTask(t);
         editTask.execute(new DisposableObserver<Task>() {
             @Override
             public void onNext(Task task) {
-                getView().editTask(task, position);
+                getView().showEditTask(task);
             }
 
             @Override
@@ -154,7 +150,8 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     public interface View extends Presenter.View, CustomDialogTask.CustomDialogListener  {
         void showTasks(List<Task> tasks);
         void removeTask(int i);
-        void editTask(Task t, int index);
+        void showEditTask(Task task);
+        void openDialogEditTask(int position);
         void openDialogCreateNewTask();
         void addTask(Task t);
     }

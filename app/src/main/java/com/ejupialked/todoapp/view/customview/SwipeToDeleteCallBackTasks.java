@@ -1,5 +1,6 @@
 package com.ejupialked.todoapp.view.customview;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
@@ -15,11 +16,13 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 public class SwipeToDeleteCallBackTasks  extends ItemTouchHelper.SimpleCallback {
 
     private final TasksPresenter presenter;
+    Context context;
 
 
-    public SwipeToDeleteCallBackTasks(TasksPresenter presenter) {
+    public SwipeToDeleteCallBackTasks(TasksPresenter presenter, Context context) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.presenter = presenter;
+        this.context = context;
     }
 
 
@@ -27,9 +30,9 @@ public class SwipeToDeleteCallBackTasks  extends ItemTouchHelper.SimpleCallback 
     @Override
     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                .addSwipeLeftBackgroundColor(Color.BLACK)
+                .addSwipeLeftBackgroundColor(getContext().getColor(R.color.green))
                 .addSwipeLeftActionIcon(R.drawable.ic_mode_edit_black_24dp)
-                .addSwipeRightBackgroundColor(Color.RED)
+                .addSwipeRightBackgroundColor(getContext().getColor(R.color.red))
                 .addSwipeRightActionIcon(R.drawable.ic_delete_sweep_black_24dp)
                 .addSwipeRightLabel("Remove")
                 .setSwipeRightLabelColor(Color.WHITE)
@@ -38,8 +41,14 @@ public class SwipeToDeleteCallBackTasks  extends ItemTouchHelper.SimpleCallback 
                 .create()
                 .decorate();
 
+
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 
+    }
+
+
+    public Context getContext() {
+        return context;
     }
 
     @Override
@@ -51,7 +60,7 @@ public class SwipeToDeleteCallBackTasks  extends ItemTouchHelper.SimpleCallback 
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
         if(direction == 4){
-            presenter.onTaskEdited(position);
+            presenter.getView().openDialogEditTask(position);
         }else {
             presenter.onTaskRemoved(position);
         }

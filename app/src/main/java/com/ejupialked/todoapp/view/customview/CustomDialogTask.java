@@ -9,8 +9,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -35,7 +33,7 @@ public class CustomDialogTask extends AppCompatDialogFragment {
     @BindView(R.id.radiogroup_task) RadioGroup radioGroup;
     @BindView(R.id.date_button) ImageButton dateButton;
     @BindView(R.id.txt_date) TextView txtDate;
-
+    @BindView(R.id.cancel_button) ImageButton buttonClear;
     @BindView(R.id.radio_high) RadioButton high;
     @BindView(R.id.radio_medium) RadioButton medium;
     @BindView(R.id.radio_low) RadioButton low;
@@ -45,6 +43,9 @@ public class CustomDialogTask extends AppCompatDialogFragment {
     private CustomDialogTask.CustomDialogListener listener;
     private Context context;
 
+
+    String title;
+    String positiveButton;
 
     private String taskDescription;
     private String taskPriority;
@@ -65,8 +66,12 @@ public class CustomDialogTask extends AppCompatDialogFragment {
 
         ButterKnife.bind(this, view);
 
+        buttonClear.setOnClickListener(view1 -> txtDate.setText("Pick a date"));
+
 
         if(t != null){
+            title = "Edit Task";
+            positiveButton = "Edit";
             editDescription.setText(t.getDescription());
             txtDate.setText(t.getDate());
 
@@ -79,22 +84,40 @@ public class CustomDialogTask extends AppCompatDialogFragment {
             }else if(t.getPriority().equalsIgnoreCase("low")){
                 low.setSelected(true);
             }
+        }else{
+            title = "Create a task";
+            positiveButton = "Create";
         }
 
         builder.setView(view)
-                .setTitle("Create a new task")
+                .setTitle(title)
                 .setNegativeButton("Cancel", (dialogInterface, i) -> {
                 })
-                .setPositiveButton("Create", (dialogInterface, i) -> {
+                .setPositiveButton(positiveButton, (dialogInterface, i) -> {
 
-                    int ID = radioGroup.getCheckedRadioButtonId();
-                    radioButton = view.findViewById(ID);
+                    if(t == null) {
+                        int ID = radioGroup.getCheckedRadioButtonId();
+                        radioButton = view.findViewById(ID);
 
-                     taskDescription = editDescription.getText().toString();
-                     taskPriority = radioButton.getText().toString();
-                     taskDate = txtDate.getText().toString();
+                        taskDescription = editDescription.getText().toString();
+                        taskPriority = radioButton.getText().toString();
+                        taskDate = txtDate.getText().toString();
 
-                    listener.applyTask(taskDescription, taskPriority, taskDate);
+                        listener.createTask(taskDescription, taskPriority, taskDate);
+                    }else{
+                        int ID = radioGroup.getCheckedRadioButtonId();
+                        radioButton = view.findViewById(ID);
+
+                        taskDescription = editDescription.getText().toString();
+                        taskPriority = radioButton.getText().toString();
+                        taskDate = txtDate.getText().toString();
+
+                        t.setDate(taskDate);
+                        t.setDescription(taskDescription);
+                        t.setPriority(taskPriority);
+
+                        listener.editTask(t);
+                    }
                 });
 
 
@@ -152,6 +175,7 @@ public class CustomDialogTask extends AppCompatDialogFragment {
     }
 
     public interface CustomDialogListener{
-        void applyTask(String description, String priority, String date);
+        void createTask(String description, String priority, String date);
+        void editTask(Task t);
     }
 }

@@ -98,6 +98,14 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         tasks.addAll(collection);
     }
 
+    public void updateEditedTask(Task task) {
+        for (Task ta: tasks) {
+            if(task.equals(ta)){
+                ta = task;
+            }
+        }
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.txt_description)    TextView txt_description;

@@ -27,6 +27,8 @@ public class CustomDialogTaskType extends DialogFragment {
 
     private CustomDialogListener listener;
 
+    private String title;
+    private String positiveButton;
 
     TypeTask t;
 
@@ -42,20 +44,25 @@ public class CustomDialogTaskType extends DialogFragment {
         ButterKnife.bind(this, view);
 
         if(t != null){
+            title = "Create a task type";
+            positiveButton = "Create";
             editText.setText(t.getName());
+        }else {
+            title = "Edit task type";
+            positiveButton = "Edit";
         }
 
         builder.setView(view)
-                .setTitle("Create new task type")
+                .setTitle(title)
                 .setNegativeButton("Cancel", (dialogInterface, i) -> {
                 });
         if(t == null) {
-            builder.setPositiveButton("Create", (dialogInterface, i) -> {
+            builder.setPositiveButton(positiveButton, (dialogInterface, i) -> {
                 String taskName = editText.getText().toString();
                 listener.createTypeTask(taskName);
             });
         }else{
-            builder.setPositiveButton("Edit", (dialogInterface, i) -> {
+            builder.setPositiveButton(positiveButton, (dialogInterface, i) -> {
                 t.setName(editText.getText().toString());
                 listener.editTypeTask(t);
             });
