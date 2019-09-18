@@ -43,7 +43,7 @@ public class CustomDialogTaskType extends DialogFragment {
 
         ButterKnife.bind(this, view);
 
-        if(t != null){
+        if(t == null){
             title = "Create a task type";
             positiveButton = "Create";
             editText.setText(t.getName());

@@ -13,17 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.domain.model.TypeTask;
+import com.ejupialked.todoapp.view.customview.SwipeToDeleteCallbackTypeTasks;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class RecyclerViewAdapterTaskType extends RecyclerView.Adapter<RecyclerViewAdapterTaskType.ViewHolder>{
+public class RecyclerViewAdapterTaskType extends RecyclerView.Adapter<RecyclerViewAdapterTaskType.ViewHolder>
+implements SwipeToDeleteCallbackTypeTasks.ItemTouchHelperAdapter {
 
     private final TaskTypesPresenter presenter;
     private final List<TypeTask> taskList;
@@ -107,6 +110,20 @@ public class RecyclerViewAdapterTaskType extends RecyclerView.Adapter<RecyclerVi
     @Override
     public int getItemCount() {
         return taskList.size();
+    }
+
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(taskList, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(taskList, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

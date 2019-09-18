@@ -1,5 +1,6 @@
 package com.ejupialked.todoapp.view.activity;
 
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,11 +54,21 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
     private void initSwipeToDelete() {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(
-                new SwipeToDeleteCallbackTypeTasks(presenter, this));
+                new SwipeToDeleteCallbackTypeTasks(presenter, recyclerViewAdapter, this));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     private void initFAB() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy){
+                if (dy > 0)
+                    floatingActionButton.hide();
+                else if (dy < 0)
+                    floatingActionButton.show();
+            }
+        });
+
         floatingActionButton.setOnClickListener(v -> openDialogCreateNewTypeTask());
     }
 

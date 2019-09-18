@@ -3,8 +3,8 @@ package com.ejupialked.todoapp.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -130,7 +130,8 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
     public void showSnackBarUndo(Task t){
 
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, t.getDescription(), Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(
+                coordinatorLayout, t.getDescription(), Snackbar.LENGTH_LONG);
         snackbar.setAction("UNDO", view -> {
             recyclerViewAdapter.undoDelete();
         });
@@ -144,8 +145,9 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     private void initSwipeToDelete() {
+
         ItemTouchHelper itemTouchHelper =
-                new ItemTouchHelper(new SwipeToDeleteCallBackTasks(presenter, this));
+                new ItemTouchHelper(new SwipeToDeleteCallBackTasks(presenter, recyclerViewAdapter, this));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
@@ -171,6 +173,16 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     private void initFAB() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy){
+                if (dy > 0)
+                    floatingActionButtonCreateTask.hide();
+                else if (dy < 0)
+                    floatingActionButtonCreateTask.show();
+            }
+        });
+
         floatingActionButtonCreateTask.setOnClickListener(v -> openDialogCreateNewTask());
     }
 
