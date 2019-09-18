@@ -2,7 +2,6 @@ package com.ejupialked.todoapp.view.presenter;
 
 import androidx.annotation.NonNull;
 
-import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.domain.usecase.AddTaskType;
 import com.ejupialked.todoapp.domain.usecase.EditTaskType;
@@ -23,7 +22,6 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
     private RemoveTaskType removeTaskType;
     private EditTaskType editTaskType;
 
-
     @Inject
     public TaskTypesPresenter(@NonNull GetTaskTypes getTaskTypes,
                               @NonNull AddTaskType addTaskType,
@@ -43,6 +41,7 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
     }
 
     private void getTaskTypes() {
+
 
         getTaskTypes.execute(new DisposableObserver<List<TypeTask>>() {
 
@@ -158,5 +157,7 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         void openTasksScreen(TypeTask typeTask);
         void openDialogEditTypeTask(int position);
         void openDialogCreateNewTypeTask();
+
+
     }
 }

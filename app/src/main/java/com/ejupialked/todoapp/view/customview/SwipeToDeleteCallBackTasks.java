@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ejupialked.todoapp.R;
+import com.ejupialked.todoapp.view.activity.TasksActivity;
 import com.ejupialked.todoapp.view.presenter.TasksPresenter;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;

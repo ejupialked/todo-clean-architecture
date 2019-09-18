@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.domain.model.Task;
+import com.ejupialked.todoapp.view.activity.TasksActivity;
+import com.ejupialked.todoapp.view.presenter.TasksPresenter;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -94,7 +96,6 @@ public class CustomDialogTask extends AppCompatDialogFragment {
                 .setNegativeButton("Cancel", (dialogInterface, i) -> {
                 })
                 .setPositiveButton(positiveButton, (dialogInterface, i) -> {
-
                     if(t == null) {
                         int ID = radioGroup.getCheckedRadioButtonId();
                         radioButton = view.findViewById(ID);

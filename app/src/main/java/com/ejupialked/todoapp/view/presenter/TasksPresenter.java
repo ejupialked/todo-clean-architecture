@@ -40,13 +40,18 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     public void initialize() {
         super.initialize();
 
+
         getTasks.showTasksByTypetask(typeTask);
 
         getTasks.execute(new DisposableObserver<List<Task>>() {
 
             @Override
             public void onNext(List<Task> tasks) {
-                getView().showTasks(tasks);
+                if(tasks.isEmpty()  ){ getView().showEmpty();}
+                else{
+                    getView().showRecycle();
+                    getView().showTasks(tasks);
+                }
             }
 
             @Override
@@ -94,6 +99,10 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     }
 
     public void onTaskRemoved(int position) {
+        if(((TasksActivity) getView()).getCount() == 1){
+            getView().showEmpty();
+        }
+
         Task task = ((TasksActivity) getView())
                 .getRecyclerViewAdapter()
                 .getTaskTypeAtPosition(position);
@@ -120,10 +129,6 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
 
 
-    /**
-     * todo
-     * @param position the position of the task in the list
-     */
     public void onTaskEdited(Task t) {
         editTask.editTask(t);
         editTask.execute(new DisposableObserver<Task>() {
@@ -154,5 +159,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
         void openDialogEditTask(int position);
         void openDialogCreateNewTask();
         void addTask(Task t);
+        void showEmpty();
+        void showRecycle();
     }
 }

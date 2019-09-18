@@ -68,4 +68,5 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @return The layout id that's gonna be the activity view.
      */
     protected abstract int getLayoutId();
+
 }

@@ -56,6 +56,8 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         holder.render(task);
     }
 
+
+
     public void removeTaskTypeAtPosition(int p){
         recentlyDeletedPosition = p;
         recentlyDeletedTask = tasks.remove(p);
@@ -106,6 +108,9 @@ public class RecycleViewAdapterTasks extends RecyclerView.Adapter<RecycleViewAda
         }
     }
 
+    public boolean isEmpty(){
+        return tasks.isEmpty();
+    }
     class ViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.txt_description)    TextView txt_description;

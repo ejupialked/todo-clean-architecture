@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapterTaskType extends RecyclerView.Adapter<RecyclerViewAdapterTaskType.ViewHolder>{
 
     private final TaskTypesPresenter presenter;
     private final List<TypeTask> taskList;
@@ -33,7 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private TypeTask recentlyDeletedTypeTask;
     private int recentlyDeletedPosition;
 
-    public RecyclerViewAdapter(TaskTypesPresenter presenter) {
+    public RecyclerViewAdapterTaskType(TaskTypesPresenter presenter) {
         this.presenter = presenter;
         this.taskList = new ArrayList<>();
         this.context = getContext();

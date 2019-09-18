@@ -11,7 +11,7 @@ import com.ejupialked.todoapp.domain.model.TypeTask;
 import com.ejupialked.todoapp.utils.Utils;
 import com.ejupialked.todoapp.view.customview.CustomDialogTaskType;
 import com.ejupialked.todoapp.view.customview.SwipeToDeleteCallbackTypeTasks;
-import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapter;
+import com.ejupialked.todoapp.view.adapter.RecyclerViewAdapterTaskType;
 import com.ejupialked.todoapp.view.presenter.TaskTypesPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -29,7 +29,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     @BindView(R.id.coordinatorTaskTypes) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.recycle) RecyclerView recyclerView;
     @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
-    public RecyclerViewAdapter recyclerViewAdapter;
+    public RecyclerViewAdapterTaskType recyclerViewAdapter;
 
 
 
@@ -63,7 +63,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
 
     private void initRecycleView(){
-        recyclerViewAdapter = new RecyclerViewAdapter(presenter);
+        recyclerViewAdapter = new RecyclerViewAdapterTaskType(presenter);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -139,13 +139,20 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         presenter.onRestart();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.destroy();
+    }
+
     public void showSnackBarUndo(){
 
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, recyclerViewAdapter.getRecentlyDeletedTypeTask().getName(), Snackbar.LENGTH_LONG);
-        snackbar.setAction("UNDO", view -> {
-            recyclerViewAdapter.undoDelete();
-        });
+        Snackbar snackbar = Snackbar.make(
+                coordinatorLayout,
+                recyclerViewAdapter.getRecentlyDeletedTypeTask().getName(),
+                Snackbar.LENGTH_LONG);
 
+        snackbar.setAction("UNDO", view -> recyclerViewAdapter.undoDelete());
         snackbar.show();
     }
 
@@ -155,7 +162,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         Utils.showSnackBarMessage(taskName + " created!", coordinatorLayout);
     }
 
-    public RecyclerViewAdapter getRecyclerViewAdapter() {
+    public RecyclerViewAdapterTaskType getRecyclerViewAdapter() {
         return recyclerViewAdapter;
     }
 

@@ -2,6 +2,8 @@ package com.ejupialked.todoapp.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -38,6 +40,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     @BindView(R.id.recycle_view_tasks) RecyclerView recyclerView;
     @BindView(R.id.floatingActionButtonCreateTask) FloatingActionButton floatingActionButtonCreateTask;
     @BindView(R.id.coordinator_tasks) CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.empty_viewtasks) View emptyView;
 
 
 
@@ -47,17 +50,16 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     public void initView() {
         super.initView();
         initializeDagger();
-        initializePresenter();
         initAdapter();
+        initRecycleViewer();
+        initializePresenter();
         initFAB();
         initToolbar();
         initBackButtonToolbar();
-        initRecycleViewer();
         initSwipeToDelete();
     }
 
     private void initToolbar() {
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getTypeTaskExtra().getName());
         }
@@ -137,6 +139,10 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
 
+    public int getCount(){
+        return recyclerViewAdapter.getItemCount();
+    }
+
     private void initSwipeToDelete() {
         ItemTouchHelper itemTouchHelper =
                 new ItemTouchHelper(new SwipeToDeleteCallBackTasks(presenter, this));
@@ -182,6 +188,9 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
     @Override
     public void createTask(String description, String priority, String date) {
+        if(getCount() == 0){
+            showRecycle();
+        }
         presenter.onTaskCreated(description, priority, date);
     }
 
@@ -194,5 +203,17 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     @Override
     public void editTask(Task t) {
         presenter.onTaskEdited(t);
+    }
+
+    @Override
+    public void showRecycle() {
+        recyclerView.setVisibility(View.VISIBLE);
+        emptyView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showEmpty() {
+        emptyView.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
     }
 }
