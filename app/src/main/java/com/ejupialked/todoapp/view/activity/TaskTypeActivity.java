@@ -30,8 +30,8 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     @BindView(R.id.coordinatorTaskTypes) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.recycle) RecyclerView recyclerView;
     @BindView(R.id.floatingActionButtonCreate) FloatingActionButton floatingActionButton;
-    public RecyclerViewAdapterTaskType recyclerViewAdapter;
 
+    public RecyclerViewAdapterTaskType recyclerViewAdapter;
 
 
     @Override
@@ -72,7 +72,6 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         floatingActionButton.setOnClickListener(v -> openDialogCreateNewTypeTask());
     }
 
-
     private void initRecycleView(){
         recyclerViewAdapter = new RecyclerViewAdapterTaskType(presenter);
         recyclerView.setAdapter(recyclerViewAdapter);
@@ -89,10 +88,7 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
         app.getMainComponent().inject(this);
     }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_tasktypes;
-    }
+
 
     @Override
     public void showTaskTypes(List<TypeTask> typeTaskList) {
@@ -102,19 +98,19 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     @Override
-    public void addTypeTask(TypeTask typeTask) {
+    public void showCreatedTypeTask(TypeTask typeTask) {
         recyclerViewAdapter.addAll(Collections.singleton(typeTask));
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void showEditTypeTask(TypeTask t) {
+    public void showEditedTypeTask(TypeTask t) {
         recyclerViewAdapter.updateEditedTypeTask(t);
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void removeTypeTask(Integer p) {
+    public void showRemovedTypeTask(Integer p) {
         recyclerViewAdapter.notifyItemRemoved(p);
         recyclerViewAdapter.removeTaskTypeAtPosition(p);
         recyclerViewAdapter.notifyDataSetChanged();
@@ -138,7 +134,6 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
 
     }
 
-
     @Override
     public void openDialogCreateNewTypeTask() {
         CustomDialogTaskType customDialogTaskType = new CustomDialogTaskType();
@@ -157,7 +152,6 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     }
 
     public void showSnackBarUndo(){
-
         Snackbar snackbar = Snackbar.make(
                 coordinatorLayout,
                 recyclerViewAdapter.getRecentlyDeletedTypeTask().getName(),
@@ -171,6 +165,11 @@ public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter
     public void createTypeTask(String taskName) {
         presenter.onTaskTypeCreated(new TypeTask(taskName));
         Utils.showSnackBarMessage(taskName + " created!", coordinatorLayout);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_tasktypes;
     }
 
     public RecyclerViewAdapterTaskType getRecyclerViewAdapter() {

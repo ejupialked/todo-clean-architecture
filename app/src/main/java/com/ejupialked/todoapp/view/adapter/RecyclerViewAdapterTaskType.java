@@ -65,10 +65,6 @@ implements SwipeToDeleteCallbackTypeTasks.ItemTouchHelperAdapter {
         return recentlyDeletedTypeTask;
     }
 
-    public List<TypeTask> getTaskList() {
-        return taskList;
-    }
-
     public void updateEditedTypeTask(TypeTask t){
         for (TypeTask ta: taskList) {
             if(t.equals(ta)){
@@ -96,7 +92,6 @@ implements SwipeToDeleteCallbackTypeTasks.ItemTouchHelperAdapter {
         return context;
     }
 
-    //todo fix repositioning
     public void clearAll() {
         int size = taskList.size();
         taskList.clear();

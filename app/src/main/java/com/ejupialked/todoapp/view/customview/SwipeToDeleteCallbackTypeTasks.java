@@ -63,8 +63,6 @@ public class SwipeToDeleteCallbackTypeTasks extends ItemTouchHelper.SimpleCallba
 
         if(direction == 16){
             presenter.getView().openDialogEditTypeTask(position);
-
-
         }else {
             presenter.onTaskTypeRemoved(position);
         }

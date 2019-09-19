@@ -17,9 +17,7 @@ public class SwipeToDeleteCallBackTasks extends ItemTouchHelper.SimpleCallback {
 
     private final TasksPresenter presenter;
     private final ItemTouchHelperAdapter mAdapter;
-
-    Context context;
-
+    private Context context;
 
     public SwipeToDeleteCallBackTasks(TasksPresenter presenter, ItemTouchHelperAdapter mAdapter, Context context) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);

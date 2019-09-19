@@ -42,8 +42,6 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     @BindView(R.id.coordinator_tasks) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.empty_viewtasks) View emptyView;
 
-
-
     private RecycleViewAdapterTasks recyclerViewAdapter;
 
     @Override
@@ -65,8 +63,6 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         }
     }
 
-
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_tasks;
@@ -86,7 +82,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     @Override
-    public void removeTask(int i) {
+    public void showRemovedTask(int i) {
         recyclerViewAdapter.notifyItemRemoved(i);
         recyclerViewAdapter.removeTaskTypeAtPosition(i);
         recyclerViewAdapter.notifyDataSetChanged();
@@ -102,8 +98,6 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         customDialogTask.show(getSupportFragmentManager(), "example");
         //restore swipe back
         recyclerViewAdapter.notifyItemChanged(position);
-
-
     }
 
     @Override
@@ -115,11 +109,10 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
 
 
     @Override
-    public void addTask(Task t) {
+    public void showCreatedTask(Task t) {
         recyclerViewAdapter.addAll(Collections.singleton(t));
         recyclerViewAdapter.notifyDataSetChanged();
-        Utils.showSnackBarMessage(t.getDescription(), coordinatorLayout);
-
+        Utils.showSnackBarMessage(t.getDescription() + " created!", coordinatorLayout);
     }
 
 
@@ -128,7 +121,6 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     public void showSnackBarUndo(Task t){
-
         Snackbar snackbar = Snackbar.make(
                 coordinatorLayout, t.getDescription(), Snackbar.LENGTH_LONG);
         snackbar.setAction("UNDO", view -> {
@@ -144,9 +136,8 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     private void initSwipeToDelete() {
-
-        ItemTouchHelper itemTouchHelper =
-                new ItemTouchHelper(new SwipeToDeleteCallBackTasks(presenter, recyclerViewAdapter, this));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(
+                new SwipeToDeleteCallBackTasks(presenter, recyclerViewAdapter, this));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
@@ -192,9 +183,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     public static void open(Context context, TypeTask typeTask) {
         Intent intent = new Intent(context, TasksActivity.class);
         intent.putExtra("type_task_key", typeTask);
-
         context.startActivity(intent);
-
     }
 
     @Override
@@ -206,7 +195,7 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
     @Override
-    public void showEditTask(Task task) {
+    public void showEditedTask(Task task) {
         recyclerViewAdapter.updateEditedTask(task);
         recyclerViewAdapter.notifyDataSetChanged();
     }

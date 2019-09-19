@@ -3,7 +3,6 @@ package com.ejupialked.todoapp.domain.model;
 import com.ejupialked.todoapp.R;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class TypeTask implements Serializable {

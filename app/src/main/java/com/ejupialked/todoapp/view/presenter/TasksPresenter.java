@@ -40,15 +40,14 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
     public void initialize() {
         super.initialize();
 
-
         getTasks.showTasksByTypetask(typeTask);
-
         getTasks.execute(new DisposableObserver<List<Task>>() {
 
             @Override
             public void onNext(List<Task> tasks) {
-                if(tasks.isEmpty()  ){ getView().showEmpty();}
-                else{
+                if(tasks.isEmpty()){
+                    getView().showEmpty();
+                } else{
                     getView().showRecycle();
                     getView().showTasks(tasks);
                 }
@@ -85,7 +84,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
         addTask.execute(new DisposableObserver<Task>() {
             @Override
             public void onNext(Task t) {
-                getView().addTask(t);
+                getView().showCreatedTask(t);
             }
 
             @Override
@@ -112,7 +111,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
         removeTask.execute(new DisposableObserver<Task>() {
             @Override
             public void onNext(Task t) {
-                getView().removeTask(position);
+                getView().showRemovedTask(position);
             }
 
             @Override
@@ -134,7 +133,7 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
         editTask.execute(new DisposableObserver<Task>() {
             @Override
             public void onNext(Task task) {
-                getView().showEditTask(task);
+                getView().showEditedTask(task);
             }
 
             @Override
@@ -154,11 +153,13 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
     public interface View extends Presenter.View, CustomDialogTask.CustomDialogListener  {
         void showTasks(List<Task> tasks);
-        void removeTask(int i);
-        void showEditTask(Task task);
+        void showRemovedTask(int i);
+        void showEditedTask(Task task);
+        void showCreatedTask(Task t);
+
         void openDialogEditTask(int position);
         void openDialogCreateNewTask();
-        void addTask(Task t);
+
         void showEmpty();
         void showRecycle();
     }

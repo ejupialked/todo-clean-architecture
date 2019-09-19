@@ -111,10 +111,6 @@ implements SwipeToDeleteCallBackTasks.ItemTouchHelperAdapter {
         }
     }
 
-    public boolean isEmpty(){
-        return tasks.isEmpty();
-    }
-
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
         if (fromPosition < toPosition) {
@@ -198,13 +194,10 @@ implements SwipeToDeleteCallBackTasks.ItemTouchHelperAdapter {
                case "medium":
                    colorBar.setBackgroundColor(getContext().getColor(R.color.medium_color));
                    break;
-
                case "low":
                    colorBar.setBackgroundColor(getContext().getColor(R.color.low_color));
                    break;
            }
         }
-
-
     }
 }

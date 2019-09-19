@@ -8,7 +8,6 @@ import com.ejupialked.todoapp.domain.usecase.EditTaskType;
 import com.ejupialked.todoapp.domain.usecase.GetTaskTypes;
 import com.ejupialked.todoapp.domain.usecase.RemoveTaskType;
 import com.ejupialked.todoapp.view.activity.TaskTypeActivity;
-import com.ejupialked.todoapp.view.activity.TasksActivity;
 import com.ejupialked.todoapp.view.customview.CustomDialogTaskType;
 
 import java.util.List;
@@ -73,7 +72,7 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         removeTaskType.execute(new DisposableObserver<TypeTask>() {
             @Override
             public void onNext(TypeTask typeTask) {
-                getView().removeTypeTask(i);
+                getView().showRemovedTypeTask(i);
             }
 
             @Override
@@ -98,7 +97,7 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         addTaskType.execute(new DisposableObserver<TypeTask>() {
             @Override
             public void onNext(TypeTask typeTask) {
-                getView().addTypeTask(typeTask);
+                getView().showCreatedTypeTask(typeTask);
             }
 
             @Override
@@ -125,22 +124,19 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
         editTaskType.execute(new DisposableObserver<TypeTask>() {
             @Override
             public void onNext(TypeTask typeTask) {
-                getView().showEditTypeTask(typeTask);
+                getView().showEditedTypeTask(typeTask);
             }
 
             @Override
             public void onError(Throwable e) {
-
             }
 
             @Override
             public void onComplete() {
-
             }
         });
 
     }
-
 
 
     public void destroy(){
@@ -151,13 +147,12 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
     public interface View extends Presenter.View, CustomDialogTaskType.CustomDialogListener {
         void showTaskTypes(List<TypeTask> typeTaskList);
-        void addTypeTask(TypeTask t);
-        void showEditTypeTask(TypeTask t);
-        void removeTypeTask(Integer p);
+        void showCreatedTypeTask(TypeTask t);
+        void showEditedTypeTask(TypeTask t);
+        void showRemovedTypeTask(Integer p);
+
         void openTasksScreen(TypeTask typeTask);
         void openDialogEditTypeTask(int position);
         void openDialogCreateNewTypeTask();
-
-
     }
 }
