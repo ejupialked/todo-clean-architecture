@@ -5,5 +5,5 @@ The purpose of this project is to develop a minimalist todo app with the aim to 
 
 This project is currently in development.
 
-
-![alt text](https://github.com/EjupiAlked/android-clean-architecture/blob/master/screenshots/screenshots.png)
+![alt text](https://raw.githubusercontent.com/EjupiAlked/todo-app/master/art/tasktype_art.png)
+![alt text](https://raw.githubusercontent.com/EjupiAlked/todo-app/master/art/tasks_art.png)
