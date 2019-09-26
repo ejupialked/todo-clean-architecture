@@ -4,6 +4,37 @@ The purpose of this project is to develop a minimalist todo app with the aim to 
 ## Project Status
 
 This project is currently in development.
+## Screenshots
 
 ![alt text](https://raw.githubusercontent.com/EjupiAlked/todo-app/master/art/tasktype_art.png)
 ![alt text](https://raw.githubusercontent.com/EjupiAlked/todo-app/master/art/tasks_art.png)
+
+## Libraries used
+* [AppCompat, CardView, RecyclerView and DesignLibrary][2]
+* [RxJava & RxAndroid][3]
+* [Dagger 2][4]
+* [Butter Knife][5]
+* [RecyclerViewSwipeDecorator][6]
+
+[2]: http://developer.android.com/intl/es/tools/support-library/index.html
+[3]: https://github.com/ReactiveX/RxAndroid
+[4]: https://github.com/google/dagger5]
+[5]: https://github.com/JakeWharton/butterknife
+[6]: https://github.com/xabaras/RecyclerViewSwipeDecorator
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Developed by
+
+Alked Ejupi - ejupialkedcs@gmail.com
