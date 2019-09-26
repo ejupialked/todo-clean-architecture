@@ -14,7 +14,7 @@ This project is currently in development.
 * [RxJava & RxAndroid][3]
 * [Dagger 2][4]
 * [Butter Knife][5]
-* [RecyclerViewSwipeDecorator][6]
+* [Recycler View Swipe Decorator][6]
 
 [2]: http://developer.android.com/intl/es/tools/support-library/index.html
 [3]: https://github.com/ReactiveX/RxAndroid
@@ -33,7 +33,7 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [https://github.com/EjupiAlked/todo-app/blob/master/LICENSE](LICENSE.md) file for details.
 
 ## Developed by
 
