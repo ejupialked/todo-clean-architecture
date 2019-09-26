@@ -57,16 +57,19 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         initSwipeToDelete();
     }
 
+    public static void open(Context context, TypeTask typeTask) {
+        Intent intent = new Intent(context, TasksActivity.class);
+        intent.putExtra("type_task_key", typeTask);
+        context.startActivity(intent);
+    }
+
+
     private void initToolbar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getTypeTaskExtra().getName());
         }
     }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_tasks;
-    }
 
     @Override protected void onDestroy() {
         super.onDestroy();
@@ -107,33 +110,6 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
     }
 
 
-
-    @Override
-    public void showCreatedTask(Task t) {
-        recyclerViewAdapter.addAll(Collections.singleton(t));
-        recyclerViewAdapter.notifyDataSetChanged();
-        Utils.showSnackBarMessage(t.getDescription() + " created!", coordinatorLayout);
-    }
-
-
-    public RecycleViewAdapterTasks getRecyclerViewAdapter() {
-        return recyclerViewAdapter;
-    }
-
-    public void showSnackBarUndo(Task t){
-        Snackbar snackbar = Snackbar.make(
-                coordinatorLayout, t.getDescription(), Snackbar.LENGTH_LONG);
-        snackbar.setAction("UNDO", view -> {
-            recyclerViewAdapter.undoDelete();
-        });
-
-        snackbar.show();
-    }
-
-
-    public int getCount(){
-        return recyclerViewAdapter.getItemCount();
-    }
 
     private void initSwipeToDelete() {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(
@@ -180,10 +156,23 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         return (TypeTask) Objects.requireNonNull(getIntent().getExtras()).get(TYPE_TASK_KEY);
     }
 
-    public static void open(Context context, TypeTask typeTask) {
-        Intent intent = new Intent(context, TasksActivity.class);
-        intent.putExtra("type_task_key", typeTask);
-        context.startActivity(intent);
+    @Override
+    public void showEditedTask(Task task) {
+        recyclerViewAdapter.updateEditedTask(task);
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void editTask(Task t) {
+        presenter.onTaskEdited(t);
+    }
+
+
+    @Override
+    public void showCreatedTask(Task t) {
+        recyclerViewAdapter.addAll(Collections.singleton(t));
+        recyclerViewAdapter.notifyDataSetChanged();
+        Utils.showSnackBarMessage(t.getDescription() + " created!", coordinatorLayout);
     }
 
     @Override
@@ -194,15 +183,16 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         presenter.onTaskCreated(description, priority, date);
     }
 
-    @Override
-    public void showEditedTask(Task task) {
-        recyclerViewAdapter.updateEditedTask(task);
-        recyclerViewAdapter.notifyDataSetChanged();
-    }
 
-    @Override
-    public void editTask(Task t) {
-        presenter.onTaskEdited(t);
+
+    public void showSnackBarUndo(Task t){
+        Snackbar snackbar = Snackbar.make(
+                coordinatorLayout, t.getDescription(), Snackbar.LENGTH_LONG);
+        snackbar.setAction("UNDO", view -> {
+            recyclerViewAdapter.undoDelete();
+        });
+
+        snackbar.show();
     }
 
     @Override
@@ -216,4 +206,18 @@ public class TasksActivity extends BaseActivity implements TasksPresenter.View {
         emptyView.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
     }
+
+    public RecycleViewAdapterTasks getRecyclerViewAdapter() {
+        return recyclerViewAdapter;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_tasks;
+    }
+
+    public int getCount(){
+        return recyclerViewAdapter.getItemCount();
+    }
+
 }

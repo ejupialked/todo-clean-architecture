@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:foregroundTint="@color/black"
+    android:layout_margin="20dp">
+
+    <ImageView
+        android:id="@+id/icon_item"
+        android:layout_width="60dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/heart">
+    </ImageView>
+
+
+
+
+</RelativeLayout>

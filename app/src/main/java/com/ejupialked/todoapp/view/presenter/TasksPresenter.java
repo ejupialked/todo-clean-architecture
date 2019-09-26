@@ -138,7 +138,6 @@ public class TasksPresenter extends Presenter<TasksPresenter.View>{
 
             @Override
             public void onError(Throwable e) {
-
             }
 
             @Override

@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.domain.model.TypeTask;
+import com.ejupialked.todoapp.view.adapter.RecycleViewAdapterIcons;
 
 import java.util.Objects;
 
@@ -24,6 +28,14 @@ public class CustomDialogTaskType extends DialogFragment {
 
     @BindView(R.id.edit_tasktype)
     EditText editText;
+
+
+    @BindView(R.id.icon_recycle_view)
+    RecyclerView recyclerViewIcons;
+
+
+    RecycleViewAdapterIcons recycleViewAdapterIcons;
+
 
     private CustomDialogListener listener;
 
@@ -43,13 +55,23 @@ public class CustomDialogTaskType extends DialogFragment {
 
         ButterKnife.bind(this, view);
 
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerViewIcons.setLayoutManager(linearLayoutManager);
+
+        recycleViewAdapterIcons = new RecycleViewAdapterIcons();
+        recyclerViewIcons.setAdapter(recycleViewAdapterIcons);
+
         if(t == null){
             title = "Create a task type";
             positiveButton = "Create";
-            editText.setText(t.getName());
+
         }else {
             title = "Edit task type";
             positiveButton = "Edit";
+            editText.setText(t.getName());
         }
 
         builder.setView(view)

@@ -10,9 +10,7 @@ public class Task implements Serializable {
     private String description;
     private String priority;
     private boolean isCompleted;
-
-
-  private String date;
+    private String date;
 
     public Task(String description, String priority, String parentID) {
         this.description = description;

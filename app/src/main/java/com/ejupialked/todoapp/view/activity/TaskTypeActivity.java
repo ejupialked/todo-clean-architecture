@@ -25,7 +25,8 @@ import butterknife.BindView;
 
 public class TaskTypeActivity extends BaseActivity implements TaskTypesPresenter.View {
 
-    @Inject TaskTypesPresenter presenter;
+    @Inject
+    TaskTypesPresenter presenter;
 
     @BindView(R.id.coordinatorTaskTypes) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.recycle) RecyclerView recyclerView;

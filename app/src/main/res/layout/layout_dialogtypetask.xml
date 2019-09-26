@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
     <EditText
@@ -11,6 +10,25 @@
         android:layout_height="wrap_content"
         android:hint="create task type" />
 
+    <TextView
+        android:id="@+id/text_choose"
+        android:layout_below="@id/edit_tasktype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:text="Select an icon:"
+        >
+
+
+    </TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/icon_recycle_view"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/text_choose"
+        android:layout_height="wrap_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </RelativeLayout>

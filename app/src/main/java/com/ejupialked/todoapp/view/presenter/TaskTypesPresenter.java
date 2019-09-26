@@ -41,7 +41,6 @@ public class TaskTypesPresenter extends Presenter<TaskTypesPresenter.View> {
 
     private void getTaskTypes() {
 
-
         getTaskTypes.execute(new DisposableObserver<List<TypeTask>>() {
 
         @Override

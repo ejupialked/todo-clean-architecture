@@ -1,6 +1,5 @@
 package com.ejupialked.todoapp.data.repository.datasource;
 
-
 import com.ejupialked.todoapp.R;
 import com.ejupialked.todoapp.domain.model.Task;
 import com.ejupialked.todoapp.domain.model.TypeTask;
@@ -71,38 +70,27 @@ public class DataSourceTasks implements DataSource {
 
 
         Task t1 = new Task("Drink water", "high", health.getID());
-        Task t2 =new Task("Train abs", "medium", health.getID());
-        Task t3 = new Task("Drink water", "high", health.getID());
+        Task t2 =new Task("Buy supplements", "medium", health.getID());
+        Task t3 = new Task("Blood test", "high", health.getID());
 
 
-        Task t4 = new Task("Drink water", "high", health.getID());
-        Task t5 =new Task("Train abs", "medium", health.getID());
-        Task t6 = new Task("Drink water", "high", health.getID());
 
-        Task t7 = new Task("Drink water", "high", health.getID());
-        Task t8 =new Task("Train abs", "medium", health.getID());
-        Task t9 = new Task("Drink water", "high", health.getID());
 
         addNewTask(t1);
         addNewTask(t2);
         addNewTask(t3);
-        addNewTask(t4);
-        addNewTask(t5);
-        addNewTask(t6);
-        addNewTask(t7);
-        addNewTask(t8);
-        addNewTask(t9);
 
-        for (int i = 0; i < 20; i++) {
-            addNewTask(new Task("Drink water", "high", health.getID()));
-        }
 
 
         Task t20 =new Task("Call father", "high", family.getID());
-        Task t21 =new Task("birthday sister", "high", family.getID());
+        Task t21 =new Task("Birthday sister", "high", family.getID());
 
-        addNewTask(t4);
-        addNewTask(t5);
+       addNewTask(t20);
+       addNewTask(t21);
+
+
+
+
     }
 
 

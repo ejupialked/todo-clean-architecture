@@ -46,8 +46,8 @@ public class CustomDialogTask extends AppCompatDialogFragment {
     private Context context;
 
 
-    String title;
-    String positiveButton;
+    private String title;
+    private String positiveButton;
 
     private String taskDescription;
     private String taskPriority;
