@@ -1,3 +1,5 @@
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 # TodoQuick
 
 The purpose of this project is to develop a minimalist todo app with the aim to learn and practice the concepts of Clean Architecture  with MVP (for the presentation layer) using architecture components library like RxJava2, Dagger2 and ButterKnife.
