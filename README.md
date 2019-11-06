@@ -20,7 +20,7 @@ This project has not been completed yet.
 
 [2]: http://developer.android.com/intl/es/tools/support-library/index.html
 [3]: https://github.com/ReactiveX/RxAndroid
-[4]: https://github.com/google/dagger5]
+[4]: https://github.com/google/dagger
 [5]: https://github.com/JakeWharton/butterknife
 [6]: https://github.com/xabaras/RecyclerViewSwipeDecorator
 
