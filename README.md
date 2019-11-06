@@ -23,6 +23,9 @@ This project has not been completed yet.
 [4]: https://github.com/google/dagger
 [5]: https://github.com/JakeWharton/butterknife
 [6]: https://github.com/xabaras/RecyclerViewSwipeDecorator
+[7]: https://github.com/EjupiAlked/TodoQuick/blob/master/LICENSE
+
+
 
 ## Contributing
 
@@ -35,7 +38,7 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 ## License
 
-This project is licensed under the MIT License - see the [https://github.com/EjupiAlked/TodoQuick/blob/master/LICENSE](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md][7] file for details.
 
 ## Developed by
 
