@@ -9,8 +9,7 @@ The purpose of this project is to develop a minimalist todo app with the aim to 
 
 
 #### Presentation Layer
-Presentation Layer
-This layer contains everything related to the UI, nothing else. You can use any pattern here, in this project I used MVP. This will ensure to separate your business logic from the UI.
+This layer contains everything related to the UI, nothing else. You can use any pattern here, in this project I used MVP, this will ensure to separate your business logic from the UI.
 #### Domain Layer
 This is the place where all the magic happens, here you can find the entities and use cases of the app. The code written in this layer does not have any Android dependency, it is just Java. 
 #### Data layer
