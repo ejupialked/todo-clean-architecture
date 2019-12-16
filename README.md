@@ -4,6 +4,18 @@
 
 The purpose of this project is to develop a minimalist todo app with the aim to learn and practice the concepts of Clean Architecture  with MVP (for the presentation layer) using architecture components library like RxJava2, Dagger2 and ButterKnife.
 
+
+![alt text](https://raw.githubusercontent.com/ejupialked/todo-clean-architecture/master/art/architecture.png)
+
+
+#### Presentation Layer
+Presentation Layer
+This layer contains everything related to the UI, nothing else. You can use any pattern here, in this project I used MVP. This will ensure to separate your business logic from the UI.
+#### Domain Layer
+This is the place where all the magic happens, here you can find the entities and use cases of the app. The code written in this layer does not have any Android dependency, it is just Java. 
+#### Data layer
+This is the layer which takes care about all the data that our application needs. It can be provided by a database, network or memory (it can be anything, in the code I provide hardcoded data). The repository pattern allows to abstract the origin of data where it is not going to matter where the data comes from, the important thing is that they will be obtained from somewhere and we can use them to do the actions that have to be done.
+
 ## Project Status
 This project has not been completed yet.
 ## Screenshots
